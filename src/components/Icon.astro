@@ -1,0 +1,6 @@
+---
+const {id, width, height} = Astro.props
+---
+<svg class="icon" width={width} height={height}>
+    <use xlink:href={`#${id}`}></use>
+</svg>

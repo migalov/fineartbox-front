@@ -1,0 +1,58 @@
+
+<button class="burger-btn">
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+<input type="checkbox" class="fab-toggle-menu" />
+
+<style lang="scss">
+    // Переменные настройки
+$bar-width: 18px;
+$bar-height: 3px;
+$bar-spacing: 8px;
+$bar-color: #000;
+$transition-speed: 0.2s;
+
+.burger-btn {
+  position: relative;
+  width: $bar-width;
+  height: ($bar-height * 2) + $bar-spacing;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000;
+
+  .bar {
+    position: absolute;
+    width: $bar-width;
+    height: $bar-height;
+    background-color: $bar-color;
+    border-radius: 2px;
+    transition: all $transition-speed ease-in-out;
+    
+    &:nth-child(1) {
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      bottom: 0;
+    }
+  }
+
+  // Активный режим (крестик)
+  &.active {
+    .bar:nth-child(1) {
+      transform: rotate(45deg);
+      top: 50%;
+      margin-top: -($bar-height / 2);
+    }
+
+    .bar:nth-child(2) {
+      transform: rotate(-45deg);
+      bottom: 50%;
+      margin-bottom: -($bar-height / 2);
+    }
+  }
+}
+</style>

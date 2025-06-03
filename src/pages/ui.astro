@@ -1,0 +1,103 @@
+---
+import Announce from "../components/Announce.astro";
+import BannerBox from "../components/BannerBox.astro";
+import BlogItem from "../components/Blog/BlogItem.astro";
+import BlogRoot from "../components/Blog/BlogRoot.astro";
+import DeadlineRoot from "../components/Deadlines/DeadlineRoot.astro";
+import FeaturesRoot from "../components/Features/FeaturesRoot.astro";
+import Icon from "../components/Icon.astro";
+import Mark from "../components/Mark.astro";
+import StageWorkRoot from "../components/StagesWorks/StageWorkRoot.astro";
+import Layout from "../layout.astro";
+import SpriteFeature from "../SpriteFeature.astro";
+import YandexWidget from "../components/YandexWidget.astro";
+import SEOBlock from "../components/SEOBlock.astro";
+import Footer from "../components/Footer.astro";
+import GridBannersType1 from "../components/GridBanners/Type1.astro";
+import Hero from "../components/Hero.astro";
+
+const services = [{
+    
+}]
+---
+
+<Layout title="UI Components">
+
+
+        <div class="fab-body">
+            <header class="fab-header">
+
+            </header>
+            <div class="content-grid">
+
+                
+                <Hero />
+                <GridBannersType1
+                    title="Услуги"
+                />
+                <StageWorkRoot />
+                <div>
+                   <h1>Автоматическая сборка кашированых коробок по цене Китая</h1>
+                    <h2>Преимущества</h2>
+                    <h3>Подходит для любых вложений, крышка занимает 2/3 от размера дна</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, explicabo. Labore corporis nulla ut dolorum autem at nam, laboriosam ab odio aspernatur, incidunt architecto mollitia, optio adipisci. Delectus, beatae est.</p>
+                    <span class="caption">Caption</span>
+                    <span class="caption--bold">Caption Bold</span>
+                </div>
+                <!-- <Announce />
+                <div>
+                    <Mark />
+                    <Icon id="arrow-45" width={30} height={30} />
+                    <Icon id="arrow-step" width={30} height={30} />
+                    <Icon id="cart" width={30} height={30} />
+                    <Icon id="delete" width={30} height={30} />
+                    <Icon id="check" width={30} height={30} />
+                    <Icon id="download" width={30} height={30} />
+                    <Icon id="exit" width={30} height={30} />
+                    <Icon id="home" width={30} height={30} />
+                    <Icon id="logo" width={30} height={30} />
+                    <Icon id="round" width={30} height={30} />
+                    <Icon id="upload" width={30} height={30} />
+                    <Icon id="user" width={30} height={30} />
+                </div> -->
+                <FeaturesRoot />
+                <DeadlineRoot />
+                
+
+                <div>
+                <!-- <BannerBox desktopColumns={6} /> -->
+                </div>
+                <div style="display: grid; grid-template-columns: 14fr 9fr; gap: var(--global-gap)">
+                    <YandexWidget />
+                    <BlogRoot />
+                </div>
+                <SEOBlock />
+                <Footer />
+
+
+
+            </div>
+
+        </div>
+		<SpriteFeature />
+</Layout>
+
+<style lang="scss" is:global>
+    .fab-body {
+        display: grid;
+        max-width: 1440px;
+        margin: 0 auto;
+        grid-template-areas: "header" "page";
+        gap: 1.5rem;
+        @media (min-width: 992px) {
+            grid-template-areas: "page header";
+            grid-template-columns: 6fr 1fr;
+        }
+    }
+    .fab-header {
+        grid-area: header;
+    }
+    .content-grid {
+        grid-area: page;
+    }
+</style>

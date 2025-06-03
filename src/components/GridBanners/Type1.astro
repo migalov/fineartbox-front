@@ -1,0 +1,25 @@
+---
+import BannerBox from "../BannerBox.astro";
+const {title, banners} = Astro.props;
+---
+
+<section class="fab-grid-banners-type-1">
+    {title && <h2>{title}</h2>}
+    <div class="fab-grid-banners-type-1-wrap fab-scrollbar">
+        <BannerBox backgroundDefault={"/img/services/Announce-Box-11.jpg"} title="Разработка конструкции" desktopColumns={1} />
+        <BannerBox backgroundDefault={"/img/services/Announce-Box-22.jpg"} title="Изготовление предтиражного образца" description="" desktopColumns={2} />
+        <BannerBox backgroundDefault={"/img/services/Announce-Box-33.jpg"} title="Отделка" description="" desktopColumns={1} />
+        <BannerBox backgroundDefault={"/img/services/Announce-Box-44.jpg"} title="Копакинг" description="" desktopColumns={2} />
+        <BannerBox backgroundDefault={"/img/services/Announce-Box-55.jpg"} title="Доставка" description="" desktopColumns={1} />
+        <BannerBox title="Все продукты производства" description="" desktopColumns={1} />
+    </div>
+</section>
+
+<style lang="scss" is:global>
+    .fab-grid-banners-type-1-wrap {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--global-gap);
+
+    }
+</style>

@@ -1,0 +1,29 @@
+---
+import Icon from "../Icon.astro";
+import StageWorkItem from "./StageWorkItem.astro";
+---
+
+<section class="fab-steps-works">
+    <h2>Этапы работ</h2>
+    <div class="fab-steps-works-row fab-scrollbar">
+        <StageWorkItem src="/img/steps-works/1.jpg" text="Разработка конструкции и изготовление «Беляка» коробки. Изготовление макета и конструкторских чертежией." />
+        <Icon id="arrow-step" width="72" height="28" />
+        <StageWorkItem src="/img/steps-works/2.jpg" text="Согласование конструкции и смета. Заключение договора и оплата. Изготовление в тиражных материалах." />
+        <Icon id="arrow-step" width="72" height="28" />
+        <StageWorkItem src="/img/steps-works/3.jpg" text="Закупка сырья, изготовления оснастки. Запуск в производство. Производство и упаковка продукции. Отгрузка." />
+    </div>
+</section>
+
+<style lang="scss" is:global>
+    .fab-steps-works svg {
+        min-width: clamp(3rem, 2.4718rem + 2.2535vw, 4.5rem);
+        margin: 4rem 0 0;
+    }
+    .fab-steps-works-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        column-gap: 1rem;
+        
+    }
+</style>

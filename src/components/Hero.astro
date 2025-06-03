@@ -1,0 +1,43 @@
+
+<section class="fab-hero splide" aria-label="Splide Basic HTML Example">
+    <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">
+                    <img src="./img/hero/1.jpg" />
+                </li>
+                <li class="splide__slide"><img src="./img/hero/2.jpg" /></li>
+                <li class="splide__slide"><img src="./img/hero/3.jpg" /></li>
+            </ul>
+    </div>
+</section>
+<style lang="scss" is:global>
+    .splide__pagination__page {
+        border-radius: 0;
+        // width: 6rem;
+        // height: .8rem;
+    }
+</style>
+<script src="./splide.min.js" is:inline></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var splide = new Splide(".fab-hero", {
+      type: "fade",
+      rewind: true,
+      arrows: true,
+      autoplay: true,
+      interval: 4000,
+      lazyLoad: "nearby",
+      pagination: true,
+    });
+    splide.mount();
+    // document
+    //   .querySelector(".cb-hero-pagitation")
+    //   .style.setProperty("--count", splide.length);
+
+    // splide.on("move", function (e) {
+    //   document
+    //     .querySelector(".cb-hero-pagitation")
+    //     .style.setProperty("--position", e + 1);
+    // });
+  });
+</script>

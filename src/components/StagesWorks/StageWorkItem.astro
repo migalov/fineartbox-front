@@ -1,0 +1,19 @@
+---
+const {src, text} = Astro.props;
+---
+<div class="fab-step-work-item">
+    <img src={src} alt="">
+    <p>{text}</p>
+</div>
+
+<style lang="scss">
+    .fab-step-work-item {
+        width: clamp(15.7rem, 14.8901rem + 3.4554vw, 18rem);
+        & img {
+            clip-path: polygon(10% 0%, 100% 0, 100% 80%, 90% 100%, 0 100%, 0% 20%);
+        }
+        & p {
+            width: inherit;
+        }
+    }
+</style>

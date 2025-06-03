@@ -1,0 +1,101 @@
+.cb-page-grid {
+
+    --max-content-width: 1200px;
+    --breakout-difference: 0.2;
+
+    --max-content-width-lg: 1200px;
+    --max-content-width-tablet: 992px;
+    --max-content-width-mobile-md: 768px;
+    --max-content-width-mobile-sm: 540px;
+
+    /*  Compute total allowed grid width to `--breakout-difference` 
+        larger than content area  */
+    --breakout-grid-width: calc(
+        var(--max-content-width) +
+        (var(--max-content-width) * var(--breakout-difference))
+        );
+
+    display: grid;
+    grid-template-columns:
+    [grid-start] 1fr 
+    [content-start] minmax(
+    min(100%, var(--max-content-width)),
+    1fr
+    )
+    [content-end] 1fr 
+    [grid-end];
+
+    width: min(100%, var(--breakout-grid-width));
+    row-gap: 1rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    @media (min-width: 540px) {
+        --max-content-width: var(--max-content-width-lg);
+    }
+    // @media (min-width: 768px) {
+    //     --max-content-width: var(--max-content-width-mobile-md);
+    // }
+    // @media (min-width: 992px) {
+    //     --max-content-width: var(--max-content-width-tablet);
+    // }
+    // @media (min-width: 1200px) {
+    //     --max-content-width: var(--max-content-width-lg);
+    // }
+}
+
+.content-grid {
+    row-gap: 2rem;
+}
+
+.content-grid,
+.full-width {
+display: grid;
+grid-template-columns:
+    [full-width-start]
+        2rem
+    [breakout-start]
+            1fr
+    [content-start]
+                minmax(0, var(--content-max-width))
+    [content-end]
+            1fr
+    [breakout-end]
+        2rem
+    [full-width-end];
+
+    & > * {
+        grid-column: content;
+    }
+
+    & > .breakout {
+        grid-column: breakout;
+    }
+
+    & > .full-width {
+        grid-column: full-width;
+    }
+
+    @media (min-width: 768px) {
+        --content-max-width: 768px;
+    }
+    @media (min-width: 992px) {
+        --content-max-width: 992px;
+    }
+    @media (min-width: 1200px) {
+        --content-max-width: 1200px;
+    }
+    @media (min-width: 1440px) {
+        --content-max-width: 1440px;
+    }
+
+}
+
+.full-width > *,
+.content-grid > * {
+grid-column: content;
+}
+
+.full-window {
+grid-column: full-width;
+}

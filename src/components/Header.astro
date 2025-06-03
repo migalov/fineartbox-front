@@ -1,0 +1,29 @@
+---
+import BurgerMenu from "./BurgerMenu.astro";
+import Icon from "./Icon.astro";
+---
+
+<header class="fab-header content-grid">
+    <a href="/">
+        <Icon width="64" height="68" id="logo" />
+    </a>
+    <div class="fab-user-actions">
+        <a href="#">
+            <Icon id="user" width={16} height={16} />
+        </a>
+        <a href="#">
+            <Icon id="cart" width={16} height={16} />
+        </a>
+        <BurgerMenu />
+    </div>
+</header>
+
+<style lang="scss">
+    .fab-user-actions {
+        display: flex;
+        align-items: center;
+        & > a {
+            display: inline-block;
+        }
+    }
+</style>

@@ -1,0 +1,47 @@
+$font-path: "/fonts/";
+$weights: (
+    "400": "Regular",
+    "500": "Medium",
+    "700": "Bold",
+    "900": "ExtraBold"
+);
+
+
+@each $weightValue, $weightName in $weights {
+  @font-face {
+    font-family: 'TT Firs Text';
+    src: url('#{$font-path}TT-Firs-Text-#{$weightName}.ttf') format('truetype');
+    font-weight: #{$weightValue};
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'TT Firs Text';
+    src: url('#{$font-path}TT-Firs-Text-#{$weightName}Italic.ttf') format('truetype');
+    font-weight: #{$weightValue};
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Source Sans 3';
+    src: url('#{$font-path}SourceSans3-#{$weightName}.ttf') format('truetype');
+    font-weight: #{$weightValue};
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Source Sans 3';
+    src: url('#{$font-path}SourceSans3-#{$weightName}Italic.ttf') format('truetype');
+    font-weight: #{$weightValue};
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url('#{$font-path}Inter-#{$weightName}.ttf') format('truetype');
+    font-weight: #{$weightValue};
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url('#{$font-path}Inter-#{$weightName}Italic.ttf') format('truetype');
+    font-weight: #{$weightValue};
+    font-style: italic;
+  }
+}

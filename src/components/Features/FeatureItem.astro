@@ -1,0 +1,45 @@
+---
+import Icon from "../Icon.astro";
+
+
+const {id, title, description} = Astro.props;
+---
+
+<div class="fab-feature">
+    <Icon id={`feature-${id}`} width="72" height="72" />
+    <h3>{title}</h3>
+    <p>{description}</p>
+</div>
+
+<style lang="scss" is:global>
+    .fab-feature {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+
+        & h3 {
+            grid-area: t;
+            font-family: var(--font-family);
+        }
+
+        & p {
+            grid-area: d;
+        }
+
+        & svg {
+            grid-area: i;
+        }
+
+        @media (min-width: 992px) {
+            display: grid;
+            grid-template-areas: "i t"
+                                "i d";
+            grid-template-columns: auto 1fr;
+            gap: calc(var(--global-gap) / 3) var(--global-gap);
+        }
+
+        @media (max-width: 991.99px) {
+            min-width: clamp(15rem, 13.9437rem + 4.5070vw, 18rem);
+        }
+    }
+</style>

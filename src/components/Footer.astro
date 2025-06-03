@@ -1,0 +1,93 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<footer>
+    <div class="fab-footer">
+        <ul class="fab-footer-menu">
+            <li><a href="">Подарочная упаковка</a></li>
+            <li><a href="">Картонные коробки</a></li>
+            <li><a href="">Пакеты</a></li>
+            <li><a href="">Ложементы</a></li>
+            <li><a href="">Отделки</a></li>
+            <li><a href="">Услуги</a></li>
+            <li><a href="">Портфолио</a></li>
+            <li><a href="">Клиенту</a></li>
+            <li><a href="">Блог</a></li>
+        </ul>
+        <hr/>
+        <small class="fab-copyright">&copy; 2005–2025 FINEARTBOX</small>
+        <ul class="fab-social-networks">
+            <li>
+                <a rel="nofollow" href="https://vk.com/fineartbox">
+                    <Icon id="vk" width="16" height="16" />
+                </a>
+            </li>
+            <li>
+                <a rel="nofollow" href="https://t.me/fineartbox">
+                    <Icon id="tg" width="16" height="16" />
+                </a>
+            </li>
+            <li>
+                <a rel="nofollow" href="">
+                    <Icon id="inst" width="16" height="16" />
+                </a>
+            </li>
+            
+            
+            
+        </ul>
+        <ul class="fab-legacy-content">
+            <li>
+                <a href="#" class="link--gray">Карта сайта</a>
+            </li>
+            <li>
+                <a href="/agreement" class="link--gray">Политика конфиденциальности</a>
+            </li>
+            
+            
+        </ul>
+    </div>
+</footer>
+
+<style lang="scss" is:global>
+
+    .fab-footer {
+
+        display: grid;
+        gap: var(--global-gap);
+        grid-template-areas: "list list list list"
+                             "line line line line"
+                             "cop net . leg";
+
+        & ul {
+            display: flex;
+            align-items: center;
+            gap: .5em 1em;
+            justify-content: space-between;
+        }
+
+        & a {
+            text-decoration: none;
+        }
+    }
+
+    .fab-footer-menu { grid-area: list;}
+    .fab-footer hr { grid-area: line;}
+    .fab-copyright { grid-area: cop;}
+    .fab-social-networks { grid-area: net;}
+    .fab-legacy-content {grid-area: leg;}
+
+    .fab-footer-menu {
+        flex-wrap: wrap;
+    }
+
+    .fab-copyright {
+        margin: 0 1.5em 0 0;
+    }
+
+    .fab-social-networks {
+        gap: 1.5rem;
+    }
+
+</style>

@@ -1,0 +1,35 @@
+<div class="fab-mark" style="--width: 10px; --height: 100%"></div>
+
+<style lang="scss">
+    .fab-mark {
+        position: relative;
+        min-width: var(--width);
+        max-width: var(--width);
+        height: calc(var(--height) - 2 * var(--width));
+        background-color: var(--color-orange);
+        &::before {
+            content: "";
+            position: absolute;
+            top: calc(-1 * var(--width));
+            left: 0;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: var(--width) 0 0 var(--width);
+            border-color: transparent transparent transparent var(--color-orange);
+            transform: rotate(0deg);
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 0 var(--width) var(--width) 0;
+            border-color: transparent var(--color-orange) transparent transparent ;
+            transform: rotate(0deg);
+        }
+    }
+</style>

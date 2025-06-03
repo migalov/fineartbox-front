@@ -1,0 +1,20 @@
+---
+import Mark from "./Mark.astro";
+---
+
+<div class="fab-announce">
+    <Mark />
+    <h2>FINEARTBOX — производство упаковки и полиграфические услуги в Москве</h2>
+</div>
+
+<style lang="scss">
+    .fab-announce {
+        display: flex;
+        align-items: center;
+        gap: var(--global-gap);
+
+        @media (min-width: 992px) {
+            grid-area: auto / span 6;
+        }
+    }
+</style>
