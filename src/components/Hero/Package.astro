@@ -1,29 +1,33 @@
 ---
-// const {}
+const { Slider } = Astro.props;
 ---
 
-
-<section class="fab-hero splide" aria-label="Splide Basic HTML Example">
+<section class="fab-hero-package splide" aria-label="Splide Basic HTML Example">
     <div class="splide__track">
             <ul class="splide__list">
-                <li class="splide__slide fab-hero-slide">
-                  <figure>
-                    <picture>
-                      <source srcset="/img/hero/package/1.jpg" media="(max-width: 767.99px)">
-                      <source srcset="/img/hero/package/1.jpg" media="(min-width: 768)">
-                      <img src="/img/hero/package/1.jpg" alt="Абстрактное изображение">
-                    </picture>
-                    <figcaption>
-                        <h2>Упаковка крышка-дно</h2>
-                        <p>Упаковка состоит из нижней части-дна и крышки, которая скрывает содержимое коробки. Подходит для подарочных и сувенирных наборов, косметики, товаров ручной работы, шоколада, кондитерской продукции и тому подобных.</p>
-                    </figcaption>
-                  </figure>
-                </li>
+              {
+                Slider.map( item =>
+                  <>
+                    <li class="splide__slide fab-hero-slide">
+                    <figure>
+                      <picture>
+                        <source srcset={item.backgoundDesktop} media="(max-width: 767.99px)" />
+                        <source srcset={item.backgroundMobile} media="(min-width: 768)" />
+                        <img src={item.backgoundDesktop} alt="Абстрактное изображение" />
+                      </picture>
+                      <figcaption set:html={item.htmlContent}>
+
+                      </figcaption>
+                    </figure>
+                  </li>
+                  </>
+                )
+              }
             </ul>
     </div>
 </section>
-<style lang="scss">
-    .fab-hero {
+<style lang="scss" is:global>
+    .fab-hero-package {
       @media (max-width:797.99px) {
         grid-column: full-width;
       }
@@ -66,12 +70,15 @@
           max-width: inherit;
         }
       }
+      & img {
+        width: 100%;
+      }
     }
 </style>
-<script src="./splide.min.js" is:inline></script>
+<script src="/splide.min.js" is:inline></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    var splide = new Splide(".fab-hero", {
+    var splide = new Splide(".fab-hero-package", {
       type: "fade",
       rewind: true,
       arrows: false,

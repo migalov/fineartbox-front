@@ -13,7 +13,8 @@ import HeroPackage from "../../components/Hero/Package.astro";
 import BlockText from "../../components/BlockText.astro";
 import ReadyWorks from "../../components/ReadyWorks.astro";
 import AccordeonCards from "../../components/AccordeonCards.astro";
-import type { ACTION_ERROR_CODES } from "astro:actions";
+import ConstructionLinks from "../../components/ConstructionLinks.astro";
+import SpriteConstructions from "../../SpriteConstructions.astro";
 
 export function getStaticPaths() {
   return [
@@ -49,55 +50,47 @@ const pageData = landingPageData.data[0];
 ---
 
 <Layout title="Упаковка крышка-дно">
-        <div class="fab-body">
-            <header class="fab-header">
+    <div class="content-grid">
 
-            </header>
-            <div class="content-grid">
-                <HeroPackage  />
-                <!-- <Announce /> -->
-                <ReadyWorks {...pageData.readyProjects} />
-                <div class="fab-widgets">
-                    {
-                        pageData.descriptions.map( b => <>
-                            <BlockText {...b} />
-                        </>)
-                    }
-                </div>
+    
+            <HeroPackage {...pageData}  />
+            <!-- <Announce /> -->
+            <ConstructionLinks {slug} />
+            <ReadyWorks {...pageData.readyProjects} />
+            <div class="fab-widgets">
                 {
-                    pageData.cardsSection.map( accordeon => <AccordeonCards {...accordeon} /> )
+                    pageData.descriptions.map( b => <>
+                        <BlockText {...b} />
+                    </>)
                 }
-                <DeadlineRoot />
-                <StageWorkRoot />
-                <div class="fab-widgets" style="">
-                    <YandexWidget />
-                    <BlogRoot />
-                </div>
-                <SEOBlock />
-                <Footer />
             </div>
-        </div>
-		<SpriteFeature />
+            {
+                pageData.cardsSection.map( accordeon => <AccordeonCards {...accordeon} /> )
+            }
+            <DeadlineRoot />
+            <StageWorkRoot />
+            <div class="fab-widgets" style="">
+                <YandexWidget />
+                <BlogRoot />
+            </div>
+            <SEOBlock />
+
+</div>
 </Layout>
 
+
 <style lang="scss" is:global>
-    .fab-body {
-        display: grid;
-        max-width: 1440px;
-        margin: 0 auto;
-        grid-template-areas: "header" "page";
-        gap: 1.5rem;
-        @media (min-width: 992px) {
-            grid-template-areas: "page header";
-            grid-template-columns: 6fr 1fr;
-        }
-    }
-    .fab-header {
-        grid-area: header;
-    }
-    .content-grid {
-        grid-area: page;
-    }
+    // .fab-body {
+    //     display: grid;
+    //     max-width: 1440px;
+    //     margin: 0 auto;
+    //     grid-template-areas: "header" "page";
+    //     gap: 1.5rem;
+    //     @media (min-width: 992px) {
+    //         grid-template-areas: "page header";
+    //         grid-template-columns: 6fr 1fr;
+    //     }
+    // }
 	.fab-widgets {
 		display: flex;
 		flex-direction: column;
@@ -107,6 +100,5 @@ const pageData = landingPageData.data[0];
 			grid-template-columns: 14fr 9fr;
 			gap: var(--global-gap);
 		}
-
 	}
 </style>

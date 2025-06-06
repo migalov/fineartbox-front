@@ -1,29 +1,303 @@
 ---
 import BurgerMenu from "./BurgerMenu.astro";
 import Icon from "./Icon.astro";
+import qs from "qs";
+import Mark from "./Mark.astro";
+const paramsMenu = {
+
+        populate: {
+            menuContent: {
+                populate: "*"
+            }
+        },
+};
+
+const queryStringPage = qs.stringify(paramsMenu, { encode: true });
+const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${queryStringPage}`).then(res => res.json());
 ---
 
-<header class="fab-header content-grid">
-    <!-- <a href="/">
-        <Icon width="64" height="68" id="logo" />
-    </a>
-    <div class="fab-user-actions">
-        <a href="#">
-            <Icon id="user" width={16} height={16} />
-        </a>
-        <a href="#">
-            <Icon id="cart" width={16} height={16} />
-        </a>
-        <BurgerMenu />
-    </div> -->
+<header class="fab-header">
+        <div class="fab-header-wrap">
+            <Icon classes="fab-header-logo" id="logo" width="75" height="80" />
+            <div class="fab-header-user-actions">
+                <a href="#">
+                    <Icon id="user" width="16" height="16" />
+                </a>
+                <a href="#">
+                    <Icon id="cart" width="16" height="16" />
+                </a>
+                <BurgerMenu />
+                
+            </div>
+            <div class="fab-personal-account">
+                <input type="checkbox" id="personal-account">
+                <label for="personal-account">Личный кабинет</label>
+                <a href="/cart">
+                    <Icon id="cart" width="16" height="16" />
+                </a>
+                <div class="fab-personal-account-options">
+                    <a href="#">
+                        <Icon id="user" width="16" height="16" />
+                        <span>Иннокентий Христораждественский</span>
+                    </a>
+                    <a href="/orders">Заказы</a>
+                    <a href="/зкщоусеы">Проекты</a>
+                    <a href="#">
+                        <span>Выйти</span>
+                        <Icon id="exit" width="16" height="16" />
+                    </a>
+                </div>
+            </div>
+            <div class="fab-menu-section">
+                    <ul class="fab-header-menu-lvl-1">
+                        {
+                            headerMenuData.data.menuContent.map( (item, id) =>
+                                <>
+                                    <li>
+                                        
+                                        <a href={item.href} class={`${id == 0 && "active"}`}>
+                                            {id == 0 && <Mark width="14px" height="44px" color="var(--color-orange)" />}
+                                            <span>{item.label}</span>
+                                        </a>
+                                        {
+                                            item.itemsMenu.length > 0 &&
+                                            <ul class="fab-header-menu-lvl-2">
+                                            {
+                                                item.itemsMenu.map( (_item, _id) => 
+                                                    <>
+                                                        <li>
+                                                            <a href={_item.href}  class={`${_id == 0 && "active"}`}>{_item.label}</a>
+                                                        </li>
+                                                    </>
+                                                )
+                                            }
+                                        </ul>
+                                        }
+                                        
+                                    </li>
+                                    {
+                                        item.line && <hr />
+                                    }
+                                </>
+                            )
+                        }
+                    </ul>
+                    <div class="fab-header-contacts" itemscope itemtype="http://schema.org/LocalBusiness">
+                        <a class="fab-header-contact__phone" href="tel:+74952150877" itemprop="telephone">+7 495 215-08-77</a>
+                        <time class="fab-header-contact__schedule caption caption--bold" itemprop="openingHours" datetime="Mo-Fr 10:00-18:00">Пн–Пт 10:00–18:00</time>
+                        <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                            <a class="fab-header-contact__email" href="mailto:sale@fineartbox.ru" itemprop="email">sale@fineartbox.ru</a>
+                            <div class="fab-header-contact__address">
+                                <span itemprop="streetAddress">Зорге 15к1</span>, 
+                                <span itemprop="addressLocality">Москва</span>
+                            </div>
+
+                        </address>
+                    </div>
+                   
+            </div>
+            
+        </div>
+
 </header>
 
-<style lang="scss">
-    .fab-user-actions {
+<style lang="scss" is:global>
+    .fab-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background-color: var(--color-white);
+        --padding-marker: 1em;
+        --size-marker: .3em;
+        // padding: var(--padding-body) 0;
+        
+        & .content-grid {
+            row-gap: 0;
+        }
+        @media (min-width: 992px) {
+
+            row-gap: 3rem;
+            position: sticky;
+            align-self: start;
+            top: 0;
+            padding-right: var(--padding-body);
+        }
+    }
+    .fab-header-wrap {
+        position: relative;
         display: flex;
+        justify-content: space-between;
+        padding: var(--padding-body);
+        @media (min-width: 992px) {
+            grid-area: full-width;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 0;
+            row-gap: 3rem;
+        }
+    }
+    .fab-header-logo {
+        width: clamp(3rem, 2.6479rem + 1.5023vw, 4rem);
+    }
+    .fab-header-user-actions {
+        display: flex;
+        gap: 1rem;
         align-items: center;
         & > a {
-            display: inline-block;
+            display: flex;
+            align-items: center;
         }
+        @media (min-width: 768px) {
+            display: none;
+        }
+    }
+    .fab-menu-section {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        z-index: 2;
+        background: var(--color-white);
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        padding: 0 calc(2 * var(--padding-body)) 2rem;
+
+
+        @media (max-width: 991.99px) {
+            transform: translateX(100%);
+            transition: var(--transition-default);
+            height: calc(100dvh - var(--header-height));
+        }
+
+        @media (min-width: 992px) {
+            padding: 0;
+            position: static;
+        }
+    }
+    .fab-personal-account {
+        position: relative;
+        & input:checked ~ .fab-personal-account-options {
+            opacity: 1;
+            pointer-events: inherit;
+        }
+        @media (max-width: 767.99px) {
+            display: none;
+        }
+    }
+    .fab-personal-account-options {
+        transition: var(--transition-default);
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: -14rem;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-gray-5);
+        z-index: 3;
+        padding: 1.5rem;
+        row-gap: 1.25rem;
+        width: min-content;
+
+        & a {
+            color: var(--color-white);
+        }
+
+        & svg {
+            filter: invert(1);
+        }
+    }
+    .fab-header-menu-lvl-1 {
+        // overflow-y: auto;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        padding: 0 0 1rem;
+        & > li {
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+
+            &:has( .fab-header-menu-lvl-2:empty) {
+
+            }
+            & > a {
+                font-size: 1.25rem;
+                font-weight: 500;
+                color: var(--color-gray-5);
+                line-height: 1.1;
+                &.active {
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    color: var(--color-black);
+                    font-weight: 700;
+
+                    & .fab-mark {
+                        position: relative;
+                        left: -.5rem;
+                    }
+                }
+            }
+        }
+    }
+    .fab-header-menu-lvl-2 {
+        display: flex;
+        flex-direction: column;
+        row-gap: .25rem;
+        & > li {
+            margin: 0 0 0 var(--padding-marker);
+            position: relative;
+            & > a {
+
+                font-size: 1rem;
+                color: var(--color-gray-4);
+                // padding: 0 0 0 var(--padding-marker);
+                &.active {
+
+                    color: var(--color-black);
+                    font-weight: 700;
+                    &::before {
+                        background: var(--color-black);
+                    }
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: calc(-1 * var(--padding-marker) + (var(--size-marker) / 2));
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: var(--size-marker);
+                    height: var(--size-marker);
+                    border-radius: 999px;
+                    background: var(--color-gray-1);
+                }
+            }
+        }
+    }
+    .fab-header-contacts {
+        display: flex;
+        flex-direction: column;
+    }
+    .fab-header-contact__phone {
+        font-size: 1.42rem;
+        font-weight: 900;
+        color: var(--color-black);
+        text-decoration: none;
+
+    }
+    .fab-header-contact__schedule {
+        
+    }
+    .fab-header-contact__email {
+        display: block;
+        margin: .5em 0 1.5em;
+    }
+    .fab-header-contact__email, .fab-header-contact__address {
+        font-style: normal;
+        font-size: 1.14rem;
     }
 </style>

@@ -19,6 +19,9 @@ import ReadyWorks from "../components/ReadyWorks.astro";
 import BlockText from "../components/BlockText.astro";
 import GridCards from "../components/GridCards.astro";
 import FAQItem from "../components/FAQItem.astro";
+import ConstructionLinks from "../components/ConstructionLinks.astro";
+import SpriteConstructions from "../SpriteConstructions.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 
 const services = [{
     
@@ -28,90 +31,77 @@ const services = [{
 <Layout title="UI Components">
 
 
-        <div class="fab-body">
-            <header class="fab-header">
+        <div class="content-grid">
 
-            </header>
-            <div class="content-grid">
-
-                
-                <Hero />
-                <FAQItem />
-                <GridCards />
-                <ReadyWorks />
-                <div class="fab-widgets" style="">
-                    <BlockText
-                        htmlContent={"<h2>Картонная коробка крышка дно</h2><p>Коробка крышка-дно – одна из наиболее популярных форм упаковки товара. Она удобна в использовании и подходит для разных товарных нишь: от косметической до электронной промышленности. Такая конструкция используется при создании подарочных полиграфических материалов. И не только благодаря своей универсальной форме, но и потому что выигрышно смотрится на фоне большинства прочих вариантов, не говоря уже о широчайших дизайнерских возможностях.</p>"}
-                    />
-                    <BlockText
-                        htmlContent={"<h2>Процесс изготовления</h2><p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p><p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>"}
-                    />
-                </div>
-                <GridBannersType1
-                    title="Услуги"
+            <Breadcrumbs />
+            <Hero />
+            <ConstructionLinks />
+            <FAQItem />
+            <GridCards />
+            <!-- <ReadyWorks /> -->
+            <div class="fab-widgets" style="">
+                <BlockText
+                    htmlContent={"<h2>Картонная коробка крышка дно</h2><p>Коробка крышка-дно – одна из наиболее популярных форм упаковки товара. Она удобна в использовании и подходит для разных товарных нишь: от косметической до электронной промышленности. Такая конструкция используется при создании подарочных полиграфических материалов. И не только благодаря своей универсальной форме, но и потому что выигрышно смотрится на фоне большинства прочих вариантов, не говоря уже о широчайших дизайнерских возможностях.</p>"}
                 />
-                <StageWorkRoot />
-                <div>
-                   <h1>Автоматическая сборка кашированых коробок по цене Китая</h1>
-                    <h2>Преимущества</h2>
-                    <h3>Подходит для любых вложений, крышка занимает 2/3 от размера дна</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, explicabo. Labore corporis nulla ut dolorum autem at nam, laboriosam ab odio aspernatur, incidunt architecto mollitia, optio adipisci. Delectus, beatae est.</p>
-                    <span class="caption">Caption</span>
-                    <span class="caption--bold">Caption Bold</span>
-                </div>
-                <Announce />
-                <div>
-                    <Mark />
-                    <Icon id="arrow-45" width={30} height={30} />
-                    <Icon id="arrow-step" width={30} height={30} />
-                    <Icon id="cart" width={30} height={30} />
-                    <Icon id="delete" width={30} height={30} />
-                    <Icon id="check" width={30} height={30} />
-                    <Icon id="download" width={30} height={30} />
-                    <Icon id="exit" width={30} height={30} />
-                    <Icon id="home" width={30} height={30} />
-                    <Icon id="logo" width={30} height={30} />
-                    <Icon id="round" width={30} height={30} />
-                    <Icon id="upload" width={30} height={30} />
-                    <Icon id="user" width={30} height={30} />
-                </div>
-                <FeaturesRoot />
-                <DeadlineRoot />
-                
-
-                <div>
-                </div>
-                <div style="display: grid; grid-template-columns: 14fr 9fr; gap: var(--global-gap)">
-                    <YandexWidget />
-                    <BlogRoot />
-                </div>
-                <SEOBlock />
-                <Footer />
-
-
-
+                <BlockText
+                    htmlContent={"<h2>Процесс изготовления</h2><p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p><p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>"}
+                />
             </div>
+            <GridBannersType1
+                title="Услуги"
+            />
+            <StageWorkRoot />
+            <div>
+                <h1>Автоматическая сборка кашированых коробок по цене Китая</h1>
+                <h2>Преимущества</h2>
+                <h3>Подходит для любых вложений, крышка занимает 2/3 от размера дна</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, explicabo. Labore corporis nulla ut dolorum autem at nam, laboriosam ab odio aspernatur, incidunt architecto mollitia, optio adipisci. Delectus, beatae est.</p>
+                <span class="caption">Caption</span>
+                <span class="caption--bold">Caption Bold</span>
+            </div>
+            <Announce />
+            <div>
+                <Icon id="const-1" width={100} height={100} />
+                <Icon id="const-2" width={100} height={100} />
+                <Icon id="const-3" width={100} height={100} />
+                <Icon id="const-4" width={100} height={100} />
+                <Icon id="const-5" width={100} height={100} />
+                <Icon id="const-6" width={100} height={100} />
+            </div>
+            <div>
+                <Mark />
+                <Icon id="arrow-45" width={30} height={30} />
+                <Icon id="arrow-step" width={30} height={30} />
+                <Icon id="cart" width={30} height={30} />
+                <Icon id="delete" width={30} height={30} />
+                <Icon id="check" width={30} height={30} />
+                <Icon id="download" width={30} height={30} />
+                <Icon id="exit" width={30} height={30} />
+                <Icon id="home" width={30} height={30} />
+                <Icon id="logo" width={30} height={30} />
+                <Icon id="round" width={30} height={30} />
+                <Icon id="upload" width={30} height={30} />
+                <Icon id="user" width={30} height={30} />
+            </div>
+            <FeaturesRoot />
+            <DeadlineRoot />
+            
+
+            <div>
+            </div>
+            <div style="display: grid; grid-template-columns: 14fr 9fr; gap: var(--global-gap)">
+                <YandexWidget />
+                <BlogRoot />
+            </div>
+            <SEOBlock />
+            <SpriteConstructions />
+
+
 
         </div>
 		<SpriteFeature />
 </Layout>
 
 <style lang="scss" is:global>
-    .fab-body {
-        display: grid;
-        max-width: 1440px;
-        margin: 0 auto;
-        grid-template-areas: "header" "page";
-        gap: 1.5rem;
-        @media (min-width: 992px) {
-            grid-template-areas: "page header";
-            grid-template-columns: 6fr 1fr;
-        }
-    }
-    .fab-header {
-        grid-area: header;
-    }
-    .content-grid {
-        grid-area: page;
-    }
+
 </style>

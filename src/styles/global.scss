@@ -38,6 +38,10 @@
     --third-family: "Inter", sans-serif;
 
     --global-gap: 1.5rem;
+
+    --transition-default: ease .4s;
+
+    --padding-body: clamp(1rem, 0.6479rem + 1.3146vw, 2rem);
 }
 
 html, body {
@@ -76,7 +80,7 @@ h3 .h3 {
 }
 
 .caption {
-    font: .75rem/1.5 var(--second-family);
+    font: .75rem/1.5;
 }
 
 .caption.caption--bold {
@@ -90,7 +94,11 @@ h3 .h3 {
 }
 
 a {
-    color: var(--color-orange)
+    color: var(--color-orange);
+    transition: var(--transition-default);
+    & > * {
+        transition: var(--transition-default);
+    }
 }
 
 a:visited {

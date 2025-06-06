@@ -1,19 +1,20 @@
 
-<button class="burger-btn">
+<input hidden type="checkbox" class="fab-toggle-menu" id="toggle-menu" />
+<label for="toggle-menu" class="burger-btn">
   <span class="bar"></span>
   <span class="bar"></span>
-</button>
-<input type="checkbox" class="fab-toggle-menu" />
+</label>
 
-<style lang="scss">
+
+<style lang="scss" is:global>
     // Переменные настройки
 $bar-width: 18px;
 $bar-height: 3px;
 $bar-spacing: 8px;
-$bar-color: #000;
 $transition-speed: 0.2s;
 
 .burger-btn {
+    display: inline-block;
   position: relative;
   width: $bar-width;
   height: ($bar-height * 2) + $bar-spacing;
@@ -27,7 +28,7 @@ $transition-speed: 0.2s;
     position: absolute;
     width: $bar-width;
     height: $bar-height;
-    background-color: $bar-color;
+    background-color: var(--color-gray-5);
     border-radius: 2px;
     transition: all $transition-speed ease-in-out;
     
@@ -42,6 +43,22 @@ $transition-speed: 0.2s;
 
   // Активный режим (крестик)
   &.active {
+    
+  }
+}
+
+body:has( .fab-toggle-menu:checked) {
+  overflow-y: hidden;
+}
+
+@media (max-width: 991.99px) {
+  .fab-header:has( .fab-toggle-menu:checked) .fab-menu-section {
+    transform: translateX(0);
+  }
+}
+
+
+.fab-toggle-menu:checked ~ .burger-btn {
     .bar:nth-child(1) {
       transform: rotate(45deg);
       top: 50%;
@@ -54,5 +71,4 @@ $transition-speed: 0.2s;
       margin-bottom: -($bar-height / 2);
     }
   }
-}
 </style>

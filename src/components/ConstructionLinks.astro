@@ -1,6 +1,107 @@
+---
+import Icon from "./Icon.astro";
+const {slug} = Astro.props;
+const constructionsLinksData = [
+    {
+        idIcon: "",
+        label: "Стандартная",
+        href: "krishka-dno"
+    },
+    {
+        idIcon: "",
+        label: "С вырезом <br />под палец",
+        href: "#"
+    },
+    {
+        idIcon: "",
+        label: "С бортом",
+        href: "#"
+    },
+    {
+        idIcon: "",
+        label: "С наклонными <br />бортами",
+        href: "#"
+    },
+    {
+        idIcon: "",
+        label: "С объёмным <br />бортом",
+        href: "#"
+    },
+    {
+        idIcon: "",
+        label: "С накладками",
+        href: "#"
+    }
+]
+---
+
 <section class="constructions-switch">
     <h2>Виды конструкций</h2>
     <div class="constructions-switch-wrap">
-        
+        {
+            constructionsLinksData.map( (item, num) =>
+                <>
+                    <a href={item.href} class={`construction-item ${ item.href === slug && "active"}`}>
+                        <Icon width="94" height="94" id={`const-${num + 1}`} />
+                        <span set:html={item.label} />
+                    </a>
+                </>
+            )
+        }
+
     </div>
 </section>
+
+<style lang="scss">
+    .constructions-switch-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: var(--global-gap);
+        overflow-x: auto;
+
+    }
+    .construction-item {
+        display: flex;
+        flex-direction: column;
+        min-width: clamp(10rem, 9.5599rem + 1.8779vw, 11.25rem);
+
+        & span {
+            flex: 1;
+            background: var(--color-gray-1);
+            color: var(--color-gray-3);
+            padding: 1.5em;
+            font-weight: 700;
+            margin: -1.5em 0 0;
+            z-index: -1;
+        }
+
+        &:not(.active):hover span {
+            background: var(--color-gray-4);
+            color: var(--color-white);
+        }
+
+        &.active span {
+            background: var(--color-orange);
+            color: var(--color-white);
+        }
+    }
+</style>
+
+<style lang="scss" is:global>
+    .construction-item {
+        & svg {
+            width: clamp(5.14rem, 4.8812rem + 1.1042vw, 5.875rem);
+            aspect-ratio: 1/1;
+            margin: 0 0 0 1.4rem;
+            opacity: .4;
+        }
+
+        &:not(.active):hover svg {
+            opacity: .85;
+        }
+
+        &.active svg {
+            opacity: 1;
+        }
+    }
+</style>

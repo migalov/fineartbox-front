@@ -54,7 +54,7 @@
 display: grid;
 grid-template-columns:
     [full-width-start]
-        2rem
+        clamp(1rem, 0.6479rem + 1.3146vw, 2rem)
     [breakout-start]
             1fr
     [content-start]
@@ -62,7 +62,7 @@ grid-template-columns:
     [content-end]
             1fr
     [breakout-end]
-        2rem
+        clamp(1rem, 0.6479rem + 1.3146vw, 2rem)
     [full-width-end];
 
     & > * {

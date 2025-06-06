@@ -2,8 +2,8 @@
 import Icon from "./Icon.astro";
 ---
 
-<footer>
-    <div class="fab-footer">
+
+    <footer class="fab-footer">
         <ul class="fab-footer-menu">
             <li><a href="">Подарочная упаковка</a></li>
             <li><a href="">Картонные коробки</a></li>
@@ -47,18 +47,18 @@ import Icon from "./Icon.astro";
             
             
         </ul>
-    </div>
-</footer>
+    </footer>
+
 
 <style lang="scss" is:global>
 
     .fab-footer {
-
+        grid-area: footer;
         display: grid;
         gap: var(--global-gap);
-        grid-template-areas: "list list list list"
-                             "line line line line"
+        grid-template-areas: "line line line line"
                              "cop net . leg";
+
 
         & ul {
             display: flex;
@@ -70,6 +70,12 @@ import Icon from "./Icon.astro";
         & a {
             text-decoration: none;
         }
+
+        @media (min-width: 768px) {
+            grid-template-areas: "list list list list"
+                        "line line line line"
+                        "cop net . leg";
+        }
     }
 
     .fab-footer-menu { grid-area: list;}
@@ -80,6 +86,9 @@ import Icon from "./Icon.astro";
 
     .fab-footer-menu {
         flex-wrap: wrap;
+        @media (max-width:797.99px) {
+            display: none!important;
+        }
     }
 
     .fab-copyright {
