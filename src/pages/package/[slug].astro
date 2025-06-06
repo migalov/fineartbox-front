@@ -1,0 +1,112 @@
+---
+import qs from "qs";
+import Announce from "../../components/Announce.astro";
+import BlogRoot from "../../components/Blog/BlogRoot.astro";
+import DeadlineRoot from "../../components/Deadlines/DeadlineRoot.astro";
+import StageWorkRoot from "../../components/StagesWorks/StageWorkRoot.astro";
+import Layout from "../../layout.astro";
+import SpriteFeature from "../../SpriteFeature.astro";
+import YandexWidget from "../../components/YandexWidget.astro";
+import SEOBlock from "../../components/SEOBlock.astro";
+import Footer from "../../components/Footer.astro";
+import HeroPackage from "../../components/Hero/Package.astro";
+import BlockText from "../../components/BlockText.astro";
+import ReadyWorks from "../../components/ReadyWorks.astro";
+import AccordeonCards from "../../components/AccordeonCards.astro";
+import type { ACTION_ERROR_CODES } from "astro:actions";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "krishka-dno" }},
+  ];
+}
+
+const { slug } = Astro.params;
+
+const paramsPage = {
+    filter: {
+        slug: slug
+    },
+    populate: {
+        Slider: {
+            populate: "*"
+        },
+        readyProjects: {
+            populate: "*"
+        },
+        descriptions: {
+            populate: "*"
+        },
+        cardsSection: {
+            populate: "*"
+        }
+	},
+};
+
+const queryStringPage = qs.stringify(paramsPage, { encode: true });
+const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
+const pageData = landingPageData.data[0];
+---
+
+<Layout title="Упаковка крышка-дно">
+        <div class="fab-body">
+            <header class="fab-header">
+
+            </header>
+            <div class="content-grid">
+                <HeroPackage  />
+                <!-- <Announce /> -->
+                <ReadyWorks {...pageData.readyProjects} />
+                <div class="fab-widgets">
+                    {
+                        pageData.descriptions.map( b => <>
+                            <BlockText {...b} />
+                        </>)
+                    }
+                </div>
+                {
+                    pageData.cardsSection.map( accordeon => <AccordeonCards {...accordeon} /> )
+                }
+                <DeadlineRoot />
+                <StageWorkRoot />
+                <div class="fab-widgets" style="">
+                    <YandexWidget />
+                    <BlogRoot />
+                </div>
+                <SEOBlock />
+                <Footer />
+            </div>
+        </div>
+		<SpriteFeature />
+</Layout>
+
+<style lang="scss" is:global>
+    .fab-body {
+        display: grid;
+        max-width: 1440px;
+        margin: 0 auto;
+        grid-template-areas: "header" "page";
+        gap: 1.5rem;
+        @media (min-width: 992px) {
+            grid-template-areas: "page header";
+            grid-template-columns: 6fr 1fr;
+        }
+    }
+    .fab-header {
+        grid-area: header;
+    }
+    .content-grid {
+        grid-area: page;
+    }
+	.fab-widgets {
+		display: flex;
+		flex-direction: column;
+		row-gap: 2rem;
+		@media (min-width: 992px) {
+			display: grid;
+			grid-template-columns: 14fr 9fr;
+			gap: var(--global-gap);
+		}
+
+	}
+</style>

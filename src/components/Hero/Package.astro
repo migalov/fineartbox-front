@@ -1,3 +1,7 @@
+---
+// const {}
+---
+
 
 <section class="fab-hero splide" aria-label="Splide Basic HTML Example">
     <div class="splide__track">
@@ -5,30 +9,15 @@
                 <li class="splide__slide fab-hero-slide">
                   <figure>
                     <picture>
-                      <source srcset="./img/hero/1.jpg" media="(max-width: 767.99px)">
-                      <source srcset="./img/hero/1.jpg" media="(min-width: 768)">
-                      <img src="./img/hero/1.jpg" alt="Абстрактное изображение">
+                      <source srcset="/img/hero/package/1.jpg" media="(max-width: 767.99px)">
+                      <source srcset="/img/hero/package/1.jpg" media="(min-width: 768)">
+                      <img src="/img/hero/package/1.jpg" alt="Абстрактное изображение">
                     </picture>
                     <figcaption>
-                        <h2>Автоматическая сборка кашированых коробок по&nbsp;цене&nbsp;Китая</h2>
-                        <p>Разработка конструкции и пилотный образец в подарок</p>
+                        <h2>Упаковка крышка-дно</h2>
+                        <p>Упаковка состоит из нижней части-дна и крышки, которая скрывает содержимое коробки. Подходит для подарочных и сувенирных наборов, косметики, товаров ручной работы, шоколада, кондитерской продукции и тому подобных.</p>
                     </figcaption>
                   </figure>
-
-                </li>
-                <li class="splide__slide">
-                    <picture>
-                      <source srcset="./img/hero/2.jpg" media="(max-width: 767.99px)">
-                      <source srcset="./img/hero/2.jpg" media="(min-width: 768)">
-                      <img src="./img/hero/2.jpg" alt="Абстрактное изображение">
-                  </picture>
-                </li>
-                <li class="splide__slide">
-                    <picture>
-                      <source srcset="./img/hero/3.jpg" media="(max-width: 767.99px)">
-                      <source srcset="./img/hero/3.jpg" media="(min-width: 768)">
-                      <img src="./img/hero/3.jpg" alt="Абстрактное изображение">
-                  </picture>
                 </li>
             </ul>
     </div>
@@ -43,7 +32,7 @@
         border-radius: 0;
     }
     .fab-hero-slide {
-
+      position: relative;
       & figcaption {
         display: flex;
         flex-direction: column;
@@ -53,10 +42,7 @@
         left: 4rem;
         top: 50%;
         transform: translateY(-50%);
-        max-width: 41rem;
-        background: rgba(50, 57, 74, 0.6);
-        backdrop-filter: blur(4px);
-        color: var(--color-white);
+        max-width: 35rem;
         & h2 {
           font-size: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
         }
@@ -89,7 +75,7 @@
       type: "fade",
       rewind: true,
       arrows: false,
-      autoplay: false,
+      autoplay: true,
       interval: 4000,
       lazyLoad: "nearby",
       pagination: true,

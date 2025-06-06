@@ -1,0 +1,35 @@
+---
+const {projectsList} = Astro.props;
+---
+
+<section class="fab-ready-works">
+    <h2>Реализованные работы</h2>
+    <div class="fab-ready-works-row fab-scrollbar">
+        {
+            projectsList.map( project => 
+                <a href={project.href}>
+                    <img src={project.src} alt="" />
+                </a>
+            )
+        }
+
+    </div>
+</section>
+
+<style lang="scss">
+    .fab-ready-works-row {
+        display: flex;
+        flex-direction: row;
+        column-gap: 1.5rem;
+        & a {
+            display: block;
+        }
+        & img {
+
+            aspect-ratio: 1/1;
+            @media (max-width: 991.92px) {
+                min-width: clamp(12.5rem, 10.3571rem + 10.7143vw, 20rem);
+            }
+        }
+    }
+</style>

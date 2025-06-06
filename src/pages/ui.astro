@@ -15,6 +15,10 @@ import SEOBlock from "../components/SEOBlock.astro";
 import Footer from "../components/Footer.astro";
 import GridBannersType1 from "../components/GridBanners/Type1.astro";
 import Hero from "../components/Hero.astro";
+import ReadyWorks from "../components/ReadyWorks.astro";
+import BlockText from "../components/BlockText.astro";
+import GridCards from "../components/GridCards.astro";
+import FAQItem from "../components/FAQItem.astro";
 
 const services = [{
     
@@ -32,6 +36,17 @@ const services = [{
 
                 
                 <Hero />
+                <FAQItem />
+                <GridCards />
+                <ReadyWorks />
+                <div class="fab-widgets" style="">
+                    <BlockText
+                        htmlContent={"<h2>Картонная коробка крышка дно</h2><p>Коробка крышка-дно – одна из наиболее популярных форм упаковки товара. Она удобна в использовании и подходит для разных товарных нишь: от косметической до электронной промышленности. Такая конструкция используется при создании подарочных полиграфических материалов. И не только благодаря своей универсальной форме, но и потому что выигрышно смотрится на фоне большинства прочих вариантов, не говоря уже о широчайших дизайнерских возможностях.</p>"}
+                    />
+                    <BlockText
+                        htmlContent={"<h2>Процесс изготовления</h2><p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p><p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>"}
+                    />
+                </div>
                 <GridBannersType1
                     title="Услуги"
                 />
@@ -44,7 +59,7 @@ const services = [{
                     <span class="caption">Caption</span>
                     <span class="caption--bold">Caption Bold</span>
                 </div>
-                <!-- <Announce />
+                <Announce />
                 <div>
                     <Mark />
                     <Icon id="arrow-45" width={30} height={30} />
@@ -59,13 +74,12 @@ const services = [{
                     <Icon id="round" width={30} height={30} />
                     <Icon id="upload" width={30} height={30} />
                     <Icon id="user" width={30} height={30} />
-                </div> -->
+                </div>
                 <FeaturesRoot />
                 <DeadlineRoot />
                 
 
                 <div>
-                <!-- <BannerBox desktopColumns={6} /> -->
                 </div>
                 <div style="display: grid; grid-template-columns: 14fr 9fr; gap: var(--global-gap)">
                     <YandexWidget />

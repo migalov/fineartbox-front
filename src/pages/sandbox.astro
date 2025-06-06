@@ -1,24 +1,50 @@
 ---
-import Announce from "../components/Announce.astro";
-import BannerBox from "../components/BannerBox.astro";
-import BlogItem from "../components/Blog/BlogItem.astro";
-import BlogRoot from "../components/Blog/BlogRoot.astro";
-import DeadlineRoot from "../components/Deadlines/DeadlineRoot.astro";
-import FeaturesRoot from "../components/Features/FeaturesRoot.astro";
-import Icon from "../components/Icon.astro";
-import Mark from "../components/Mark.astro";
-import StageWorkRoot from "../components/StagesWorks/StageWorkRoot.astro";
+import BannerBox from "../components/TestComponents/BannerBox.astro";
 import Layout from "../layout.astro";
 import SpriteFeature from "../SpriteFeature.astro";
-import YandexWidget from "../components/YandexWidget.astro";
 import SEOBlock from "../components/SEOBlock.astro";
 import Footer from "../components/Footer.astro";
-import GridBannersType1 from "../components/GridBanners/Type1.astro";
-import Hero from "../components/Hero.astro";
+import GridBannersType1 from "../components/TestComponents/GridBannersType1.astro";
 
-const services = [{
-    
-}]
+const servicesData = {
+    title: "Услуги",
+    banners: [
+        {
+            backgroundDefault: "./Announce-Box-11.jpg",
+            backgroundHover: "./Announce-Box-hover.jpg",
+            title: "Разработка конструкции",
+            description: "Текстовое описание"
+        },
+        {
+            backgroundDefault: "./Announce-Box-22.jpg",
+            backgroundHover: "./Announce-Box-hover.jpg",
+            title: "Изготовление предтиражного образца",
+            description: "Текстовое описание"
+        },
+        {
+            backgroundDefault: "./Announce-Box-33.jpg",
+            backgroundHover: "./Announce-Box-hover.jpg",
+            title: "Отделка",
+            description: "Текстовое описание"
+        },
+        {
+            backgroundDefault: "./Announce-Box-44.jpg",
+            backgroundHover: "./Announce-Box-hover.jpg",
+            title: "Копакинг",
+            description: "Текстовое описание"
+        },
+        {
+            backgroundDefault: "./Announce-Box-55.jpg",
+            backgroundHover: "./Announce-Box-hover.jpg",
+            title: "Доставка",
+            description: "Текстовое описание"
+        },
+        {
+            title: "Доставка",
+            href: ""
+        }
+    ]
+}
 ---
 
 <Layout title="UI Components">
@@ -29,7 +55,7 @@ const services = [{
 
             </header>
             <div class="content-grid">
-				<FeaturesRoot />
+				<GridBannersType1 {...servicesData} />
                 <SEOBlock />
                 <Footer />
             </div>

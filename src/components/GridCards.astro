@@ -1,0 +1,19 @@
+---
+import CardType1 from "./Cards/Type1.astro";
+---
+
+<section class="fab-cards-grid fab-scrollbar">
+    <CardType1 src="./img/card.jpg" title="Переплётный картон" description="При сборке внешние края упаковки полукруглые" />
+    <CardType1 src="./img/card.jpg" title="Мелованная бумага" description="При сборке внешние края упаковки угол 90 лайнер тонкая бумага" />
+    <CardType1 src="./img/card.jpg" title="Дизайнерская бумага" description="При сборке внешние края упаковки угол 90 у переплетённого картона или картон, также пазорезка" />
+    <CardType1 src="./img/card.jpg" title="Переплётный материал" description="При сборке внешние края упаковки угол 90 у переплетённого картона или картон, также пазорезка" />
+</section>
+
+<style lang="scss">
+    .fab-cards-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        gap: var(--global-gap);
+    }
+</style>

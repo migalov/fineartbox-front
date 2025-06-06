@@ -31,7 +31,7 @@
     padding: 0 2rem;
 
     @media (min-width: 540px) {
-        --max-content-width: var(--max-content-width-lg);
+        --max-content-width: var(--max-content-width);
     }
     // @media (min-width: 768px) {
     //     --max-content-width: var(--max-content-width-mobile-md);
@@ -45,7 +45,8 @@
 }
 
 .content-grid {
-    row-gap: 2rem;
+    row-gap: 4rem;
+    --content-max-width: 100%;
 }
 
 .content-grid,

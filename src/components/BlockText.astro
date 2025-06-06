@@ -1,0 +1,15 @@
+---
+const {title, htmlContent} = Astro.props;
+---
+
+<div class="fab-text" set:html={htmlContent}>
+    <!-- {JSON.stringify(title)} -->
+</div>
+
+<style lang="scss" is:global>
+    .fab-text {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+</style>
