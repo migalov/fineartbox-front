@@ -1,0 +1,21 @@
+---
+const {label} = Astro.props;
+---
+
+<button disabled type="submit" class="fab-button-submit">{label}</button>
+
+<style lang="scss" is:global>
+    .fab-button-submit {
+        background: var(--color-orange);
+        padding: 0 1em;
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--color-white);
+        outline: transparent;
+        border: transparent;
+        &:disabled {
+            opacity: .6;
+        }
+    }   
+</style>

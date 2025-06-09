@@ -29,7 +29,7 @@ import Icon from "./Icon.astro";
                 </a>
             </li>
             <li>
-                <a rel="nofollow" href="">
+                <a rel="nofollow" href="https://www.instagram.com/fineartbox/">
                     <Icon id="inst" width="16" height="16" />
                 </a>
             </li>
@@ -55,27 +55,61 @@ import Icon from "./Icon.astro";
     .fab-footer {
         grid-area: footer;
         display: grid;
-        gap: var(--global-gap);
-        grid-template-areas: "line line line line"
-                             "cop net . leg";
+        padding: 0 var(--global-gap);
+        gap: calc(0.3 * var(--global-gap));
+        grid-template-areas: "cop net"
+                             "leg leg";
+
 
 
         & ul {
             display: flex;
             align-items: center;
             gap: .5em 1em;
+            // justify-content: space-between;
+        }
+
+        // & .fab-social-networks, .fab-legacy-content {
+            
+
+        // }
+        .fab-footer-menu {
             justify-content: space-between;
+        }
+
+        & .fab-social-networks {
+            gap: 1.5rem;
+            justify-content: flex-end;
+            @media (min-width: 768px) {
+                justify-content: inherit;
+            }
+        }
+
+        & .fab-legacy-content {
+            gap: 1.5rem;
+            justify-content: space-between;
+            @media (min-width: 768px) {
+                justify-content: flex-end;
+            }
         }
 
         & a {
             text-decoration: none;
         }
 
+        & hr {
+            @media (max-width: 767.99px) {
+                display: none;
+            }
+        }
+
         @media (min-width: 768px) {
             grid-template-areas: "list list list list"
                         "line line line line"
                         "cop net . leg";
+            gap: var(--global-gap);
         }
+
     }
 
     .fab-footer-menu { grid-area: list;}
@@ -95,8 +129,6 @@ import Icon from "./Icon.astro";
         margin: 0 1.5em 0 0;
     }
 
-    .fab-social-networks {
-        gap: 1.5rem;
-    }
+
 
 </style>

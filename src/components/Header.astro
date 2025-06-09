@@ -18,7 +18,8 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
 
 <header class="fab-header">
         <div class="fab-header-wrap">
-            <Icon classes="fab-header-logo" id="logo" width="75" height="80" />
+            <a href="/"><Icon classes="fab-header-logo" id="logo" width="75" height="80" /></a>
+            
             <div class="fab-header-user-actions">
                 <a href="#">
                     <Icon id="user" width="16" height="16" />
@@ -30,9 +31,9 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                 
             </div>
             <div class="fab-personal-account">
-                <input type="checkbox" id="personal-account">
-                <label for="personal-account">Личный кабинет</label>
-                <a href="/cart">
+                <input hidden type="checkbox" id="personal-account">
+                <label for="personal-account">Личный <br />кабинет</label>
+                <a  class="fab-personal-account__cart" href="/cart">
                     <Icon id="cart" width="16" height="16" />
                 </a>
                 <div class="fab-personal-account-options">
@@ -41,7 +42,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                         <span>Иннокентий Христораждественский</span>
                     </a>
                     <a href="/orders">Заказы</a>
-                    <a href="/зкщоусеы">Проекты</a>
+                    <a href="/projects">Проекты</a>
                     <a href="#">
                         <span>Выйти</span>
                         <Icon id="exit" width="16" height="16" />
@@ -169,6 +170,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
             transform: translateX(100%);
             transition: var(--transition-default);
             height: calc(100dvh - var(--header-height));
+            opacity: 0;
         }
 
         @media (min-width: 992px) {
@@ -177,12 +179,23 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
         }
     }
     .fab-personal-account {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
         position: relative;
+        background-color: var(--color-gray-1);
+        border-bottom: 1px solid var(--color-gray-2);
         & input:checked ~ .fab-personal-account-options {
             opacity: 1;
             pointer-events: inherit;
         }
-        @media (max-width: 767.99px) {
+        & label {
+            cursor: pointer;
+             font-weight: 700;
+             color: var(--color-gray-4);
+        }
+        @media (max-width: 991.99px) {
             display: none;
         }
     }
@@ -299,5 +312,11 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
     .fab-header-contact__email, .fab-header-contact__address {
         font-style: normal;
         font-size: 1.14rem;
+    }
+    .fab-personal-account__cart {
+        display: inline-block;
+        margin-left: 1.25rem;
+        padding: .5rem 0 .5rem 1.25rem;
+        border-left: 1px solid var(--color-gray-2);
     }
 </style>

@@ -1,3 +1,124 @@
-    <label for="">
-        <input type="text">
-    </label>
+---
+import Sprite from "../../Icons/Sprite.astro";
+
+const {type = "text", id, name, label, value, pattern, autocomplete="off"} = Astro.props;
+
+const classesInput = [
+    "fab-input-text",
+    type === "password" && "cb-input-password"
+]
+---
+
+<label for={id} class:list={classesInput}>
+    {
+        // type == "password" &&
+        // <>
+        //     <span class="toggle-password">
+        //         <Sprite classList={["hide-icon"]} id="show" width={16} height={16} fill="#000" />
+        //         <Sprite id="hide" width={16} height={16} fill="#000" />
+        //     </span>
+        // </>
+}
+    <input autocomplete={autocomplete} type={type} id={id} name={name} value={value} pattern={pattern} placeholder={label}>
+    <!-- <span>{label}</span> -->
+
+</label>
+<style lang="scss" is:global>
+    .fab-input-text {
+        position: relative;
+        font-size: var(--18px);
+        flex: 1;
+        display: block;
+
+        & input {
+            appearance: none;
+            border: 0;
+            outline: 0;
+            padding: 0.93em 1em;
+            width: 100%;
+            font-family: 1rem;
+            font-family: var(--font-family);
+            border-bottom: 1px solid var(--color-gray-4);
+
+            &.has-value {
+                // & + span {
+                //     top: .4em;
+                //     left: 1.3em;
+                //     transform: translateY(0);
+                //     // transition-property: transform;
+                //     font-size: var(--11px);
+                // }
+                font-weight: 500;
+                background-color: var(--color-white);
+            }
+
+            background-color: var(--color-gray-1);
+
+            :not(:placeholder-shown) {
+                background-color: var(--color-white);
+            }
+            
+        }
+
+        // &:has( input:focus) {
+        //     border: 1px solid #000;
+        // }
+
+        // &:has( input:valid) {
+        //     border: 1px solid rgba(218,218,218,1);
+        // }
+
+        // &:has( input:invalid) {
+        //     border: 1px solid red;
+        // }
+
+
+        & span {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: .8em;
+            transition: var(--transition-default);
+            transition-property: all;
+            &.toggle-password {
+                cursor: pointer;
+                left: auto;
+                right: .8em;
+                z-index: 1;
+            }
+        }
+
+    }
+
+    @keyframes flashing  {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .cb-animate-flashing {
+        animation: flashing 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .hide-icon {
+        display: none;
+    }
+
+</style>
+
+<script>
+    document.querySelectorAll(".fab-input-text").forEach(lab => {
+        lab.querySelector("input").addEventListener("input", (inp) => {
+            
+            let hasValue = Boolean(inp.target.value);
+
+            if (hasValue) inp.target.classList.add("has-value")
+            else inp.target.classList.remove("has-value")
+            
+
+        })
+    })
+</script>

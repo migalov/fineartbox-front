@@ -15,10 +15,28 @@ import SEOBlock from "../components/SEOBlock.astro";
 import Footer from "../components/Footer.astro";
 import GridBannersType1 from "../components/GridBanners/Type1.astro";
 import Hero from "../components/Hero.astro";
+import Achievements from "../components/Achievements/Root.astro";
+import qs from "qs";
+import FAQSection from "../components/FAQ/FAQSection.astro";
+import SubscribeBlock from "../components/SubscribeBlock.astro";
 
-const services = [{
-    
-}]
+const paramsPage = {
+    populate: {
+        Slider: {
+            populate: "*"
+        },
+        FAQBlock: {
+            populate: "*"
+        },
+        SEOBlock: {
+            populate: "*"
+        }
+	},
+};
+
+const queryStringPage = qs.stringify(paramsPage, { encode: true });
+const landingPageData = await fetch(`${import.meta.env.HOST_API}/main-page?${queryStringPage}`).then(res => res.json());
+const pageData = landingPageData.data;
 ---
 
 <Layout title="Главная">
@@ -41,7 +59,10 @@ const services = [{
                 <YandexWidget />
                 <BlogRoot />
             </div>
-            <SEOBlock />
+            <Achievements />
+            <FAQSection {...pageData} />
+            <SubscribeBlock status="default" />
+            <SEOBlock {...pageData.SEOBlock[0]}  />
 
         </div>
 		<SpriteFeature />

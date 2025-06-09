@@ -54,6 +54,7 @@ body:has( .fab-toggle-menu:checked) {
 @media (max-width: 991.99px) {
   .fab-header:has( .fab-toggle-menu:checked) .fab-menu-section {
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
@@ -62,13 +63,13 @@ body:has( .fab-toggle-menu:checked) {
     .bar:nth-child(1) {
       transform: rotate(45deg);
       top: 50%;
-      margin-top: -($bar-height / 2);
+      margin-top: calc(-0.5 * $bar-height);
     }
 
     .bar:nth-child(2) {
       transform: rotate(-45deg);
       bottom: 50%;
-      margin-bottom: -($bar-height / 2);
+      margin-bottom: calc(-0.5 * $bar-height);
     }
   }
 </style>

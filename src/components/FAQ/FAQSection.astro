@@ -1,0 +1,18 @@
+---
+import FAQItem from "./FAQItem.astro"
+const {FAQBlock} = Astro.props;
+---
+<section class="fab-faq-section">
+    <h2>{FAQBlock.title}</h2>
+    <ul>
+        {
+            (FAQBlock.faqList && FAQBlock.faqList.length > 0) && FAQBlock.faqList.map((_item) =>
+                <>
+                {
+                    _item.htmlContent && <FAQItem {..._item} />
+                }
+                
+                </>)
+        }
+    </ul>
+</section>

@@ -1,0 +1,39 @@
+---
+const {title, description, src} = Astro.props
+---
+<div class="fab-achievement-item">
+    <img src={src} alt="">
+    <div class="fab-achievement-item-wrap">
+        <h3 set:html={title}></h3>
+        <p set:html={description}></p>
+    </div>
+</div>
+
+<style lang="scss">
+    .fab-achievement-item {
+        --size-cut-triangle: clamp(1rem, 0.8239rem + 0.7512vw, 1.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        @media (min-width: 992px) {
+            flex-direction: row;
+        }
+        & img {
+            min-width: clamp(15rem, 13.7844rem + 5.1864vw, 17rem);
+            clip-path: polygon(var(--size-cut-triangle) 0%, 100% 0, 100% calc(100% - var(--size-cut-triangle)), calc(100% - var(--size-cut-triangle)) 100%, 0 100%, 0% var(--size-cut-triangle));
+            @media (min-width: 992px) {
+                min-width: 10.5rem;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+        }
+        & h3 {
+            font-family: var(--font-family);
+        }
+    }
+    .fab-achievement-item-wrap {
+        display: flex;
+        flex-direction: column;
+        row-gap: .5rem;
+    }
+</style>

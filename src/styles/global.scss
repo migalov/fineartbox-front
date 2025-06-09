@@ -95,20 +95,27 @@ h3 .h3 {
 
 a {
     color: var(--color-orange);
-    transition: var(--transition-default);
     & > * {
         transition: var(--transition-default);
     }
+}
+
+a, button {
+    transition: var(--transition-default);
+}
+
+button[type=submit]:disabled {
+    cursor: not-allowed;
+}
+
+button[type=submit]:not(:disabled) {
+    cursor: pointer;
 }
 
 a:visited {
     color: inherit;
 }
 
-
-.link {
-
-}
 
 .link--gray {
     color: var(--color-gray-4);

@@ -1,24 +1,12 @@
 ---
 import Icon from "./Icon.astro";
+const {columnOne, columnTwo} = Astro.props;
 ---
 
-<div class="fab-seo-blog">
-    <div class="fab-seo-blog-wrap">
-        <div class="fab-seo-blog-column">
-            <p>#Упаковка крышка-дно: #стандартная, #с вырезом под палец, #с бортом, #с наклонными бортами, #с накладками, #с объемным бортом</p>
-            <p>#Упаковка магнитный клапан, #окном, #фигурный, #на лентах</p>
-            <p>#Упаковка пенал: #открытый, #закрытый, #комбинированный</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus adipisci exercitationem dicta aliquid similique nihil modi enim nam est labore? Veritatis eius labore vel dignissimos culpa sequi, recusandae dolor tempore!</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus adipisci exercitationem dicta aliquid similique nihil modi enim nam est labore? Veritatis eius labore vel dignissimos culpa sequi, recusandae dolor tempore!</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus adipisci exercitationem dicta aliquid similique nihil modi enim nam est labore? Veritatis eius labore vel dignissimos culpa sequi, recusandae dolor tempore!</p>
-        </div>
-        <div class="fab-seo-blog-column">
-            <p>#Коробка для книг, #с магнитным клапаном, #распошная, #кофр, #футляр</p>
-            <p>#Упаковка магнитный клапан, #окном, #фигурный, #на лентах</p>
-            <p>#Упаковка пенал: #открытый, #закрытый, #комбинированный</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus adipisci exercitationem dicta aliquid similique nihil modi enim nam est labore? Veritatis eius labore vel dignissimos culpa sequi, recusandae dolor tempore!</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus adipisci exercitationem dicta aliquid similique nihil modi enim nam est labore? Veritatis eius labore vel dignissimos culpa sequi, recusandae dolor tempore!</p>
-        </div>
+<div class="fab-seo-block">
+    <div class="fab-seo-block-wrap">
+        <div class="fab-seo-block-column" set:html={columnOne} />
+        <div class="fab-seo-block-column" set:html={columnTwo} />
     </div>
     <label class="fab-seo-toggle" for="seo-toggle">
         <input hidden type="checkbox" name="" id="seo-toggle">
@@ -28,7 +16,7 @@ import Icon from "./Icon.astro";
 </div>
 
 <style lang="scss" is:global>
-    .fab-seo-blog {
+    .fab-seo-block {
         display: grid;
         grid-template-rows: 0fr;
         overflow: hidden;
@@ -40,8 +28,24 @@ import Icon from "./Icon.astro";
         &:has( input:checked) {
             grid-template-rows: 1fr;
         }
+        & h2 {
+            font-weight: 500;
+        }
+
+
+        & :is(h2, p, li) {
+            font-family: var(--font-family);
+
+            font-size: 1rem;
+            margin: 0 0 .5em;
+        }
+
+        & p {
+            font-family: var(--font-text);
+            line-height: 1.4;
+        }
     }
-    .fab-seo-blog-wrap {
+    .fab-seo-block-wrap {
 
         position: relative;
         overflow: hidden;
@@ -53,7 +57,7 @@ import Icon from "./Icon.astro";
             gap: 1rem;
         }
     }
-    .fab-seo-blog-column {
+    .fab-seo-block-column {
         display: flex;
         flex-direction: column;
         row-gap: 1em;
@@ -65,7 +69,6 @@ import Icon from "./Icon.astro";
         & input:checked + svg {
             transform: rotate(180deg);
         }
-
-
     }
+    
 </style>

@@ -1,0 +1,26 @@
+---
+import AchievementsItem from "./Item.astro";
+---
+
+<section class="fab-achievements">
+    <h2>Достижения</h2>
+    <div class="fab-achievements-grid fab-scrollbar">
+        <AchievementsItem title="Рост производительности на&nbsp;30%" description="Внедрение автоматизированной линии сократило сроки производства и увеличило объёмы выпуска." src="/img/achievements/1.jpg"/>
+        <AchievementsItem title="Выход на новые региональные&nbsp;рынки" description="Успешные поставки в другие регионы расширили географию продаж на 5 новых направлений." src="/img/achievements/2.jpg" />
+        <AchievementsItem title="Экологичная упаковка нового&nbsp;поколения" description="Разработка и сертификация перерабатываемых материалов в соответствии с международными стандартами." src="/img/achievements/3.jpg" />
+        <AchievementsItem title="Онлайн-конструктор — рост продаж на&nbsp;40%" description="Интерактивный сервис для клиентов увеличил количество заказов и упростил персонализацию упаковки." src="/img/achievements/4.jpg" />
+    </div>
+    
+</section>
+
+<style lang="scss">
+    .fab-achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        @media (min-width: 992px) {
+            gap: 3rem 4rem;
+        }
+    }
+
+</style>

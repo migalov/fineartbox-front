@@ -1,0 +1,127 @@
+---
+const { title, htmlContent } = Astro.props;
+// const nameDropdown = `${slug}-${item.id}`
+import sanitizeHtml from 'sanitize-html';
+import Icon from '../Icon.astro';
+const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
+       allowedTags: ['a', 'p', 'h2', 'h3', 'ul', 'ol', 'li', 'strong', 'em'], // Разрешенные теги
+       allowedAttributes: {
+        'span': [ 'style' ],
+        'a': ['href']
+       } // Разрешенные атрибуты
+   });
+   const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
+   const addNonBreakingSpace = (text) => {
+        return text.replace(prepositions, (match) => `${match}\u00A0`);
+   };
+---
+
+
+<li class="fab-faq-item">
+    {
+        title && 
+        <label class="fab-faq-item-head">
+            <h3>{title}</h3>
+            <input type="checkbox" />
+            <Icon id="arrow" width="16" height="16" />
+        </label>        
+    }
+    
+    <div class="fab-faq-item-answer">
+        <div class="fab-faq-item-answer-inner" set:html={cleanHtml(htmlContent)} />
+    </div>
+</li>
+
+<style lang="scss" is:global>
+    .fab-faq-item {
+        position: relative;
+        padding: 1em 0;
+        border-bottom: 1px solid var(--color-medium-gray);
+        list-style-type: none;
+        & ul > li {
+            list-style-type: disc!important;
+        }
+        & ol > li {
+            list-style-type: decimal!important;
+        }
+        & h3 {
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            margin: 0 0 .5em;
+            font-weight: 500;
+        }
+        & :is(h3, p, li) {
+            font-family: var(--font-family);
+        }
+        &:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--color-black);
+        }
+    }
+    .fab-faq-item-head {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 1rem;
+        align-items: center;
+        cursor: pointer;
+        & input {
+            display: none;
+            appearance: none;
+            &:checked + svg {
+                transform: rotate(0);
+                filter: invert(1);
+            }
+        }
+
+        & svg {
+            transform: rotate(90deg);
+            transition: var(--transition-default);
+        }
+
+        &:has( input:not(:checked)) h3 {
+            margin: 0;
+        }
+
+        & h3 {
+            transition: var(--transition-default);
+        }
+
+        &:has( input:checked) + .fab-faq-item-answer {
+            grid-template-rows: 1fr;
+        }
+    }
+    .fab-faq-item-answer {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition-duration: 500ms;
+        transition-property: grid-template-rows, padding;
+        width: 100%;
+        padding: 0 0 0;
+    }
+
+    .fab-faq-item-answer-inner {
+        display: flex;
+        flex-direction: column;
+        gap: .7em;
+        overflow: hidden;
+
+        & p {
+            line-height: 1.6em;
+            margin: 0;
+        }
+
+        & ul {
+            padding: 0 0 0 1.2em;
+        }
+        & ol {
+            padding: 0 0 0 1.2em;
+        }
+    }
+
+</style>
+

@@ -15,6 +15,7 @@ import ReadyWorks from "../../components/ReadyWorks.astro";
 import AccordeonCards from "../../components/AccordeonCards.astro";
 import ConstructionLinks from "../../components/ConstructionLinks.astro";
 import SpriteConstructions from "../../SpriteConstructions.astro";
+import SubscribeBlock from "../../components/SubscribeBlock.astro";
 
 export function getStaticPaths() {
   return [
@@ -50,11 +51,8 @@ const pageData = landingPageData.data[0];
 ---
 
 <Layout title="Упаковка крышка-дно">
-    <div class="content-grid">
-
-    
+    <div class="content-grid">    
             <HeroPackage {...pageData}  />
-            <!-- <Announce /> -->
             <ConstructionLinks {slug} />
             <ReadyWorks {...pageData.readyProjects} />
             <div class="fab-widgets">
@@ -69,10 +67,7 @@ const pageData = landingPageData.data[0];
             }
             <DeadlineRoot />
             <StageWorkRoot />
-            <div class="fab-widgets" style="">
-                <YandexWidget />
-                <BlogRoot />
-            </div>
+            <SubscribeBlock status="default" />
             <SEOBlock />
 
 </div>
@@ -80,17 +75,6 @@ const pageData = landingPageData.data[0];
 
 
 <style lang="scss" is:global>
-    // .fab-body {
-    //     display: grid;
-    //     max-width: 1440px;
-    //     margin: 0 auto;
-    //     grid-template-areas: "header" "page";
-    //     gap: 1.5rem;
-    //     @media (min-width: 992px) {
-    //         grid-template-areas: "page header";
-    //         grid-template-columns: 6fr 1fr;
-    //     }
-    // }
 	.fab-widgets {
 		display: flex;
 		flex-direction: column;

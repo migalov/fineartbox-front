@@ -1,7 +1,5 @@
 ---
 import Announce from "../components/Announce.astro";
-import BannerBox from "../components/BannerBox.astro";
-import BlogItem from "../components/Blog/BlogItem.astro";
 import BlogRoot from "../components/Blog/BlogRoot.astro";
 import DeadlineRoot from "../components/Deadlines/DeadlineRoot.astro";
 import FeaturesRoot from "../components/Features/FeaturesRoot.astro";
@@ -12,8 +10,7 @@ import Layout from "../layout.astro";
 import SpriteFeature from "../SpriteFeature.astro";
 import YandexWidget from "../components/YandexWidget.astro";
 import SEOBlock from "../components/SEOBlock.astro";
-import Footer from "../components/Footer.astro";
-import GridBannersType1 from "../components/GridBanners/Type1.astro";
+
 import Hero from "../components/Hero.astro";
 import ReadyWorks from "../components/ReadyWorks.astro";
 import BlockText from "../components/BlockText.astro";
@@ -22,6 +19,9 @@ import FAQItem from "../components/FAQItem.astro";
 import ConstructionLinks from "../components/ConstructionLinks.astro";
 import SpriteConstructions from "../SpriteConstructions.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Achievements from "../components/Achievements/Root.astro";
+import GridBannersType1 from "../components/TestComponents/GridBannersType1.astro";
+import SubscribeBlock from "../components/SubscribeBlock.astro";
 
 const services = [{
     
@@ -33,10 +33,15 @@ const services = [{
 
         <div class="content-grid">
 
+            <GridBannersType1 />
+            <SubscribeBlock status="default" />
+            <!-- <SubscribeBlock status="pending" />
+            <SubscribeBlock status="success" />
+            <SubscribeBlock status="error" /> -->
             <Breadcrumbs />
             <Hero />
+            <Achievements />
             <ConstructionLinks />
-            <FAQItem />
             <GridCards />
             <!-- <ReadyWorks /> -->
             <div class="fab-widgets" style="">
@@ -47,9 +52,9 @@ const services = [{
                     htmlContent={"<h2>Процесс изготовления</h2><p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p><p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>"}
                 />
             </div>
-            <GridBannersType1
+            <!-- <GridBannersType1
                 title="Услуги"
-            />
+            /> -->
             <StageWorkRoot />
             <div>
                 <h1>Автоматическая сборка кашированых коробок по цене Китая</h1>

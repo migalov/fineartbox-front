@@ -35,6 +35,9 @@ import SpriteConstructions from "./SpriteConstructions.astro";
 </html>
 
 <style lang="scss" is:global>
+    astro-dev-toolbar {
+        display: none;
+    }
     .fab-body {
         padding-top: var(--header-height);
         display: grid;
@@ -58,6 +61,7 @@ import SpriteConstructions from "./SpriteConstructions.astro";
     }
     .fab-page {
         grid-area: page;
+        padding-bottom: 2rem;
     }
 	.fab-widgets {
 		display: flex;
@@ -86,4 +90,19 @@ import SpriteConstructions from "./SpriteConstructions.astro";
     updateHeightBlock();
     window.addEventListener("DOMContentLoaded", updateHeightBlock);
     window.addEventListener("resize", updateHeightBlock);
+</script>
+
+<script>
+    let formSubscribe = document.querySelector(`.fab-subscribe-form`);
+    let emailSubscribe = formSubscribe.querySelector("[type=email]");
+    let submitSubscribe = formSubscribe.querySelector("[type=submit]");
+
+    emailSubscribe.addEventListener("input", () => {
+        if (emailSubscribe.checkValidity() && emailSubscribe != "") {
+            submitSubscribe.disabled = false;
+        }
+        else {
+            submitSubscribe.disabled = true;
+        }
+    })
 </script>
