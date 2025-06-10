@@ -52,7 +52,7 @@ const {status} = Astro.props;
         gap: 1.5rem;
         justify-content: space-between;
         align-items: center;
-        padding: clamp(1rem, 0.6479rem + 1.5023vw, 2rem) clamp(1rem, 0.2958rem + 3.0047vw, 3rem); 
+        padding: clamp(1rem, 0.6479rem + 1.5023vw, 2rem) clamp(1rem, 0.2958rem + 3.0047vw, 3rem)!important; 
         border: 1px solid var(--color-gray-2);
         clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--size-cut-triangle)), calc(100% - var(--size-cut-triangle)) 100%, 0 100%);
 
@@ -104,7 +104,7 @@ const {status} = Astro.props;
     }
 </style>
 
-<style lang="scss">
+<style lang="scss" is:global>
     .spinner {
     width: 24px;
     height: 24px;

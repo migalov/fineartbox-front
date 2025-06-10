@@ -1,18 +1,13 @@
 ---
 import Announce from "../components/Announce.astro";
-import BannerBox from "../components/BannerBox.astro";
-import BlogItem from "../components/Blog/BlogItem.astro";
 import BlogRoot from "../components/Blog/BlogRoot.astro";
 import DeadlineRoot from "../components/Deadlines/DeadlineRoot.astro";
 import FeaturesRoot from "../components/Features/FeaturesRoot.astro";
-import Icon from "../components/Icon.astro";
-import Mark from "../components/Mark.astro";
 import StageWorkRoot from "../components/StagesWorks/StageWorkRoot.astro";
 import Layout from "../layout.astro";
 import SpriteFeature from "../SpriteFeature.astro";
 import YandexWidget from "../components/YandexWidget.astro";
 import SEOBlock from "../components/SEOBlock.astro";
-import Footer from "../components/Footer.astro";
 import GridBannersType1 from "../components/GridBanners/Type1.astro";
 import Hero from "../components/Hero.astro";
 import Achievements from "../components/Achievements/Root.astro";
@@ -41,7 +36,7 @@ const pageData = landingPageData.data;
 
 <Layout title="Главная">
         <div class="content-grid">
-            <Hero />
+            <Hero {...pageData} />
             <!-- <GridBannersType1
                 title="Услуги"
             />

@@ -1,22 +1,35 @@
+---
+const { Slider } = Astro.props;
+---
+
+<!-- <code>
+  {JSON.stringify(Slider)}
+</code> -->
 
 <section class="fab-hero splide" aria-label="Splide Basic HTML Example">
     <div class="splide__track">
             <ul class="splide__list">
+              {
+                Slider.map( slide => 
+
                 <li class="splide__slide fab-hero-slide">
                   <figure>
                     <picture>
-                      <source srcset="./img/hero/1.jpg" media="(max-width: 767.99px)">
-                      <source srcset="./img/hero/1.jpg" media="(min-width: 768)">
-                      <img src="./img/hero/1.jpg" alt="Абстрактное изображение">
+                      <source srcset={slide.backgroundMobile} media="(max-width: 767.99px)" />
+                      <source srcset={slide.backgoundDesktop} media="(min-width: 768)" />
+                      <img src={slide.backgoundDesktop} alt="Абстрактное изображение" />
                     </picture>
                     <figcaption>
-                        <h2>Автоматическая сборка кашированых коробок по&nbsp;цене&nbsp;Китая</h2>
-                        <p>Разработка конструкции и пилотный образец в подарок</p>
+                        <h2 set:html={slide.title} />
+                        <p set:html={slide.description} />
                     </figcaption>
                   </figure>
 
                 </li>
-                <li class="splide__slide">
+                )
+              }
+                
+                <!-- <li class="splide__slide">
                     <picture>
                       <source srcset="./img/hero/2.jpg" media="(max-width: 767.99px)">
                       <source srcset="./img/hero/2.jpg" media="(min-width: 768)">
@@ -29,8 +42,9 @@
                       <source srcset="./img/hero/3.jpg" media="(min-width: 768)">
                       <img src="./img/hero/3.jpg" alt="Абстрактное изображение">
                   </picture>
-                </li>
+                </li> -->
             </ul>
+            
     </div>
 </section>
 <style lang="scss">

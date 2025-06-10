@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Фильтр упаковок</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .product-list {
+      display: flex;
+     flex-wrap: wrap;
+      gap: 15px;
+    }
+    .product-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Упаковки</h1>
+
+  <div id="app"></div>
+  <script src="/preact.min.js"></script> 
+  <script src="/babel.min.js"></script>
+  <!-- Скрипт с JSX -->
+  <script type="text/babel">
+
+    const { h, Component } = preact;
+
+    // Данные продуктов
+    const products = [
+      { id: 1, name: "Коробка A", purpose: "Еда", type: "Картонная", shape: "Прямоугольная" },
+      { id: 2, name: "Банка B", purpose: "Напитки", type: "Металлическая", shape: "Цилиндрическая" },
+      { id: 3, name: "Пакет C", purpose: "Еда", type: "Пластиковая", shape: "Прямоугольная" },
+      { id: 4, name: "Контейнер D", purpose: "Техника", type: "Пластиковая", shape: "Квадратная" },
+      { id: 5, name: "Коробка E", purpose: "Подарки", type: "Картонная", shape: "Квадратная" },
+      { id: 6, name: "Туба F", purpose: "Косметика", type: "Пластиковая", shape: "Цилиндрическая" },
+      { id: 7, name: "Блистер G", purpose: "Электроника", type: "Пластиковая", shape: "Прямоугольная" },
+      { id: 8, name: "Канистра H", purpose: "Химия", type: "Пластиковая", shape: "Цилиндрическая" },
+      { id: 9, name: "Коробка I", purpose: "Еда", type: "Картонная", shape: "Квадратная" },
+      { id: 10, name: "Коробка J", purpose: "Техника", type: "Картонная", shape: "Прямоугольная" },
+    ];
+
+    class App extends Component {
+      constructor() {
+        super();
+        this.state = {
+          filters: {
+            purpose: '',
+            type: '',
+            shape: ''
+          }
+        };
+      }
+
+      handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+          filters: {
+            ...this.state.filters,
+            [name]: value
+          }
+        });
+      };
+
+      getFilteredProducts = () => {
+        const { filters } = this.state;
+        return products.filter(product => {
+          return (
+            (filters.purpose === '' || product.purpose === filters.purpose) &&
+            (filters.type === '' || product.type === filters.type) &&
+            (filters.shape === '' || product.shape === filters.shape)
+          );
+        });
+      };
+
+      render() {
+        const filtered = this.getFilteredProducts();
+
+        // Получаем уникальные значения для фильтров
+        const purposes = [...new Set(products.map(p => p.purpose))];
+        const types = [...new Set(products.map(p => p.type))];
+        const shapes = [...new Set(products.map(p => p.shape))];
+
+        return h('div', null,
+          h('div', { className: 'filters' },
+            h('div', { className: 'filter-group' },
+              h('label', null, 'Назначение'),
+              h('select', {
+                name: 'purpose',
+                onChange: this.handleFilterChange,
+                value: this.state.filters.purpose
+              },
+                h('option', { value: '' }, 'Все'),
+                purposes.map(p =>
+                  h('option', { key: p, value: p }, p)
+                )
+              )
+            ),
+            h('div', { className: 'filter-group' },
+              h('label', null, 'Тип'),
+              h('select', {
+                name: 'type',
+                onChange: this.handleFilterChange,
+                value: this.state.filters.type
+              },
+                h('option', { value: '' }, 'Все'),
+                types.map(t =>
+                  h('option', { key: t, value: t }, t)
+                )
+              )
+            ),
+            h('div', { className: 'filter-group' },
+              h('label', null, 'Форма'),
+              h('select', {
+                name: 'shape',
+                onChange: this.handleFilterChange,
+                value: this.state.filters.shape
+              },
+                h('option', { value: '' }, 'Все'),
+                shapes.map(s =>
+                  h('option', { key: s, value: s }, s)
+                )
+              )
+            )
+          ),
+          h('div', { className: 'product-list' },
+            filtered.length === 0 ? h('p', null, 'Нет подходящих товаров') :
+            filtered.map(product =>
+              h('div', { key: product.id, className: 'product-card' },
+                h('h3', null, product.name),
+                h('p', null, `Назначение: ${product.purpose}`),
+                h('p', null, `Тип: ${product.type}`),
+                h('p', null, `Форма: ${product.shape}`)
+              )
+            )
+          )
+        );
+      }
+    }
+
+    preact.render(h(App, null), document.getElementById('app'));
+
+  </script>
+
+</body>
+</html>
