@@ -12,6 +12,9 @@ const paramsPage = {
         },
         Grid: {
             populate: "*"
+        },
+        SEOBlock: {
+          populate: "*"
         }
 	},
 };
@@ -31,7 +34,7 @@ const dataFilters = [
 
 <Layout title="Портфолио">
     <template>
-        <div style={`--desk-col: ; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-3.jpg);`}></div>
+        <div style={`--desk-col: ; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-3.jpg);`}></div>
     </template>
     <div class="content-grid">
         <Breadcrumbs />
@@ -55,67 +58,67 @@ const dataFilters = [
             }
         </div>
         <div class="portfolio-grid">
-            <div data-purpose="for-the-banking-and-premium-cards" style={`--mob-col: 6; --mob-col: 6; --desk-col: 6; --desk-row: 2; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box.jpg);`}></div>
-            <div data-purpose="for-the-banking-and-premium-cards" style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-1.jpg);`}></div>
-            <div data-purpose="for-the-banking-and-premium-cards" style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-2.jpg);`}></div>
-            <div style={`--desk-col: 6; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-3.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-4.jpg);`}></div>
-            <div style={`--desk-col: 6; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-5.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-6.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-7.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-8.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-9.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-10.jpg);`}></div>
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-11.jpg);`}></div>
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-12.jpg);`}></div>
-            <div class="portfolio-box-text" style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
+            <div data-purpose="for-the-banking-and-premium-cards" style={`--mob-col: 1; --mob-col: 1; --desk-col: 6; --desk-row: 2; --mob-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box.jpg);`}></div>
+            <div data-purpose="for-the-banking-and-premium-cards" style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-1.jpg);`}></div>
+            <div data-purpose="for-the-banking-and-premium-cards" style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --mob-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-2.jpg);`}></div>
+            <div style={`--desk-col: 6; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-3.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-4.jpg);`}></div>
+            <div style={`--desk-col: 6; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-5.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-6.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-7.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-8.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-9.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-10.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-11.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-12.jpg);`}></div>
+            <div class="portfolio-box-text" style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
                 <h3>Попробуем бесплатно?</h3>
                 <p>Разработаем конструкцию и изготовим пилотный образец за наш счёт</p>
             </div>
-            <div style={`--desk-col: 3; --desk-row: 2; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-13.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-14.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-15.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-16.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-17.jpg);`}></div>
-            <div style={`--desk-col: 6; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-18.jpg);`}></div>
-            <div style={`--desk-col: 8; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-19.jpg);`}></div>
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-20.jpg);`}></div>
-            <div class="portfolio-box-text" style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
+            <div style={`--desk-col: 3; --desk-row: 2; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-13.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-14.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-15.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-16.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-17.jpg);`}></div>
+            <div style={`--desk-col: 6; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-18.jpg);`}></div>
+            <div style={`--desk-col: 8; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-19.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-20.jpg);`}></div>
+            <div class="portfolio-box-text" style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
                 <h3>Как это сделано?</h3>
             </div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-21.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-22.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-23.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-21.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-22.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-23.jpg);`}></div>
 
-            <div style={`--desk-col: 4; --desk-row: 2; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-24.jpg);`}></div>
-            <div style={`--desk-col: 8; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-25.jpg);`}></div>
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-26.jpg);`}></div>
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-27.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 2; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-24.jpg);`}></div>
+            <div style={`--desk-col: 8; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-25.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-26.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-27.jpg);`}></div>
 
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-28.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-29.jpg);`}></div>
-            <div style={`--desk-col: 6; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-30.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-28.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-29.jpg);`}></div>
+            <div style={`--desk-col: 6; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-30.jpg);`}></div>
 
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-31.jpg);`}></div>
-            <div style={`--desk-col: 8; --desk-row: 2; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-32.jpg);`}></div>
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-33.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-31.jpg);`}></div>
+            <div style={`--desk-col: 8; --desk-row: 2; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-32.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-33.jpg);`}></div>
 
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-34.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-35.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-36.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-37.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-34.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-35.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-36.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-37.jpg);`}></div>
 
-            <div style={`--desk-col: 6; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-38.jpg);`}></div>
-            <div style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-39.jpg);`}></div>
-            <div class="portfolio-box-text" style={`--desk-col: 3; --desk-row: 1; --aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
+            <div style={`--desk-col: 6; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-38.jpg);`}></div>
+            <div style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-39.jpg);`}></div>
+            <div class="portfolio-box-text" style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
                 <h3>А мы успеем до Нового Года?</h3>
             </div>
 
-            <div style={`--desk-col: 4; --desk-row: 1; --aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-40.jpg);`}></div>
-            <div style={`--desk-col: 8; --desk-row: 1; --aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-41.jpg);`}></div>
+            <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-40.jpg);`}></div>
+            <div style={`--desk-col: 8; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-41.jpg);`}></div>
         </div>
         <SubscribeBlock status="default" />
-        <SEOBlock />
+        <SEOBlock {...pageData} />
     </div>
     <script>
 let portfolioGrid = document.querySelectorAll(".portfolio-grid > div")
@@ -161,14 +164,14 @@ for (i = 0; i < l; i++) {
         }
         h.click();
         /////////////////////
-        let f = h.closest(".fab-custom-select").querySelector("select");
+        /*let f = h.closest(".fab-custom-select").querySelector("select");
         console.log(`${f.getAttribute("data-category")}: ${f.value}`);
         portfolioGrid.forEach( obj => {
             obj.style.display = "";
             if (obj.getAttribute("data-purpose") != f.value) {
                 obj.style.display = "none";
             }
-        })
+        })*/
         
     });
     b.appendChild(c);
@@ -233,16 +236,22 @@ document.addEventListener("click", closeAllSelect);
     }
     .portfolio-grid {
         display: grid;
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--global-gap);
         & > div {
-            aspect-ratio: var(--aspect-ratio);
+            aspect-ratio: var(--mob-aspect-ratio);
             background: var(--background);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            grid-area: span var(--desk-row) / span var(--desk-col);
-            
+            grid-area: span var(--mob-row) / span var(--mob-col);
+            @media (min-width: 768px) {
+              grid-area: span var(--desk-row) / span var(--desk-col);
+              aspect-ratio: var(--desk-aspect-ratio);
+            }
+        }
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(12, 1fr);
         }
     }
     .portfolio-box-text {

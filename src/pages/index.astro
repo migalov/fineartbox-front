@@ -32,18 +32,98 @@ const paramsPage = {
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/main-page?${queryStringPage}`).then(res => res.json());
 const pageData = landingPageData.data;
----
 
+let dataOne = {
+    title: "",
+    data: [
+    {
+        "title": "Разработка конструкции",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-11.jpg",
+        "columns": "1"
+    },
+    {
+        "title": "Изготовление предтиражного образца",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-22.jpg",
+        "columns": "2"
+    },
+    {
+        "title": "Отделка",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-33.jpg",
+        "columns": "1"
+    },
+    {
+        "title": "Копакинг",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-44.jpg",
+        "columns": "2"
+    },
+    {
+        "title": "Доставка",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-55.jpg",
+        "columns": "1"
+    },
+    {
+        "title": "Все продукты производства",
+        "description": "",
+        "backgroundDefault": "",
+        "columns": "1"
+    }, 
+]};
+
+let dataServices = {
+    title: "Услуги",
+    data: [
+    {
+        "title": "Бумажные пакеты",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box.jpg",
+        "columns": "1"
+    },
+    {
+        "title": "3D-отделка",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-1.jpg",
+        "columns": "2"
+    },
+    {
+        "title": "Ложементы",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-2.jpg",
+        "columns": "1"
+    },
+    {
+        "title": "Подарочная упаковка",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-3.jpg",
+        "columns": "2"
+    },
+    {
+        "title": "Картонные коробки",
+        "description": "Текстовое описание",
+        "backgroundDefault": "/img/services/Announce-Box-4.jpg",
+        "columns": "1"
+    },
+    {
+        "title": "Все продукты производства",
+        "description": "",
+        "backgroundDefault": "",
+        "columns": "1"
+    }, 
+]};
+---
 <Layout title="Главная">
         <div class="content-grid">
             <Hero {...pageData} />
-            <!-- <GridBannersType1
-                title="Услуги"
-            />
-            <StageWorkRoot />
-                -->
-                            <Announce />
-            <GridBannersType1 />
+            <!-- <code>
+                {JSON.stringify(dataOne[0])}
+            </code> -->
+            <GridBannersType1 data={dataServices.data} />
+            <Announce maxWidthBlock="42rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)" />
+            <GridBannersType1 data={dataOne.data} title={dataServices.title} />
             <FeaturesRoot />
             <GridBannersType1
                 title="Услуги"

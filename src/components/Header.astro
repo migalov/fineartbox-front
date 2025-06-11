@@ -112,17 +112,15 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
         background-color: var(--color-white);
         --padding-marker: 1em;
         --size-marker: .3em;
-        // padding: var(--padding-body) 0;
         
         & .content-grid {
             row-gap: 0;
         }
         @media (min-width: 992px) {
-
             row-gap: 3rem;
             position: sticky;
             align-self: start;
-            top: 0;
+            top: 2rem;
             padding-right: var(--padding-body);
         }
     }
@@ -223,7 +221,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
         }
     }
     .fab-header-menu-lvl-1 {
-        // overflow-y: auto;
+        overflow-y: auto;
         flex: 1;
         display: flex;
         flex-direction: column;

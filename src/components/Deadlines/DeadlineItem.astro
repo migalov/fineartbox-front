@@ -12,6 +12,9 @@ const { number, text } = Astro.props
         display: flex;
         align-items: flex-start;
         column-gap: var(--global-gap);
+        &:last-child .cb-deadline-number {
+            text-align: right;
+        }
         @media (max-width: 767.99px) {
             &:last-child {
                 flex-direction: column;
@@ -24,6 +27,7 @@ const { number, text } = Astro.props
         font-size: clamp(4.5rem, 4.0599rem + 1.8779vw, 5.75rem);
         color: var(--color-orange);
         line-height: .9;
+        
     }
     .cb-deadline-about {
 

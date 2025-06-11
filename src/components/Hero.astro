@@ -115,6 +115,12 @@ const { Slider } = Astro.props;
 </style>
 <script src="/splide.min.js" is:inline></script>
 <script>
+  const changeHeight = () => {
+    document.querySelector(".fab-hero-pagination").style.bottom = `${(document.querySelector(".fab-hero").clientHeight - document.querySelector(".fab-hero .is-active figcaption").clientHeight) / 4}px`
+  }
+  window.addEventListener("resize", changeHeight);
+  window.addEventListener("DOMContentLoaded", changeHeight);
+  window.addEventListener("load", changeHeight);
   document.addEventListener("DOMContentLoaded", function () {
     var splide = new Splide(".fab-hero", {
       type: "fade",
@@ -129,6 +135,7 @@ const { Slider } = Astro.props;
       }
     });
     splide.mount();
+    splide.on("mounter", changeHeight);
     // document
     //   .querySelector(".cb-hero-pagitation")
     //   .style.setProperty("--count", splide.length);
@@ -139,4 +146,7 @@ const { Slider } = Astro.props;
     //     .style.setProperty("--position", e + 1);
     // });
   });
+</script>
+<script>
+
 </script>

@@ -1,6 +1,6 @@
 ---
-import CardType1 from "./Cards/Type1.astro";
-import Icon from "./Icon.astro";
+import CardType1 from "../Cards/Type1.astro";
+import Icon from "../Icon.astro";
 const {title, cardsList, id} = Astro.props
 ---
 
@@ -22,6 +22,7 @@ const {title, cardsList, id} = Astro.props
 <style lang="scss" is:global>
     .fab-accordeon-cards {
         display: grid;
+        gap: .6rem 0;
         // gap: 2rem;
 
         & label {
@@ -58,7 +59,15 @@ const {title, cardsList, id} = Astro.props
         display: flex;
         flex-wrap: nowrap;
         gap: var(--global-gap);
-        overflow: hidden;
+        overflow-x: auto;
+        @media (min-width: 992px) {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (min-width: 1200px) {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 
 

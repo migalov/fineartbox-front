@@ -1,9 +1,10 @@
 ---
 import Mark from "./Mark.astro";
+const {maxWidthBlock, widthMark, heightMark, colorMark, marginBlock} = Astro.props;
 ---
 
-<div class="fab-announce">
-    <Mark />
+<div class="fab-announce" style={`--max-width: ${maxWidthBlock}; --margin: ${marginBlock}`}>
+    <Mark width={widthMark} height={heightMark} color={colorMark} />
     <h2>FINEARTBOX — производство упаковки и полиграфические услуги в Москве</h2>
 </div>
 
@@ -12,6 +13,9 @@ import Mark from "./Mark.astro";
         display: flex;
         align-items: center;
         gap: var(--global-gap);
+        max-width: var(--max-width);
+        margin: var(--margin);
+        font-family: var(--font-family);
 
         @media (min-width: 992px) {
             // grid-area: auto / span 6;

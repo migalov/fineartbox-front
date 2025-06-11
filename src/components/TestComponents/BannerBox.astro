@@ -1,55 +1,60 @@
 ---
+import Icon from "../Icon.astro";
+
 const {columns, backgroundDefault, title} = Astro.props;
 ---
 
-<div class="fab-box-banner" style={`
-    --background-color: var(--color-orange);
-    --background-default: url('${backgroundDefault}');
-    --background-hover: url('/img/Announce-Box-hover.jpg');
-    --columns: ${columns};
-`}>
-    <div class="fab-box-banner-overflow">
+
+    {
+        backgroundDefault && 
+
+        <div class="fab-box-banner" style={`
+            --background-color: ${!backgroundDefault && "var(--color-orange)"};
+            --background-default: url('${backgroundDefault}');
+            --background-hover: url('/img/Announce-Box-hover.jpg');
+            --columns: ${columns};
+        `}>
+        <div class="fab-box-banner-background">
+
+        </div>
         <div class="fab-box-banner__shadow">
             <h3>{title}</h3>
             <p>Текстовое описание</p>
         </div>
-    </div>
-</div>
+        </div>
+    }
+    {
+        !backgroundDefault &&
+        <a href="#" class="fab-box-banner" style={`--background-color: ${!backgroundDefault && "var(--color-orange)"}; --columns: ${columns};`}>
+            <h3>{title}</h3>
+            <Icon classes="fab-box-banner__arrow" id="arrow-45" width="40" height="40" />
+        </a>
+            
+
+    }
+    
+
 
 <style lang="scss" scoped>
     .fab-box-banner {
         position: relative;
-        background-image: var(--background-default);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        width: 100%;
+        overflow: hidden;
+        min-width: 100%;
         min-height: 14.5rem;
-        transition: ease .5s;
         grid-area: auto / span var(--columns);
-
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         color: var(--color-white);
-
-
-        // &::before {
-        //     content: "";
-        //     position: absolute;
-        //     top: 0;
-        //     left: 0;
-        //     width: 100%;
-        //     height: 100%;
-
-        // }
+        // aspect-ratio: var(--columns) / 1;
 
         &:hover {
-            background-size: 110%;
+            background-size: 110% 110%;
+
             & p {
                 display: block;
                 opacity: 1;
-                max-height: 100%;
+                max-height: 100px;
             }
         }
 
@@ -59,13 +64,56 @@ const {columns, backgroundDefault, title} = Astro.props;
             max-height: 0;
             opacity: 0;
         }
-        // &.fab-box-banner--no-image {
-        //     background-color: var(--background-color);
-        //     clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
-        // }
+        &:not(:has( .fab-box-banner-background)) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+            backdrop-filter: brightness(60%);
+            padding: clamp(0.5rem, -0.3803rem + 3.7559vw, 3rem);
+            clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
+        }
+        @media (max-width: 991.99px) {
+            min-width: calc( var(--columns) * clamp(12.5rem, 10.9781rem + 6.4935vw, 15rem));
+        }
     }
-    // .fab-box-banner__shadow {
-    //     padding: 1rem;
-    //     background: linear-gradient(180deg, rgba(35, 31, 32, 0) 60.42%, rgba(35, 31, 32, 0.6) 97.91%);
-    // }
+    .fab-box-banner-background {
+        height: 100%;
+        background-image: var(--background-default);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        transition: ease .5s;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    .fab-box-banner__shadow {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+</style>
+
+<style lang="scss" is:global>
+    .fab-box-banner__arrow {
+        opacity: 0;
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        transform: translate(-1rem, 1rem);
+        transition: var(--transition-default);
+    }
+    .fab-box-banner {
+        &:hover {
+            & .fab-box-banner__arrow {
+                opacity: .4;
+                transform: translate(0, 0);
+            }
+        }
+    }
 </style>
