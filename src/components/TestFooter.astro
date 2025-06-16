@@ -28,6 +28,7 @@ import Icon from "./Icon.astro";
 <style lang="scss" is:global>
 
     .fab-footer {
+        position: relative;
         grid-area: footer;
         display: grid;
         padding: 0 var(--global-gap);
@@ -65,10 +66,16 @@ import Icon from "./Icon.astro";
         }
 
         @media (min-width: 768px) {
+            
             grid-template-areas: "list list list list"
-                        "line line line line"
-                        "cop net . leg";
+                                "line line line line"
+                                "cop net . leg";
             gap: var(--global-gap);
+            width: calc(100vw - var(--width-header) - 1.1rem);
+        }
+        @media (min-width: 1440px) {
+            margin: 0 auto;
+            width: calc(1440px - var(--width-header));
         }
 
     }
@@ -93,3 +100,17 @@ import Icon from "./Icon.astro";
 
 
 </style>
+
+<script>
+    let footer = document.querySelector(".fab-footer");
+
+    const resizeFooter = () => {
+        if (window.innerWidth > 1440) {
+            footer.style.left = `${(window.innerWidth - 1440)/2}px`  ;
+        }
+    }
+    resizeFooter();
+    window.addEventListener("DOMContentLoaded", resizeFooter);
+    window.addEventListener("load", resizeFooter);
+    window.addEventListener("resize", resizeFooter);
+</script>

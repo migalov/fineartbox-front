@@ -1,0 +1,31 @@
+---
+import Icon from "../Icon.astro";
+---
+
+<ul class="fab-social-networks">
+    <li>
+        <a rel="nofollow" href="https://vk.com/fineartbox">
+            <Icon id="vk" width="16" height="16" />
+        </a>
+    </li>
+    <li>
+        <a rel="nofollow" href="https://t.me/fineartbox">
+            <Icon id="tg" width="16" height="16" />
+        </a>
+    </li>
+    <li>
+        <a rel="nofollow" href="https://www.instagram.com/fineartbox/">
+            <Icon id="inst" width="16" height="16" />
+        </a>
+    </li> 
+</ul>
+
+<style lang="scss" is:global>
+.fab-social-networks {
+    gap: 1.5rem;
+    justify-content: flex-end;
+    @media (min-width: 768px) {
+        justify-content: inherit;
+    }
+}
+</style>

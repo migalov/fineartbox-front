@@ -1,0 +1,49 @@
+---
+const { title } = Astro.props;
+import "./styles/global.scss";
+import "./styles/fonts.scss";
+import "./styles/grid.scss";
+import Sprite from "./sprite.astro";
+import Header from "./components/Header.astro";
+import Footer from "./components/Footer.astro";
+import SpriteFeature from "./SpriteFeature.astro";
+import SpriteConstructions from "./SpriteConstructions.astro";
+import TestHeader from "./components/TestHeader.astro";
+import TestFooter from "./components/TestFooter.astro";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/splide.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-scrollbar@latest/simple-scrollbar.css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-scrollbar@latest/simple-scrollbar.min.js"></script>
+</head>
+<body>
+    <TestHeader />
+    <div class="fab-page">
+        <slot />
+    </div>
+    <TestFooter />
+    <!-- <Footer /> -->
+    <!-- <Sprite />
+    <SpriteFeature />
+    <SpriteConstructions /> -->
+</body>
+</html>
+
+<style lang="scss" is:global>
+    body {
+        --width-header: 192px;
+        margin: 0;
+    }
+    astro-dev-toolbar {
+        display: none;
+    }
+    
+</style>

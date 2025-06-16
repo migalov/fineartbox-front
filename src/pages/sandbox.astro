@@ -1,10 +1,12 @@
 ---
 import BannerBox from "../components/TestComponents/BannerBox.astro";
-import Layout from "../layout.astro";
+import Sandbox from "../sandbox.astro";
 import SpriteFeature from "../SpriteFeature.astro";
 import SEOBlock from "../components/SEOBlock.astro";
 import Footer from "../components/Footer.astro";
 import GridBannersType1 from "../components/TestComponents/GridBannersType1.astro";
+import Sprite from "../sprite.astro";
+import SpriteConstructions from "../SpriteConstructions.astro";
 
 const servicesData = {
     title: "Услуги",
@@ -47,21 +49,11 @@ const servicesData = {
 }
 ---
 
-<Layout title="UI Components">
-
-
-        <div class="fab-body">
-            <header class="fab-header">
-
-            </header>
-            <div class="content-grid">
-				<GridBannersType1 {...servicesData} />
-                <SEOBlock />
-                <Footer />
-            </div>
-        </div>
-		<SpriteFeature />
-</Layout>
+<Sandbox title="Sandbox">
+        <Sprite />
+    		<!-- <SpriteFeature />
+        <SpriteConstructions /> -->
+</Sandbox>
 
 <style lang="scss" is:global>
     .fab-body {
