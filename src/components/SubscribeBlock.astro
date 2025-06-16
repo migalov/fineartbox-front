@@ -3,39 +3,101 @@ import ButtonSubmit from "./Button/ButtonSubmit.astro";
 import Input from "./Form/Input.astro";
 import Icon from "./Icon.astro";
 const {status} = Astro.props;
+
+// 
 ---
 
-<div class="fab-subscribe-form" style="--size-cut-triangle: 2rem" data-status="default">
+<form method="POST" action="https://h.integrations-hub.ru/wh/38/1lfvk4c/1oK0L5SG5X1DSPWtk79SNGgKDnXoBDpuNA6FipYeBhI/" class="fab-subscribe-form" style="--size-cut-triangle: 2rem" >
     <div class="fab-subscribe-form-wrap">
         <Icon class="fab-subscribe-form__icon" width="100" height="72" id="subscribe" />
         <div class="fab-subscribe-form__text">
             <h3>Узнайте первыми!</h3>
             <p>Скидки, акции, новые типы упаковки</p>
         </div>
-        {
-            status == "default" && <div data-status="default">
-                <Input label="Электронная почта" type="email" />
-                <ButtonSubmit label="Подписаться" />
-            </div>
-        }
-        {
-            status == "pending" && <div class="fab-subscrive-form__status fab-subscrive-form__status--center" data-status="pending">
+        <div data-status="default">
+            <Input name="email" label="Электронная почта" type="email" autocomplete="on" />
+            <ButtonSubmit label="Подписаться" />
+        </div>
+        <div class="fab-subscribe-form__status fab-subscribe-form__status--center" data-status="pending" style="display: none;">
             <div class="spinner"></div>
         </div>
-        }
-        {
-            status == "success" &&  <div class="fab-subscrive-form__status fab-subscrive-form__status--center" data-status="success">
+        <div class="fab-subscribe-form__status fab-subscribe-form__status--center" data-status="success" style="display: none;">
             <p><strong>Получилось :)</strong> Спасибо за подписку!</p>
         </div>
-        }
-        {
-            status == "error" && <div class="fab-subscrive-form__status fab-subscrive-form__status--center" data-status="error">
-            <p><strong>Что-то пошло не так :(</strong> <span onclick="">Попробуем снова?</span></p>
+        <div class="fab-subscribe-form__status fab-subscribe-form__status--center" data-status="error" style="display: none;">
+            <p><strong>Что-то пошло не так :(</strong> <span class="fab-subscribe-form__retry">Попробуем снова?</span></p>
         </div>
-        }
     </div>
         
-</div>
+</form>
+
+<script>
+const form = document.querySelector(`.fab-subscribe-form`);
+  const defaultStatus = form.querySelector(`[data-status="default"]`);
+  const pendingStatus = form.querySelector(`[data-status="pending"]`);
+  const errorStatus = form.querySelector(`[data-status="error"]`);
+  const successStatus = form.querySelector(`[data-status="success"]`);
+  const retryButton = form.querySelector(".fab-subscribe-form__retry");
+
+
+
+  const hideBlock = (block) => {
+    block.style.display = "none";
+  }
+
+  const showBlock = (block) => {
+    block.style.display = "";
+  }
+
+
+  const showStatus = (status) => {
+    if (status == "default") {
+        showBlock(defaultStatus);
+        hideBlock(pendingStatus);
+        hideBlock(successStatus);
+        hideBlock(errorStatus);
+    }
+    if (status == "pending") {
+        hideBlock(defaultStatus);
+        showBlock(pendingStatus);
+        hideBlock(successStatus);
+        hideBlock(errorStatus);
+    }
+    if (status == "success") {
+        hideBlock(defaultStatus);
+        hideBlock(pendingStatus);
+        showBlock(successStatus);
+        hideBlock(errorStatus);
+    }
+    if (status == "error") {
+        hideBlock(defaultStatus);
+        hideBlock(pendingStatus);
+        hideBlock(successStatus);
+        showBlock(errorStatus);
+    }
+  }
+
+ retryButton.addEventListener("click", showStatus("default"));
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let formData = new FormData(form);
+    console.log(formData);
+    showStatus("pending");
+    fetch(e.target.action, {
+      method: form.method,
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        showStatus("success");
+      }
+    }).catch(error => {
+      showStatus("pending");
+      showStatus("error");
+    })
+  })
+
+</script>
 
 <style lang="scss" is:global>
     .fab-subscribe-form {
@@ -106,9 +168,21 @@ const {status} = Astro.props;
             color: var(--color-gray-5)
         }
     }
-    .fab-subscrive-form__status--center {
-        align-items: center;
+    .fab-subscribe-form__status--center {
+        // align-items: center;
     }
+    [data-status="success"], [data-status="error"] {
+            justify-content: center;
+    }
+    @media (min-width: 768px) {
+        [data-status="pending"] {
+            justify-content: center;
+        }
+        [data-status="success"], [data-status="error"] {
+            justify-content: flex-end;
+        }
+    }
+
 </style>
 
 <style lang="scss" is:global>

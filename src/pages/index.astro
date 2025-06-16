@@ -121,13 +121,15 @@ let dataServices = {
             <!-- <code>
                 {JSON.stringify(dataOne[0])}
             </code> -->
+            <Announce maxWidthBlock="42rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)" text="FINEARTBOX — производство упаковки и полиграфические услуги в Москве" />
+            
             <GridBannersType1 data={dataServices.data} />
-            <Announce maxWidthBlock="42rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)" />
-            <GridBannersType1 data={dataOne.data} title={dataServices.title} />
             <FeaturesRoot />
-            <GridBannersType1
+            <GridBannersType1 data={dataOne.data} title={dataServices.title} />
+
+            <!-- <GridBannersType1
                 title="Услуги"
-            />
+            /> -->
             <DeadlineRoot />
             <StageWorkRoot />
             <div class="fab-widgets" style="">
@@ -135,7 +137,7 @@ let dataServices = {
                 <BlogRoot />
             </div>
             <Achievements />
-            <FAQSection {...pageData} />
+            <!-- <FAQSection {...pageData} />-->
             <SubscribeBlock status="default" />
             <SEOBlock {...pageData.SEOBlock[0]}  />
 

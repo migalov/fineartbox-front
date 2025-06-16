@@ -1,18 +1,21 @@
 ---
 import CardType1 from "../Cards/Type1.astro";
 import Icon from "../Icon.astro";
-const {title, cardsList, id} = Astro.props
+const {title, cardsList, id, num} = Astro.props
 ---
 
 <div class="fab-accordeon-cards">
-    <input hidden type="checkbox" id={`accordeon-${id}`}>
+    {
+        num == 0 ? <input hidden type="checkbox" checked id={`accordeon-${id}`} /> : <input hidden type="checkbox" id={`accordeon-${id}`} />
+    }
+    
     <label for={`accordeon-${id}`}>
         <Icon width="24" height="24" id="arrow" />
         <h2>{title}</h2></label>
     <div class="fab-accordeon-cards-wrap fab-scrollbar">
         <div class="fab-accordeon-cards-row">
             {
-                cardsList.map( card => <CardType1 {...card} /> )
+                cardsList.map( (card, num) => <CardType1 {...card} /> )
             }     
         </div>
 
@@ -60,6 +63,7 @@ const {title, cardsList, id} = Astro.props
         flex-wrap: nowrap;
         gap: var(--global-gap);
         overflow-x: auto;
+        overflow-y: hidden;
         @media (min-width: 992px) {
             display: grid;
             grid-template-columns: repeat(3, 1fr);

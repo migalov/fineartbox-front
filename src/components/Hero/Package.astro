@@ -6,7 +6,7 @@ const { Slider } = Astro.props;
     <div class="splide__track">
             <ul class="splide__list">
               {
-                Slider.map( item =>
+                Slider?.map( item =>
                   <>
                     <li class="splide__slide fab-hero-slide">
                     <figure>
@@ -15,8 +15,9 @@ const { Slider } = Astro.props;
                         <source srcset={item.backgroundMobile} media="(min-width: 768)" />
                         <img src={item.backgoundDesktop} alt="Абстрактное изображение" />
                       </picture>
-                      <figcaption set:html={item.htmlContent}>
-
+                      <figcaption>
+                        <h2 set:html={item.title}></h2>
+                        <p set:html={item.description}></p>
                       </figcaption>
                     </figure>
                   </li>

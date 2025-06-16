@@ -1,12 +1,27 @@
 ---
 import Icon from "./Icon.astro";
 const {columnOne, columnTwo} = Astro.props;
+
+
+import sanitizeHtml from 'sanitize-html';
+const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
+       allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
+       allowedAttributes: {
+        'a': ['href']
+       } // Разрешенные атрибуты
+   });
+   const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
+   const addNonBreakingSpace = (text) => {
+        return text.replace(prepositions, (match) => `${match}\u00A0`);
+   };
+
+
 ---
 
 <div class="fab-seo-block">
     <div class="fab-seo-block-wrap">
-        <div class="fab-seo-block-column" set:html={columnOne} />
-        <div class="fab-seo-block-column" set:html={columnTwo} />
+        <div class="fab-seo-block-column" set:html={cleanHtml(columnOne)} />
+        <div class="fab-seo-block-column" set:html={cleanHtml(columnTwo)} />
     </div>
     <label class="fab-seo-toggle" for="seo-toggle">
         <input hidden type="checkbox" name="" id="seo-toggle">

@@ -1,0 +1,92 @@
+---
+const { Banner } = Astro.props;
+
+
+import sanitizeHtml from 'sanitize-html';
+const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
+       allowedTags: ['p', 'h1', 'h2' ,'br'], // Разрешенные теги
+       allowedAttributes: {
+        'span': [ 'style' ],
+        'a': ['href']
+       } // Разрешенные атрибуты
+   });
+   const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
+   const addNonBreakingSpace = (text) => {
+        return text.replace(prepositions, (match) => `${match}\u00A0`);
+   };
+---
+<!-- <code>
+    {JSON.stringify(Banner)}
+</code> -->
+
+<section class="fab-hero-package" style={`--background-image: url(${Banner?.backgroundMobile})`}>
+    <!-- <picture>
+    <source srcset={Banner?.backgoundDesktop} media="(max-width: 767.99px)" />
+    <source srcset={Banner?.backgroundMobile} media="(min-width: 768)" /> -->
+    <img src={Banner?.backgoundDesktop} alt="Абстрактное изображение" />
+    <!-- </picture> -->
+    <div class="fab-hero-package__text" set:html={cleanHtml(Banner?.htmlContent)}>
+    </div>
+</section>
+
+<style lang="scss" is:global>
+    .fab-hero-package {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: 45%;
+        background-position-y: center;
+        & img {
+            width: 100%;
+            @media (max-width: 991.99px) {
+                display: none;
+            }
+        }
+        @media (max-width:991.99px) {
+            grid-column: full-width;
+            background-image: var(--background-image);
+        }
+
+    }
+    .fab-hero-package {
+      position: relative;
+    }
+    .fab-hero-package__text {
+        box-sizing: content-box;
+        display: flex;
+        flex-direction: column;
+        row-gap: .7rem;
+        padding: .7rem .7rem 1rem;
+        position: absolute;
+        left: 4rem;
+        top: 50%;
+        max-width: 60vw;
+
+        & h1 {
+          font-size: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
+        }
+        & p {
+          font-size: .85rem;
+          @media (min-width: 768px) {
+            font-size: 1rem;
+            font-weight: 400;
+          }
+        }
+
+        @media (min-width: 768px) {
+          row-gap: 2rem;
+          padding: 2rem 2rem 2.25rem;
+        }
+
+        @media (min-width: 992px) {
+            transform: translateY(-50%);
+            max-width: 24rem;
+        }
+
+        @media (max-width: 991.99px) {
+          position: static;
+          left: 2rem;
+          right: 2rem;
+        }
+    }
+
+</style>

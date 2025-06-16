@@ -16,21 +16,33 @@ import ConstructionLinks from "../../components/ConstructionLinks.astro";
 import SpriteConstructions from "../../SpriteConstructions.astro";
 import SubscribeBlock from "../../components/SubscribeBlock.astro";
 import AccordeonCards from "../../components/AccordeonBlock/AccordeonCards.astro";
+import OneHero from "../../components/OneHero.astro";
 
 export function getStaticPaths() {
   return [
     { params: { slug: "krishka-dno" }},
+    { params: { slug: "magnet-print" }},
+    { params: { slug: "penal" }},
+    { params: { slug: "transformer" }},
+    { params: { slug: "advent" }},
+    { params: { slug: "board-game" }},
+    { params: { slug: "suitcase" }},
+    { params: { slug: "books" }},
+    { params: { slug: "paper-bags" }},
+    { params: { slug: "cardboard" }},
   ];
 }
 
 const { slug } = Astro.params;
 
 const paramsPage = {
-    filter: {
-        slug: slug
+    filters: {
+        slug: {
+            $eq: slug
+        }
     },
     populate: {
-        Slider: {
+        Banner: {
             populate: "*"
         },
         readyProjects: {
@@ -41,36 +53,51 @@ const paramsPage = {
         },
         cardsSection: {
             populate: "*"
+        },
+        SEO: {
+            populate: "*"
+        },
+        filterConstructions: {
+            populate: "*"
         }
 	},
+    SVGSprite: {
+        populate: "*"
+    },
 };
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
-const pageData = landingPageData.data[0];
+const pageData = landingPageData?.data[0];
 ---
-
-<Layout title="Упаковка крышка-дно">
+<code>
+<!-- {JSON.stringify(queryStringPage)} -->
+    
+</code>
+<Layout title={pageData.title}>
     <div class="content-grid">    
-            <HeroPackage {...pageData}  />
-            <ConstructionLinks {slug} />
-            <ReadyWorks {...pageData.readyProjects} />
+            <OneHero {...pageData}  />
+            <ConstructionLinks {slug} {...pageData} />
+            <Announce maxWidthBlock="58rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"  text={pageData.announce} />
+            <ReadyWorks {...pageData?.readyProjects} />
             <div class="fab-widgets">
                 {
-                    pageData.descriptions.map( b => <>
+                    pageData?.descriptions.map( b => <>
                         <BlockText {...b} />
                     </>)
                 }
             </div>
             {
-                pageData.cardsSection.map( accordeon => <AccordeonCards {...accordeon} /> )
+                pageData?.cardsSection.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
             }
             <DeadlineRoot />
             <StageWorkRoot />
             <SubscribeBlock status="default" />
-            <SEOBlock />
+            <SEOBlock {...pageData?.SEO} />
+
 
 </div>
+            <div set:html={pageData?.SVGSprite}></div>
 </Layout>
 
 
@@ -81,8 +108,16 @@ const pageData = landingPageData.data[0];
 		row-gap: 2rem;
 		@media (min-width: 992px) {
 			display: grid;
-			grid-template-columns: 14fr 9fr;
+			grid-template-columns: 1fr 1fr;
 			gap: var(--global-gap);
 		}
 	}
+    .fab-announce {
+        margin: 0 auto!important;
+        max-width: 34rem!important;
+    }
+    .fab-announce h2 {
+        font-size: 1.5rem;
+        line-height: 1.5;
+    }
 </style>

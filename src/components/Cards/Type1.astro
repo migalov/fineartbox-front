@@ -1,9 +1,9 @@
 ---
-const { src, title, description } = Astro.props;
+const { src, title, description, num } = Astro.props;
 ---
 
 <div class="cb-fab-card">
-    <img src={src} alt="">
+    <img data-src={src} alt="">
     <div class="cb-card-wrap">
         <h3>{title}</h3>
         <p>{description}</p>
@@ -24,12 +24,13 @@ const { src, title, description } = Astro.props;
         }
 
         & :is(h3, p) {
-            color: var(--color-gray-5);
+            color: var(--color-black);
         }
 
         & img {
             display: block;
-            aspect-ratio: 1/1;
+            // aspect-ratio: 1/1;
+            object-fit: cover;
         }
         @media (max-width: 991.99px) {
             min-width: clamp(12.5rem, 11.3571rem + 5.7143vw, 16.5rem);

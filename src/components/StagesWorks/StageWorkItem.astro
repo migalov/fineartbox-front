@@ -1,19 +1,37 @@
 ---
-const {src, text} = Astro.props;
+const {src, text, title, description} = Astro.props;
 ---
 <div class="fab-step-work-item">
     <img src={src} alt="">
-    <p>{text}</p>
+    <div class="fab-step-work-item-wrap">
+        <h3 set:html={title}></h3>
+        <p set:html={description}>{text}</p>
+    </div>
+
 </div>
 
 <style lang="scss">
     .fab-step-work-item {
+        min-width: clamp(15.7rem, 14.8901rem + 3.4554vw, 18rem);
         width: clamp(15.7rem, 14.8901rem + 3.4554vw, 18rem);
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.5rem;
         & img {
             clip-path: polygon(10% 0%, 100% 0, 100% 80%, 90% 100%, 0 100%, 0% 20%);
+        }
+        & h3 {
+            font-size: 1rem;
+            font-size: var(--font-family);
+            font-weight: 700;
         }
         & p {
             width: inherit;
         }
+    }
+    .fab-step-work-item-wrap {
+        display: flex;
+        flex-direction: column;
+        row-gap: .5rem;
     }
 </style>

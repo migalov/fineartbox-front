@@ -19,6 +19,8 @@ import SpriteConstructions from "./SpriteConstructions.astro";
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="stylesheet" href="/splide.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-scrollbar@latest/simple-scrollbar.css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-scrollbar@latest/simple-scrollbar.min.js"></script>
 </head>
 <body>
     <div class="fab-body">
@@ -69,7 +71,7 @@ import SpriteConstructions from "./SpriteConstructions.astro";
 		row-gap: 2rem;
 		@media (min-width: 992px) {
 			display: grid;
-			grid-template-columns: 14fr 9fr;
+			grid-template-columns: 1fr 1fr;
 			gap: var(--global-gap);
 		}
 
@@ -105,4 +107,32 @@ import SpriteConstructions from "./SpriteConstructions.astro";
             submitSubscribe.disabled = true;
         }
     })
+</script>
+
+<script>
+	const imageObserver = new IntersectionObserver(
+		(entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					if(entry.target.hasAttribute("data-src")) {
+						entry.target.src = entry.target.dataset.src;
+						observer.unobserve(entry.target)
+					}
+					if(entry.target.hasAttribute("data-bg-src")) {
+						entry.target.style.backgroundImage = `url('${entry.target.dataset.bgSrc}')`;
+						observer.unobserve(entry.target);
+					}
+				}
+			})
+		},
+		{
+			rootMargin: "0px"
+		}
+	)
+	document.querySelectorAll("div, img, a, iframe, li").forEach((image) => imageObserver.observe(image));
+
+
+
+
+
 </script>

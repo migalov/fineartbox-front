@@ -6,7 +6,7 @@ const {projectsList} = Astro.props;
     <h2>Реализованные работы</h2>
     <div class="fab-ready-works-row fab-scrollbar">
         {
-            projectsList.map( project => 
+            projectsList?.map( project => 
                 <a href={project.href}>
                     <img src={project.src} alt="" />
                 </a>
@@ -21,8 +21,10 @@ const {projectsList} = Astro.props;
         display: flex;
         flex-direction: row;
         column-gap: 1.5rem;
+
         & a {
             display: block;
+            flex: 1;
         }
         & img {
 
