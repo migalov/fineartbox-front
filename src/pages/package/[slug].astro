@@ -75,7 +75,29 @@ const pageData = landingPageData?.data[0];
     
 </code>
 <Layout title={pageData.title}>
+    <script>
+(function(w, d, s, o){
+  var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
+    if (document.readyState !== 'loading') Marquiz.init(o);
+    else document.addEventListener("DOMContentLoaded", function() {
+      Marquiz.init(o);
+    });
+  };
+  d.head.insertBefore(j, d.head.firstElementChild);
+})(window, document, 'script', {
+    host: '//quiz.marquiz.ru',
+    region: 'ru',
+    id: '684ee254f13a8d0019d0a865',
+    autoOpen: false,
+    autoOpenFreq: 'once',
+    openOnExit: false,
+    disableOnMobile: false
+  }
+);
+</script>
     <div class="content-grid">    
+        <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
+           <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
             <OneHero {...pageData}  />
             <ConstructionLinks {slug} {...pageData} />
             <Announce maxWidthBlock="58rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"  text={pageData.announce} />
@@ -92,7 +114,7 @@ const pageData = landingPageData?.data[0];
             }
             <DeadlineRoot />
             <StageWorkRoot />
-            <SubscribeBlock status="default" />
+            <!-- <SubscribeBlock status="default" /> -->
             <SEOBlock {...pageData?.SEO} />
 
 
@@ -119,5 +141,51 @@ const pageData = landingPageData?.data[0];
     .fab-announce h2 {
         font-size: 1.5rem;
         line-height: 1.5;
+    }
+</style>
+
+<style lang="scss" is:global>
+    .marquiz__container {
+        --triangle-width: 64px;
+        position: fixed;
+        top: 25rem;
+        left: 0;
+        transform: rotate(-90deg);
+        z-index: 4;
+        width: fit-content;
+        transform-origin: 0 0;
+        clip-path: polygon(100% 0, calc(100% - var(--triangle-width)) 100%, 0% 100%, var(--triangle-width) 0%);
+
+
+    }
+    .marquiz__button {
+        position: relative;
+        background-color: var(--color-orange);
+        font-size: 2rem;
+        font-family: var(--second-family);
+        font-weight: 700;
+        padding: .5em 2.7em;
+        //         &::before, &::after {
+        //     content: "";
+        //     position: absolute;
+        //     width: 0px;
+        //     height: 0px;
+        //     border-style: solid;
+        //     transform: rotate(0deg);
+        // }
+        // &::before {
+        //     border-width: 0 var(--triangle-width) var(--triangle-width) 0;
+        //     border-color: transparent var(--color-white) transparent transparent;
+        //     transform: rotate(90deg);
+        //     top: 0px;
+        //     left: calc(100% - 65px);
+        // }
+        // &::after {
+        //     border-width: 0 var(--triangle-width) var(--triangle-width) 0 ;
+        //     border-color: transparent var(--color-black) transparent transparent;
+        //     top: 0px;
+        //     left: calc(100% - 65px);
+        // }
+        // box-shadow: 0px 0px 1px 1px rgba(34, 60, 80, 1) inset;
     }
 </style>

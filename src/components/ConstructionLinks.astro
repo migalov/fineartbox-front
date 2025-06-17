@@ -54,8 +54,8 @@ const constructionsLinksData = [
     </div>
 </section>
 
-<style lang="scss">
-    .constructions-switch-wrap {
+<style lang="scss" is:global>
+        .constructions-switch-wrap {
         display: flex;
         flex-wrap: nowrap;
         gap: var(--global-gap);
@@ -75,7 +75,8 @@ const constructionsLinksData = [
             padding: 1.5em;
             font-weight: 700;
             margin: -1.5em 0 0;
-            z-index: -1;
+            z-index: 1;
+            font-family: var(--font-family);
         }
 
         &:not(.active):hover span {
@@ -87,18 +88,22 @@ const constructionsLinksData = [
             background: var(--color-orange);
             color: var(--color-white);
         }
+        & a {
+            text-decoration: none;
+            &:hover {
+                text-decoration: none;
+            }
+        }
 
 
     }
-</style>
-
-<style lang="scss" is:global>
     .construction-item {
 
         & svg {
             width: clamp(5.14rem, 4.8812rem + 1.1042vw, 5.875rem);
             aspect-ratio: 1/1;
             margin: 0 0 0 1.4rem;
+            z-index: 2;
             // opacity: .4;
             &:nth-child(2) {
                 display: none;
@@ -106,6 +111,7 @@ const constructionsLinksData = [
             &:nth-child(3) {
                 display: none;
             }
+            
         }
 
         &:hover {

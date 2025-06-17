@@ -39,38 +39,44 @@ let dataOne = {
     {
         "title": "Разработка конструкции",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-11.jpg",
-        "columns": "1"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/8013620146850fd3145a725.24594240.webp",
+        "columns": "1",
+        "href": ""
     },
     {
         "title": "Изготовление предтиражного образца",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-22.jpg",
-        "columns": "2"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/20383183896850fd318394c9.88894130.webp",
+        "columns": "2",
+        "href": "/on-designing/drawing-sample"
     },
     {
         "title": "Отделка",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-33.jpg",
-        "columns": "1"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/18076141296850fd31c53f42.03389689.webp",
+        "columns": "1",
+        "href": "/materials/finish"
     },
     {
         "title": "Копакинг",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-44.jpg",
-        "columns": "2"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/17615715576850fd334d7ee8.10038596.webp",
+        "columns": "2",
+        "href": "/hand-work/copying-and-delivery"
     },
     {
         "title": "Доставка",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-55.jpg",
-        "columns": "1"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/11598333126850fd3380ef78.50828980.webp",
+        "columns": "1",
+        "href": "/term_of_use/delivery"
     },
     {
         "title": "Все продукты производства",
         "description": "",
         "backgroundDefault": "",
-        "columns": "1"
+        "columns": "1",
+        "href": "/projects-archive"
     }, 
 ]};
 
@@ -80,56 +86,54 @@ let dataServices = {
     {
         "title": "Бумажные пакеты",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box.jpg",
-        "columns": "1"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/340424796850fd3042ace4.19606123.webp",
+        "columns": "1",
+        "href": "/projects_category/packages"
     },
     {
         "title": "3D-отделка",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-1.jpg",
-        "columns": "2"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/12308639776850fd307a9657.76645884.webp",
+        "columns": "2",
+        "href": "/packaging-finish"
     },
     {
         "title": "Ложементы",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-2.jpg",
-        "columns": "1"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/7402154076850fd30a50191.09263313.webp",
+        "columns": "1",
+        "href": "/projects_category/type-of-lodgement"
     },
     {
         "title": "Подарочная упаковка",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-3.jpg",
-        "columns": "2"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/2025485456850fd30dafbb5.05807369.webp",
+        "columns": "2",
+        "href": "/projects_category/box-cover-bottom-laminated"
     },
     {
         "title": "Картонные коробки",
         "description": "Текстовое описание",
-        "backgroundDefault": "/img/services/Announce-Box-4.jpg",
-        "columns": "1"
+        "backgroundDefault": "https://static0.wow2print.com/storage/119/content/image/12665594926850fd311a9e51.23615675.webp",
+        "columns": "1",
+        "href": "/projects_category/cardboard-boxes"
     },
     {
         "title": "Все продукты производства",
         "description": "",
         "backgroundDefault": "",
-        "columns": "1"
+        "columns": "1",
+        "href": "/portfolio"
     }, 
 ]};
 ---
 <Layout title="Главная">
         <div class="content-grid">
             <Hero {...pageData} />
-            <!-- <code>
-                {JSON.stringify(dataOne[0])}
-            </code> -->
             <Announce maxWidthBlock="42rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)" text="FINEARTBOX — производство упаковки и полиграфические услуги в Москве" />
-            
             <GridBannersType1 data={dataServices.data} />
             <FeaturesRoot />
             <GridBannersType1 data={dataOne.data} title={dataServices.title} />
-
-            <!-- <GridBannersType1
-                title="Услуги"
-            /> -->
             <DeadlineRoot />
             <StageWorkRoot />
             <div class="fab-widgets" style="">
@@ -138,7 +142,7 @@ let dataServices = {
             </div>
             <Achievements />
             <!-- <FAQSection {...pageData} />-->
-            <SubscribeBlock status="default" />
+            <!-- <SubscribeBlock status="default" /> -->
             <SEOBlock {...pageData.SEOBlock[0]}  />
 
         </div>
