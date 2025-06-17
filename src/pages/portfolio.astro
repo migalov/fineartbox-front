@@ -43,7 +43,12 @@ const dataFilters = [
                 pageData.FilterSection.map( select => 
                     <div class="fab-custom-select">
                         <div class="fab-custom-select__dropdown" data-category={select.category}>
-                          <div class="fab-custom-select__dropdown-title"><span>{select.title}</span><Icon id="arrow-dropdown" width="16" height="16" /></div>
+                          <div class="fab-custom-select__dropdown-title">
+                            <a href={select.slug}>{select.title}</a>
+                            {
+                              select.options.length > 0 && <Icon id="arrow-dropdown" width="16" height="16" />
+                            }
+                          </div>
                           <div class="fab-custom-select__dropdown-inner">
                             {select.options.map( option => 
                               <a href={option?.slug}>{option.label}</a>
@@ -57,6 +62,140 @@ const dataFilters = [
             }
         </div>
         <div class="portfolio-grid">
+
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/3170185706544e387d980a9.01033107.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1795544635642542a46c3c69.63560859.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1024187481642570c50ec233.41392652.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/373377156642571e4c48b17.52346199.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/823076884642571f15337d3.84686165.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1635971097642572566147d1.94059216.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/291973847642572ce580fa6.49075720.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/417972021642572cecdb309.18834155.jpg" alt="">
+          </a>
+                    <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/42621450664254316df7955.07082275.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/15481688436425720ff07c35.50705081.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/353666225642572fdcc5bd1.56716283.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/226281065642572fe20eee3.97604509.jpg" alt="">
+          </a>
+
+          <a href="" style="--desktop-columns: 4">
+            <img src="https://static0.wow2print.com/storage/119/content/image/18028451536425713125fea9.94023199.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 4">
+            <img src="https://static0.wow2print.com/storage/119/content/image/12677405376425731b74fb48.57044977.jpg" alt="">
+          </a>
+          <div style="--desktop-columns: 4" class="portfolio-box-text" style={`--desk-aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
+              <h3>Попробуем бесплатно?</h3>
+              <p>Разработаем конструкцию и изготовим пилотный образец за наш счёт</p>
+          </div>
+
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/264069584642573442d54b9.75478832.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1621607770642573398a9092.53145588.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/14619967206425714d0007a5.10689396.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/18378779726425714d84a202.26512528.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/157630212364257374c21f43.65324221.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/140527759864257167568a78.97552302.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/19623073864257167a844d4.05917322.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/19959509976425717c50ae36.71922461.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/138161629964257393442437.93889453.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/6464282826425719708af90.35649770.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1751810904642571a955bc85.32640285.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/200045027643804a83f0237.24808797.jpg" alt="">
+          </a>
+
+          <div class="portfolio-box-text" style={`--desktop-columns: 4; --desk-aspect-ratio: 1/1; --background: var(--color-orange); clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);`}>
+              <h3>Как это сделано?</h3>
+          </div>
+          <a style="--desktop-columns: 4" href="#">
+            <img src="https://static0.wow2print.com/storage/119/content/image/791132753643804a1251a02.65205647.jpg" alt="">
+          </a>
+          <a style="--desktop-columns: 4" href="#">
+            <img src="https://static0.wow2print.com/storage/119/content/image/11104340466433f85db7a299.97062575.jpg" alt="">
+          </a>
+
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/544396694642d8fc7032009.36741461.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/123201399864340fe5da98f6.01987862.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/260156006642d41663add25.35232383.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/232877164642fd2e91aa673.55825707.jpg" alt="">
+          </a>
+                    <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1899094473642d8fb47c94f6.26000443.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/1776561083642d93d0f39cb5.57808055.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/43999664164300b1a57de50.94310234.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/506391276642d5da3cd6370.05306174.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/155144719164300b7b4beaf6.92895806.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/906958856642d6037414b75.57440910.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/112345958642d5b0a0aca29.54431457.jpg" alt="">
+          </a>
+          <a href="" style="--desktop-columns: 3">
+            <img src="https://static0.wow2print.com/storage/119/content/image/25393301164300f45e482f6.62979162.jpg" alt="">
+          </a>
+        </div>
+        <!-- <div class="portfolio-grid">
             <div data-purpose="for-the-banking-and-premium-cards" style={`--mob-col: 1; --mob-col: 1; --desk-col: 6; --desk-row: 2; --mob-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box.jpg);`}></div>
             <div data-purpose="for-the-banking-and-premium-cards" style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-1.jpg);`}></div>
             <div data-purpose="for-the-banking-and-premium-cards" style={`--desk-col: 3; --desk-row: 1; --desk-aspect-ratio: 1/1; --mob-aspect-ratio: 1/1; --background: url(/img/portfolio/Announce-Box-2.jpg);`}></div>
@@ -115,7 +254,8 @@ const dataFilters = [
 
             <div style={`--desk-col: 4; --desk-row: 1; --desk-aspect-ratio: ; --background: url(/img/portfolio/Announce-Box-40.jpg);`}></div>
             <div style={`--desk-col: 8; --desk-row: 1; --desk-aspect-ratio: 2/1; --background: url(/img/portfolio/Announce-Box-41.jpg);`}></div>
-        </div>
+        </div> -->
+        
         <SubscribeBlock status="default" />
         <SEOBlock {...pageData} />
     </div>
@@ -135,6 +275,11 @@ const dataFilters = [
     }
     .fab-custom-select {
       flex: 1;
+      & a {
+        color: var(--color-gray-5);
+        text-decoration: none;
+        width: 100%;
+      }
     }
     .fab-custom-select__dropdown-title {
       display: flex;
@@ -175,30 +320,58 @@ const dataFilters = [
       }
     }
     .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--global-gap);
-        & > div {
-            aspect-ratio: var(--mob-aspect-ratio);
-            background: var(--background);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            grid-area: span var(--mob-row) / span var(--mob-col);
-            @media (min-width: 768px) {
-              grid-area: span var(--desk-row) / span var(--desk-col);
-              aspect-ratio: var(--desk-aspect-ratio);
-            }
-        }
-        @media (min-width: 768px) {
-          grid-template-columns: repeat(12, 1fr);
-        }
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--global-gap);
+      @media (min-width: 992px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (min-width: 1200px) {
+        grid-template-columns: repeat(12, 1fr);
+      }
+      & > :is(a, div) {
+
+        grid-area: auto / span var(--desktop-columns);
+        border: 1px solid var(--color-gray-1);
+        overflow: hidden;
+      }
+      & a {
+        display: block;
+      }
+      & div {
+        display: flex;
+        clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
+      }
+      & img:hover {
+        transform: scale(1.15);
+      }
     }
+    // .portfolio-grid {
+    //     display: grid;
+    //     grid-template-columns: repeat(2, 1fr);
+    //     gap: var(--global-gap);
+    //     & > div {
+    //         aspect-ratio: var(--mob-aspect-ratio);
+    //         background: var(--background);
+    //         background-size: cover;
+    //         background-position: center;
+    //         background-repeat: no-repeat;
+    //         grid-area: span var(--mob-row) / span var(--mob-col);
+    //         @media (min-width: 768px) {
+    //           grid-area: span var(--desk-row) / span var(--desk-col);
+    //           aspect-ratio: var(--desk-aspect-ratio);
+    //         }
+    //     }
+    //     @media (min-width: 768px) {
+    //       grid-template-columns: repeat(12, 1fr);
+    //     }
+    // }
     .portfolio-box-text {
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: clamp(0.5rem, -0.3803rem + 3.7559vw, 3rem);
+        background-color: var(--color-orange);
         color: var(--color-white);
         row-gap: .75rem;
         & h3 {

@@ -74,8 +74,9 @@ import Icon from "./Icon.astro";
             width: calc(100vw - var(--width-header) - 1.1rem);
         }
         @media (min-width: 1440px) {
-            margin: 0 auto;
-            width: calc(1440px - var(--width-header));
+            // margin: 0 auto;
+            // min-width: calc(1200px);
+            width: calc(1200px)
         }
 
     }
@@ -106,7 +107,10 @@ import Icon from "./Icon.astro";
 
     const resizeFooter = () => {
         if (window.innerWidth > 1440) {
-            footer.style.left = `${(window.innerWidth - 1440)/2}px`  ;
+            footer.style.left = `${(document.querySelector(".fab-header").getBoundingClientRect().left - 1200)}px`  ;
+        }
+        else {
+            footer.style.left = ""
         }
     }
     resizeFooter();

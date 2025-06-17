@@ -136,6 +136,7 @@ const { Slider } = Astro.props;
     });
     splide.mount();
     splide.on("mounter", changeHeight);
+    splide.on("moved", changeHeight);
     // document
     //   .querySelector(".cb-hero-pagitation")
     //   .style.setProperty("--count", splide.length);
