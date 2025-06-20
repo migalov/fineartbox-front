@@ -76,7 +76,9 @@ const form = document.querySelector(`.fab-subscribe-form`);
     }
   }
 
- retryButton.addEventListener("click", showStatus("default"));
+ retryButton.addEventListener("click", () => {
+    showStatus("default");
+ });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -179,6 +181,13 @@ const form = document.querySelector(`.fab-subscribe-form`);
         }
         [data-status="success"], [data-status="error"] {
             justify-content: flex-end;
+        }
+    }
+    .fab-subscribe-form__retry {
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+            color: var(--color-orange)
         }
     }
 

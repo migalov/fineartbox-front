@@ -1,0 +1,170 @@
+---
+import Icon from "../components/Icon.astro";
+import Layout from "../layout.astro";
+import qs from "qs";
+const paramsPage = {
+    populate: {
+        Content: {
+            populate: {
+                listMenus: {
+                    populate: "*"
+                }
+            }
+        }
+	},
+};
+const queryStringPage = qs.stringify(paramsPage, { encode: true });
+const mapSite = await fetch(`${import.meta.env.HOST_API}/map-site?populate[Content][populate][listsMenus][populate]=*`).then(res => res.json());
+const mapSiteData = mapSite.data.Content;
+---
+
+<Layout>
+    <div class="fab-sitemap">
+        <Icon classes="fap-sitemap-close" width="24" height="24px" id="cross" />
+        <div class="h1">Карта сайта</div>
+        <ul class="fab-sitemap-grid">
+            {
+                mapSiteData.map( item => 
+                    <>
+                        <li style={`--grid-area: ${item.gridArea}`} data-label={item.label}>
+                            <span class="fab-sitemap-grid__title">{item.label}</span>
+                            <ul class={`fab-sitemap-grid-block ${item.gridArea == "po" ? "fab-sitemap-grid-block-portfolio" : ""}`} style="margin-left: 1rem;">
+                                {
+                                    item?.listsMenus?.map( _item => 
+                                        <>
+                                            <li>
+                                                <a href="">{_item.label}</a>
+                                                {
+                                                    _item.itemsMenu.length > 0 &&
+                                                    <ul class="fab-sitemap-grid-block-list" style="margin-left: 2rem;">
+                                                        {
+                                                            _item.itemsMenu.map( __item => 
+                                                                <li>
+                                                                    <a href={__item?.href}>{__item.label}</a>
+                                                                </li>
+                                                            )
+                                                        }
+                                                    </ul>
+                                                }
+                                            </li>
+                                        </>
+                                    )
+                                }
+                            </ul>
+                        </li>
+                    </>
+                )
+            }
+        </ul>
+    </div>
+</Layout>
+
+<style lang="scss" is:global>
+    .fab-sitemap {
+        padding: clamp(1rem, 0.4737rem + 2.807vw, 3rem);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--color-white);
+        z-index: 100;
+        max-height: 100dvh;
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        row-gap: calc(2 * var(--global-gap));
+        & a {
+            color: var(--color-black);
+            text-decoration: none;
+        }
+    }
+
+    .fap-sitemap-close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .fab-sitemap-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--global-gap);
+        flex: 1;
+        overflow-y: auto;
+        & > li {
+            display: flex;
+            flex-direction: column;
+            row-gap: var(--global-gap);
+            grid-area: var(--grid-area);
+        }
+        @media (min-width: 768px) {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-areas:    "gp c"
+                                    "gp p"
+                                    "l f"
+                                    "s cl"
+                                    "po po";
+            gap: var(--global-gap);
+        }
+    }
+    .fab-sitemap-grid__title {
+        font-size: 1.25rem;
+        font-weight: 900;
+    }
+    .fab-sitemap-grid-block {
+        display: flex;
+        flex-direction: column;
+        row-gap: calc(var(--global-gap) / 2);
+
+        & > li {
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+
+            & > a {
+                font-size: 1rem;
+                font-weight: 500;
+
+            }
+        }
+
+        &:has( .fab-sitemap-grid-block-list) {
+            row-gap: var(--global-gap);
+        }
+    }
+
+    .fab-sitemap-grid-block-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: calc(var(--global-gap)/3);
+    }
+
+    .fab-sitemap-grid-block-portfolio {
+        @media (min-width: 768px) {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            & {
+                li {
+                    &:nth-child(1) {
+                        grid-area: span 3 / auto;
+                    }
+                    &:nth-child(2) {
+                        grid-area: span 1;
+                    }
+                    &:nth-child(3) {
+                        grid-area: span 1;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .fab-header {
+        display: none;
+    }
+</style>
