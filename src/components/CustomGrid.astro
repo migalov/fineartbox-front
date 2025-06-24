@@ -1,0 +1,43 @@
+---
+const {columns, classes} = Astro.props;
+---
+
+<div class="fab-custom-grid" class:list={classes} style={`--grid-template-columns: repeat(${columns}, 1fr)`}>
+    <slot />
+</div>
+
+<style lang="scss" is:global>
+    .fab-custom-grid {
+        display: grid;
+        gap: var(--global-gap);
+        & figure {
+            margin: 0;
+            gap: .5rem!important;
+        }
+        & figcaption {
+            color: var(--color-gray-4);
+        }
+        & :is(ul) {
+            margin: 0;
+        }
+        & > :not([class]) {
+            display: flex;
+            flex-direction: column;
+            gap: var(--global-gap);
+        }
+        & ul {
+            @media (min-width: 768px) {
+                column-count: var(--columns-count);
+            }
+        }
+        @media (min-width: 768px) {
+            grid-template-columns: var(--grid-template-columns);
+        }
+    }
+    .fl-col-reverse-mob {
+        @media (max-width: 767.99px) {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+</style>

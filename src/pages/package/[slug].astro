@@ -101,14 +101,14 @@ const pageData = landingPageData?.data[0];
             <OneHero {...pageData}  />
             <ConstructionLinks {slug} {...pageData} />
             <Announce maxWidthBlock="58rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"  text={pageData.announce} />
-            <ReadyWorks {...pageData?.readyProjects} />
-            <div class="fab-widgets">
+            <ReadyWorks {...pageData?.readyProjects[0]} />
+            <!-- <div class="fab-widgets">
                 {
-                    pageData?.descriptions.map( b => <>
+                    pageData?.descriptions?.map( b => <>
                         <BlockText {...b} />
                     </>)
                 }
-            </div>
+            </div> -->
             {
                 pageData?.cardsSection.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
             }

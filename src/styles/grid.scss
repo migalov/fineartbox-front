@@ -1,4 +1,4 @@
-.cb-page-grid {
+.fab-page-grid {
 
     --max-content-width: 1200px;
     --breakout-difference: 0.2;
@@ -47,6 +47,14 @@
 .content-grid {
     row-gap: 4rem;
     --content-max-width: 100%;
+
+    * p {
+        margin: 0;
+    }
+}
+
+.content-grid section {
+    row-gap: clamp(1rem, 0.7143rem + 1.4286vw, 2rem);
 }
 
 .content-grid,

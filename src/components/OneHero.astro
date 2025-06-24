@@ -20,11 +20,7 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 </code> -->
 
 <section class="fab-hero-package" style={`--background-image: url(${Banner?.backgroundMobile})`}>
-    <!-- <picture>
-    <source srcset={Banner?.backgoundDesktop} media="(max-width: 767.99px)" />
-    <source srcset={Banner?.backgroundMobile} media="(min-width: 768)" /> -->
     <img src={Banner?.backgoundDesktop} alt="Абстрактное изображение" />
-    </picture>
     <div class="fab-hero-package__text" set:html={cleanHtml(Banner?.htmlContent)}>
     </div>
 </section>

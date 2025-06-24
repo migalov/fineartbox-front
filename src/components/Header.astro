@@ -3,8 +3,10 @@ import BurgerMenu from "./BurgerMenu.astro";
 import Icon from "./Icon.astro";
 import qs from "qs";
 import Mark from "./Mark.astro";
+import Copyright from "./Footer/Copyright.astro";
+import LegacyContent from "./Footer/LegacyContent.astro";
+import SocialNetworks from "./Footer/SocialNetworks.astro";
 const paramsMenu = {
-
         populate: {
             menuContent: {
                 populate: "*"
@@ -15,168 +17,216 @@ const paramsMenu = {
 const queryStringPage = qs.stringify(paramsMenu, { encode: true });
 const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${queryStringPage}`).then(res => res.json());
 ---
-
-<header class="fab-header">
-        <div class="fab-header-wrap">
-            <a href="/"><Icon classes="fab-header-logo" id="logo" width="75" height="80" /></a>
+<div class="fab-header">
+    <div class="fab-mobile-top">
+        <a href="/"><Icon classes="fab-header-logo" id="logo" width="75" height="80" /></a>
             
-            <div class="fab-header-user-actions">
-                <a href="#">
-                    <Icon id="user" width="16" height="16" />
-                </a>
-                <a href="#">
-                    <Icon id="cart" width="16" height="16" />
-                </a>
-                <BurgerMenu />
-                
-            </div>
-            <div class="fab-personal-account">
+        <div class="fab-header-user-actions">
+            <a href="/profile">
+                <Icon id="user" width="16" height="16" />
+            </a>
+            <a href="/cart">
+                <Icon id="cart" width="16" height="16" />
+            </a>
+            <BurgerMenu />
+        </div>
+    </div>
+    <div class="fab-mobile-dropdown">
+    <div class="fab-personal-account" data-username="hg">
+            <div class="fab-personal-account-auhthorize">
                 <input hidden type="checkbox" id="personal-account">
                 <label for="personal-account">Личный <br />кабинет</label>
                 <a  class="fab-personal-account__cart" href="/cart">
                     <Icon id="cart" width="16" height="16" />
                 </a>
-                <div class="fab-personal-account-options">
-                    <a href="#">
-                        <Icon id="user" width="16" height="16" />
-                        <span>Иннокентий Христораждественский</span>
-                    </a>
-                    <a href="/orders">Заказы</a>
-                    <a href="/projects">Проекты</a>
-                    <a href="#">
-                        <span>Выйти</span>
-                        <Icon id="exit" width="16" height="16" />
-                    </a>
-                </div>
             </div>
-            <div class="fab-menu-section">
-                    <ul class="fab-header-menu-lvl-1">
-                        {
-                            headerMenuData.data.menuContent.map( (item, id) =>
-                                <>
-                                    <li>
-                                        
-                                        <a href={item.href} class={`${id == 0 && "active"}`}>
-                                            {id == 0 && <Mark width="14px" height="44px" color="var(--color-orange)" />}
-                                            <span>{item.label}</span>
-                                        </a>
-                                        {
-                                            item.itemsMenu.length > 0 &&
-                                            <ul class="fab-header-menu-lvl-2">
-                                            {
-                                                item.itemsMenu.map( (_item, _id) => 
-                                                    <>
-                                                        <li>
-                                                            <a href={_item.href}  class={`${_id == 0 && "active"}`}>{_item.label}</a>
-                                                        </li>
-                                                    </>
-                                                )
-                                            }
-                                        </ul>
-                                        }
-                                        
-                                    </li>
-                                    {
-                                        item.line && <hr />
-                                    }
-                                </>
-                            )
-                        }
-                    </ul>
-                    <div class="fab-header-contacts" itemscope itemtype="http://schema.org/LocalBusiness">
-                        <a class="fab-header-contact__phone" href="tel:+74952150877" itemprop="telephone">+7 495 215-08-77</a>
-                        <time class="fab-header-contact__schedule caption caption--bold" itemprop="openingHours" datetime="Mo-Fr 10:00-18:00">Пн–Пт 10:00–18:00</time>
-                        <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                            <a class="fab-header-contact__email" href="mailto:sale@fineartbox.ru" itemprop="email">sale@fineartbox.ru</a>
-                            <div class="fab-header-contact__address">
-                                <span itemprop="streetAddress">Зорге 15к1</span>, 
-                                <span itemprop="addressLocality">Москва</span>
-                            </div>
-
-                        </address>
-                    </div>
-                   
+            <div class="fab-personal-account-unauhthorize">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="fab-personal-account-options">
+                <a href="#">
+                    <Icon id="user" width="16" height="16" />
+                    <span>Michel Migalov</span>
+                </a>
+                <a href="/orders">Заказы</a>
+                <a href="/projects">Проекты</a>
+                <a href="/logout">
+                    <span>Выйти</span>
+                    <Icon id="exit" width="16" height="16" />
+                </a>
             </div>
             
-        </div>
 
-</header>
+    </div>
+    <ul class="fab-header-menu-lvl-1">
+        {
+            headerMenuData.data.menuContent.map( (item, id) =>
+                <>
+                    <li>
+                        
+                        <a href={item?.href?.replace("https://fineartbox.ru/", "")} class={`${item?.active ? "active" : ""}`}>
+                            <span>{item.label}</span>
+                        </a>
+                        {
+                            item.itemsMenu.length > 0 &&
+                            <ul class="fab-header-menu-lvl-2">
+                            {
+                                item.itemsMenu.map( (_item, _id) => 
+                                    <>
+                                        <li>
+                                            <a href={_item?.href?.replace("https://fineartbox.ru/", "")}  class={`${_item?.active ? "active" : ""}`}>{_item.label}</a>
+                                        </li>
+                                    </>
+                                )
+                            }
+                        </ul>
+                        }
+                        
+                    </li>
+                    {
+                        item.line && <hr />
+                    }
+                </>
+            )
+        }
+    </ul>
+    <div class="fab-header-contacts" itemscope itemtype="http://schema.org/LocalBusiness">
+        <a class="fab-header-contact__phone" href="tel:+74952150977" itemprop="telephone">+7 495 215-09-77</a>
+        <time class="fab-header-contact__schedule caption caption--bold" itemprop="openingHours" datetime="Mo-Fr 10:00-18:00">Пн–Пт 10:00–18:00</time>
+        <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <a class="fab-header-contact__email" href="mailto:sale@fineartbox.ru" itemprop="email">sale@fineartbox.ru</a>
+            <a href="https://yandex.ru/maps/-/CCU4rMgYsC" class="fab-header-contact__address">
+                <span itemprop="streetAddress">Зорге 15к1</span>, 
+                <span itemprop="addressLocality">Москва</span>
+            </a>
+
+        </address>
+    </div>
+    <div class="fab-header-bottom">
+        <Copyright />
+        <LegacyContent />
+        <SocialNetworks />
+    </div></div>
+</div>
+
 
 <style lang="scss" is:global>
     .fab-header {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-white);
         position: fixed;
-        top: 0;
         left: 0;
         right: 0;
-        z-index: 2;
-        background-color: var(--color-white);
-        --padding-marker: 1em;
-        --size-marker: .3em;
-        
-        & .content-grid {
-            row-gap: 0;
-        }
-        @media (min-width: 992px) {
-            row-gap: 3rem;
-            position: sticky;
-            align-self: start;
-            top: 2rem;
-            padding-right: var(--padding-body);
-        }
-    }
-    .fab-header-wrap {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        padding: var(--padding-body);
-        @media (min-width: 992px) {
-            grid-area: full-width;
-            justify-content: flex-start;
+        top: 0;
+        z-index: 3;
+        height: var(--header-height);
+        max-height: var(--header-height);
+        transition: var(--transition-default) max-height;
+        padding: 0 1rem;
+        @media (min-width: 768px) {
+            width: var(--width-header);
+            left: calc(100% - var(--width-header));
+            right: 0;
+            display: flex;
             flex-direction: column;
-            padding: 0;
-            row-gap: 3rem;
+            row-gap: 2rem;
+            max-height: 100dvh;
+            height: 100dvh;
+            padding: 2rem 0;
+            & > ul {
+                flex: 1;
+                overflow-y: auto;
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 768px) {
+
+        }
+        @media (min-width: 1440px) {
+            left: auto;
+            right: calc( 0.5*(100% - var(--width-page)));
+        }
+
+
+
+        &:has( #toggle-menu:checked) {
+            max-height: 100dvh;
+            height: 100dvh;
+        }
+        [data-username=""] {
+            & .fab-personal-account-auhthorize {
+                display: none;
+                
+            }
+        }
+        [data-username]:not([data-username=""])
+        {
+            & .fab-personal-account-unauhthorize {
+                display: none;
+            }
+        }
+
+    }
+    .fab-mobile-dropdown {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden;
+        row-gap: inherit;
+        @media (min-width: 768px) {
+            padding: 0 var(--padding-body) 0 0;
         }
     }
     .fab-header-logo {
         width: clamp(3rem, 2.6479rem + 1.5023vw, 4rem);
+        height: 100%;
+    }
+    .fab-mobile-top {
+        height: var(--header-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media (min-width: 768px) {
+            height: initial;
+        }
+
+
     }
     .fab-header-user-actions {
         display: flex;
-        gap: 1rem;
         align-items: center;
+        gap: 1rem;
+
         & > a {
             display: flex;
             align-items: center;
         }
+
         @media (min-width: 768px) {
             display: none;
         }
     }
-    .fab-menu-section {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        z-index: 2;
-        background: var(--color-white);
-        top: var(--header-height);
-        left: 0;
-        right: 0;
-        padding: 0 calc(2 * var(--padding-body)) 2rem;
-
-
-        @media (max-width: 991.99px) {
-            transform: translateX(100%);
-            transition: var(--transition-default);
-            height: calc(100dvh - var(--header-height));
-            opacity: 0;
-        }
-
-        @media (min-width: 992px) {
-            padding: 0;
-            position: static;
-        }
-    }
     .fab-personal-account {
+        position: relative;
+        label {
+            cursor: pointer;
+            font-weight: 700;
+            font-family: var(--font-family);
+            color: var(--color-gray-4);
+
+        }
+        & .fab-personal-account-auhthorize:has( input:checked) ~ .fab-personal-account-options {
+            opacity: 1;
+            pointer-events: all;
+        }
+        @media (max-width: 767.99px) {
+            display: none;
+        }
+
+    }
+    .fab-personal-account-unauhthorize, .fab-personal-account-auhthorize {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -184,57 +234,99 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
         position: relative;
         background-color: var(--color-gray-1);
         border-bottom: 1px solid var(--color-gray-2);
-        & input:checked ~ .fab-personal-account-options {
-            opacity: 1;
-            pointer-events: inherit;
+    }
+    .fab-personal-account-unauhthorize {
+        & a {
+            color: var(--color-gray-5);
+            font-weight: 700;
+            text-decoration: none;
+            font-family: var(--font-family);
+            font-size: 1rem;
         }
-        & label {
-            cursor: pointer;
-             font-weight: 700;
-             color: var(--color-gray-4);
-        }
-        @media (max-width: 991.99px) {
-            display: none;
-        }
+
     }
     .fab-personal-account-options {
-        transition: var(--transition-default);
+        position: fixed;
+        transition: var(--transition-default) opacity;
         opacity: 0;
         pointer-events: none;
-        position: absolute;
-        top: 0;
-        left: -14rem;
+        top: clamp(8.1rem, 7.5286rem + 1.1905vw, 8.6rem);
         display: flex;
         flex-direction: column;
         background-color: var(--color-gray-5);
-        z-index: 3;
+        z-index: 11111;
         padding: 1.5rem;
         row-gap: 1.25rem;
         width: min-content;
+        right: 15rem;
 
         & a {
+            display: inline-flex;
             color: var(--color-white);
+            column-gap: .5rem;
+            font-weight: 500;
+            text-decoration: none;
+            &:first-child {
+                font-weight: 700;
+                color: var(--color-gray-2);
+            }
+            &:last-child {
+                color: var(--color-gray-3);
+            }
         }
 
         & svg {
-            filter: invert(1);
+            width: 2rem;
+            filter: invert(.7);
+        }
+
+        @media (min-width: 1440px) {
+
+            right: calc(0.5*(100% - var(--width-page) + 2.1* var(--width-header)));
         }
     }
+    .fab-personal-account__cart {
+        display: inline-block;
+        margin-left: 1.25rem;
+        padding: .5rem 0 .5rem 1.25rem;
+        border-left: 1px solid var(--color-gray-2);
+    }
     .fab-header-menu-lvl-1 {
-        overflow-y: auto;
+        --padding-level-one: 20px;
+        padding: 1rem var(--padding-level-one) 0;
         flex: 1;
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
-        padding: 0 0 1rem;
+        --sb-track-color: var(--color-gray-2);
+        --sb-thumb-color: var(--color-orange);
+        --sb-size: 2px;
+
+        &::-webkit-scrollbar {
+        width: var(--sb-size);
+        }
+
+        &::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+        border-radius: 1px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+        border-radius: 1px;
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+        & {
+            scrollbar-color: var(--sb-thumb-color)
+                            var(--sb-track-color);
+        }
+        }
         & > li {
             display: flex;
             flex-direction: column;
             row-gap: 1rem;
-
-            &:has( .fab-header-menu-lvl-2:empty) {
-
-            }
             & > a {
                 font-size: 1.25rem;
                 font-weight: 500;
@@ -246,27 +338,57 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                     position: relative;
                     color: var(--color-black);
                     font-weight: 700;
-
-                    & .fab-mark {
-                        position: relative;
-                        left: -.5rem;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: calc( -1 * var(--padding-level-one));
+                        width: 14px;
+                        height: 100%;
+                        min-height: 2rem;
+                        background: var(--color-orange);
+                        clip-path: polygon(100% 0, 100% calc(100% - 14px), 0 100%, 0% 14px);
                     }
+                }
+                &:hover {
+                    font-weight: 700;
                 }
             }
         }
+        & a {
+            font-family: var(--font-family);
+            text-decoration: none;
+        }
+        & hr {
+            outline: none;
+            border-top: 1px solid var(--color-gray-2);
+            border-bottom: 0;
+        }
+        @media (min-width: 768px) {
+            padding: 0 .5rem 0 var(--padding-level-one);
+        }
     }
     .fab-header-menu-lvl-2 {
+        &:not(:has( .active)) {
+            display: none;
+        }
+    }
+    .fab-header-menu-lvl-2 {
+        --size-marker: 5px;
+        --padding-marker: .75em;
         display: flex;
         flex-direction: column;
         row-gap: .25rem;
         & > li {
-            margin: 0 0 0 var(--padding-marker);
+            padding: 0 0 0 var(--padding-marker);
             position: relative;
             & > a {
 
                 font-size: 1rem;
                 color: var(--color-gray-4);
                 // padding: 0 0 0 var(--padding-marker);
+                text-decoration: none;
                 &.active {
 
                     color: var(--color-black);
@@ -278,7 +400,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                 &::before {
                     content: "";
                     position: absolute;
-                    left: calc(-1 * var(--padding-marker) + (var(--size-marker) / 2));
+                    left: 0;
                     top: 50%;
                     transform: translateY(-50%);
                     width: var(--size-marker);
@@ -292,29 +414,82 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
     .fab-header-contacts {
         display: flex;
         flex-direction: column;
+        padding: 1rem 1rem 3rem;
+        @media (min-width: 768px) {
+            padding: 0;
+        }
     }
     .fab-header-contact__phone {
-        font-size: 1.42rem;
+        font-size: 1.25rem;
         font-weight: 900;
         color: var(--color-black);
+        text-decoration: none;
+        font-family: var(--font-family);
+        color: inherit;
         text-decoration: none;
 
     }
     .fab-header-contact__schedule {
-        
+        color: var(--color-gray-3)        
     }
     .fab-header-contact__email {
         display: block;
         margin: .5em 0 1.5em;
+        font-family: var(--font-family);
     }
     .fab-header-contact__email, .fab-header-contact__address {
         font-style: normal;
         font-size: 1.14rem;
+        color: var(--color-black);
+        text-decoration: none;
     }
-    .fab-personal-account__cart {
-        display: inline-block;
-        margin-left: 1.25rem;
-        padding: .5rem 0 .5rem 1.25rem;
-        border-left: 1px solid var(--color-gray-2);
+
+    .fab-header-bottom {
+        display: grid;
+        grid-template-areas: "cop net" "leg leg";
+        padding: 1rem 0;
+        row-gap: .5rem;
+        @media (min-width: 768px) {
+            display: none;
+        }
+
+        & .fab-copyright {
+            grid-area: cop
+        }
+        & .fab-legacy-content {
+            grid-area: leg;
+            display: flex;
+        }
+        & .fab-social-networks {
+            display: flex;
+            grid-area: net
+        }
     }
+
+
 </style>
+
+<style lang="scss" is:global>
+    
+    astro-dev-toolbar {
+        display: none;
+    }
+
+</style>
+
+<script is:inline>
+    let buttonAccount = document.querySelector(".fab-personal-account");
+    let blockOptions = document.querySelector(".fab-personal-account-options");
+    const movingBlockOptions = () => {
+        console.log(blockOptions);
+        
+        if (window.innerWidth > 1440) {
+            blockOptions.style.left = `${buttonAccount.getBoundingClientRect()}px`;
+        }
+        
+    }
+    movingBlockOptions();
+    window.addEventListener("load", movingBlockOptions);
+    window.addEventListener("resize", movingBlockOptions);
+    window.addEventListener("DOMContentLoaded", movingBlockOptions);
+</script>

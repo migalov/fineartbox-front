@@ -1,0 +1,54 @@
+---
+import CustomGrid from "../components/CustomGrid.astro";
+import OneHero from "../components/OneHero.astro";
+import TechDocs from "../components/TechDocs.astro";
+import Layout from "../layout.astro";
+const Banner = {
+    Banner: {
+        backgoundDesktop: "https://static0.wow2print.com/storage/119/content/image/738713142685aa55cc44bf6.83154737.webp",
+        backgroundMobile: "https://static0.wow2print.com/storage/119/content/image/255493681685aa55c6de564.37229644.webp"
+    }
+}
+---
+
+<Layout>
+    <div class="fab-page">
+        <div class="content-grid">
+                <OneHero {...Banner}  />
+                <section>
+                    <h1>Технические требования</h1>
+                    <CustomGrid columns="2">
+                        <p>Технические требования к макетам полиграфической продукции доступны для скачивания на сайте в разделе «Подготовка макета».</p>
+                        <p>Файлы представлены в популярных форматах (PDF, AI, CDR) и включают параметры обрезки, вылетов, цветовой модели и других требований.</p>
+                    </CustomGrid>
+                    <CustomGrid columns="3">
+                        <TechDocs
+                            title="Основные требования"
+                            description="Как правильно сохранить файл для печати и в какой программе прислать."
+                        />
+                        <TechDocs
+                            title="Контурная резка"
+                            description="От наклеек и стикерпаков до магнитов и упаковки."
+                        />
+                        <TechDocs
+                            title="3D-фольга и выборочный лак"
+                            description="О чем следует помнить при подготовке макета."
+                        />
+                        <TechDocs
+                            title="Печать белым тонером"
+                            description="Печать белым и цветным по черному."
+                        />
+                        <TechDocs
+                            title="Тиснение"
+                            description="Два самых главных правила."
+                        />
+                        <TechDocs
+                            title="Словарик терминов"
+                        />
+                    </CustomGrid>
+
+
+                </section>
+        </div>
+    </div>
+</Layout>

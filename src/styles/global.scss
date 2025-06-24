@@ -62,6 +62,7 @@ section  {
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6 .h6 {
     font-family: var(--second-family);
     font-weight: 700;
+    margin: 0;
 }
 
 h1, .h1 {
@@ -74,7 +75,7 @@ h2, .h2 {
     line-height: 1.375;
 }
 
-h3 .h3 {
+h3, .h3 {
     font-size: var(--size-h3);
     line-height: 1.5;
 }
@@ -87,7 +88,7 @@ h3 .h3 {
     font-weight: 700;
 }
 
-[class^="fab-"] * {
+:is(.fab-header, .fab-footer) :is(ul, li) {
     margin: 0;
     padding: 0;
     list-style-type: none;

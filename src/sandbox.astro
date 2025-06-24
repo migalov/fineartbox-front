@@ -5,6 +5,9 @@ import "./styles/fonts.scss";
 import "./styles/grid.scss";
 import TestHeader from "./components/TestHeader.astro";
 import TestFooter from "./components/TestFooter.astro";
+import Sprite from "./sprite.astro";
+import Footer from "./components/Footer.astro";
+import Header from "./components/Header.astro";
 ---
 
 <!DOCTYPE html>
@@ -18,27 +21,46 @@ import TestFooter from "./components/TestFooter.astro";
     <link rel="stylesheet" href="/splide.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-scrollbar@latest/simple-scrollbar.css">
     <script src="https://cdn.jsdelivr.net/npm/simple-scrollbar@latest/simple-scrollbar.min.js"></script>
+    <style lang="scss" is:global>
+        
+    body {
+        --width-page: 1440px;
+        --width-header: 14rem;
+        --header-height: 84px;
+        --global-template-columns: 1fr minmax(0, calc(var(--width-page) - var(--width-header))) var(--width-header) 1fr;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: var(--header-height) 0 0;
+        @media (min-width: 768px) {
+            padding: 2rem 0 0;
+        }
+    }
+    .main {
+        flex: 1;
+        @media (min-width: 768px) {
+            display: grid;
+            grid-template-areas: ". c h .";
+            grid-template-columns: var(--global-template-columns);
+
+        }
+    }
+    .content-html-source {
+        grid-area: c;
+    }
+    </style>
 </head>
 <body>
-    <TestHeader />
-    <div class="fab-page">
-        <slot />
-    </div>
-    <TestFooter />
+    
+    <main class="main">
+        <Header />
+        <div class="content-html-source">
+            <slot />
+        </div>
+    </main>
+    <Footer />
     <!-- <Footer /> -->
-    <!-- <Sprite />
-    <SpriteFeature />
-    <SpriteConstructions /> -->
+    <Sprite />
+
 </body>
 </html>
-
-<style lang="scss" is:global>
-    body {
-        --width-header: 192px;
-        margin: 0;
-    }
-    astro-dev-toolbar {
-        display: none;
-    }
-    
-</style>

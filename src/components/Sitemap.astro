@@ -1,6 +1,5 @@
 ---
 import Icon from "../components/Icon.astro";
-import Layout from "../layout.astro";
 import qs from "qs";
 const paramsPage = {
     populate: {
@@ -18,7 +17,6 @@ const mapSite = await fetch(`${import.meta.env.HOST_API}/map-site?populate[Conte
 const mapSiteData = mapSite.data.Content;
 ---
 
-<Layout>
     <div class="fab-sitemap">
         <Icon classes="fap-sitemap-close" width="24" height="24px" id="cross" />
         <div class="h1">Карта сайта</div>
@@ -33,14 +31,14 @@ const mapSiteData = mapSite.data.Content;
                                     item?.listsMenus?.map( _item => 
                                         <>
                                             <li>
-                                                <a href="">{_item.label}</a>
+                                                <a href={_item?.href ? _item?.href : ""}>{_item.label}</a>
                                                 {
                                                     _item.itemsMenu.length > 0 &&
                                                     <ul class="fab-sitemap-grid-block-list" style="margin-left: 2rem;">
                                                         {
                                                             _item.itemsMenu.map( __item => 
                                                                 <li>
-                                                                    <a href={__item?.href}>{__item.label}</a>
+                                                                    <a href={__item?.href ? __item?.href : ""} class={}>{__item.label}</a>
                                                                 </li>
                                                             )
                                                         }
@@ -57,7 +55,6 @@ const mapSiteData = mapSite.data.Content;
             }
         </ul>
     </div>
-</Layout>
 
 <style lang="scss" is:global>
     .fab-sitemap {
@@ -75,9 +72,23 @@ const mapSiteData = mapSite.data.Content;
         display: flex;
         flex-direction: column;
         row-gap: calc(2 * var(--global-gap));
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition-default) opacity;
         & a {
             color: var(--color-black);
             text-decoration: none;
+            font-family: var(--font-family);
+            &[href=""] {
+                color: var(--color-gray-2);
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+        }
+        &.fab-sitemap--show {
+            opacity: 1;
+            pointer-events: all;
         }
     }
 
@@ -127,7 +138,7 @@ const mapSiteData = mapSite.data.Content;
             & > a {
                 font-size: 1rem;
                 font-weight: 500;
-
+                font-weight: var(--font-family);
             }
         }
 
@@ -140,6 +151,8 @@ const mapSiteData = mapSite.data.Content;
         display: flex;
         flex-direction: column;
         row-gap: calc(var(--global-gap)/3);
+
+
     }
 
     .fab-sitemap-grid-block-portfolio {
@@ -162,9 +175,11 @@ const mapSiteData = mapSite.data.Content;
             }
         }
     }
-
-
-    .fab-header {
-        display: none;
-    }
 </style>
+
+<script>
+    document.querySelector(".fap-sitemap-close")?.addEventListener("click", () => {
+        document.querySelector(".fab-sitemap")?.classList?.toggle("fab-sitemap--show");
+    })
+    
+</script>

@@ -1,0 +1,94 @@
+---
+import DownloadDocument from "../components/DownloadDocument.astro";
+import Icon from "../components/Icon.astro";
+import SubscribeBlock from "../components/SubscribeBlock.astro";
+import Layout from "../layout.astro";
+import StaticPageSprite from "../sprites/StaticPagesSprite.astro";
+---
+
+<Layout title="Оплата">
+    <div class="fab-page">
+        <div class="content-grid">
+            <section>
+                <h1 class="h2">Оплата</h1>
+                    <p>Доступна оплата по счету для юридических лиц. Все необходимые документы предоставляются вместе с заказом</p>
+                <div class="fab-custom-grid" style="--grid-template-columns: repeat(2, 1fr); max-width: 59rem; margin: 0 auto; column-gap: calc(8rem + 2* var(--global-gap));">
+                    <DownloadDocument
+                        idIcon="papers"
+                        title="По счёту для юр. лиц (20% НДС)"
+                        desc="Вы можете запросить необходимые вам документы в бухгалтерии"
+                        label="Скачать реквизиты"
+                        href="#"
+                    >
+                    <ul>
+                        <li><span>Полное наименование организации:</span> <strong>Общество с ограниченной ответственностью “ТиДжиПак”</strong></li>
+                        <li><span>ИНН:</span> <strong>7714718216</strong></li>
+                        <li><span>КПП:</span> <strong>771401001</strong></li>
+                        <li><span>ОГРН:</span> <strong>1077762370058</strong></li>
+                        <li><span>ОКПО:</span> <strong>83224033</strong></li>
+                        <li><span>Расчетный счет:</span> <strong>40702810501400012668</strong></li>
+                        <li><span>Банк:</span> <strong>АЛЬФА-БАНК, г. Москва</strong></li>
+                        <li><span>БИК:</span> <strong>044525593</strong></li>
+                        <li><span>Корр. счет:</span> <strong>30101810200000000593</strong></li>
+                    </ul>    
+                </DownloadDocument>
+                    <DownloadDocument
+                        idIcon="papers"
+                        title="По счёту (5% по УСН)"
+                        desc="Вы можете запросить необходимые вам документы в бухгалтерии"
+                        label="Скачать реквизиты"
+                        href="#"
+                    >
+                    <ul>
+                        <li><span>Полное наименование организации:</span> <strong>Общество с ограниченной ответственностью “ТиДжиПак”</strong></li>
+                        <li><span>ИНН:</span> <strong>7715673991</strong></li>
+                        <li><span>КПП:</span> <strong>771401001</strong></li>
+                        <li><span>ОГРН:</span> <strong>1077762369805</strong></li>
+                        <li><span>ОКПО:</span> <strong>83223973</strong></li>
+                        <li><span>Расчетный счет:</span> <strong>40702810801400002912</strong></li>
+                        <li><span>Банк:</span> <strong>АЛЬФА-БАНК, г. Москва</strong></li>
+                        <li><span>БИК:</span> <strong>044525593</strong></li>
+                        <li><span>Корр. счет:</span> <strong>30101810200000000593</strong></li>
+                    </ul> 
+                </DownloadDocument>
+                </div>
+            </section>
+            <section>
+                <h2>Контактная информация</h2>
+                <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/fineartbox/84116757109/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">FineArtBox</a><a href="https://yandex.ru/maps/213/moscow/category/packing_materials/184106936/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Тара и упаковочные материалы в Москве</a><a href="https://yandex.ru/maps/213/moscow/category/printing_house/184107134/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Типография в Москве</a><iframe src="https://yandex.ru/map-widget/v1/?ll=37.513079%2C55.783687&mode=search&oid=84116757109&ol=biz&sctx=ZAAAAAgBEAAaKAoSCZ5eKcsQz0JAEdOgaB7A4EtAEhIJycuaWOBr%2FT8RZTiez4B64z8iBgABAgMEBSgKOABAppIHSAFiGnJlbGV2X2huc3dfbWVyZ2VfcmVzdWx0cz0wYi5idXNpbmVzc191c2VfZXhwZXJpbWVudGFsX29yZ2FuaWNfaG5zd19pbmRleD0xagJydZ0BzczMPaABAKgBAL0BiUg7v8IBBvW0%2F625AoICCmZpbmVhcnRib3iKAgCSAgCaAgxkZXNrdG9wLW1hcHM%3D&sll=37.513079%2C55.783687&sspn=0.020037%2C0.006628&text=fineartbox&z=16.52" width="100%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;border:none"></iframe></div>
+                <div class="fab-custom-grid" style="--grid-template-columns: repeat(2, 1fr)">
+                    <div class="fab-contacts-block">
+                        <h3>Есть вопросы? Свяжиесь с нами!</h3>
+                        <p>Звоните: <a href="tel:+74952150977">+7 495 215-09-77</a><br />
+                            Пишите: <a href="mailto:sale@fineartbox.ru">sale@fineartbox.ru</a></p>
+                    </div>
+                    <div class="fab-contacts-block">
+                        <h3>Или приезжайте</h3>
+                        <p><a href="https://yandex.ru/maps/-/CHccFSNQ">Метро МЦК Зорге, ул. Зорге 15к1,  офис 404, Москва, 125252</a></p>
+                        <p>Ждём вас по будням (пн–пт) с 10:00 до 19:00</p>
+                        <p>В офисе можно посмотреть широкий ассортимент продукции и проконсультироваться с менеджерами по техническим моментам.</p>
+                    </div>
+                </div>
+            </section>
+            <SubscribeBlock />
+            
+        </div>
+    </div>
+    <StaticPageSprite />
+</Layout>
+
+<style lang="scss">
+    .fab-custom-grid {
+        display: grid;
+        gap: var(--global-gap);
+        @media (min-width: 768px) {
+            grid-template-columns: var(--grid-template-columns);
+        }
+
+    }
+    .fab-contacts-block {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+    }
+</style>

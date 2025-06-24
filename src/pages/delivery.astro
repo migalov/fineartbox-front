@@ -1,0 +1,97 @@
+---
+import CustomGrid from "../components/CustomGrid.astro";
+import SubscribeBlock from "../components/SubscribeBlock.astro";
+import Layout from "../layout.astro";
+
+
+---
+
+<Layout title="Доставка">
+    <div class="fab-page">
+        <div class="content-grid">
+            <section>
+                <h1 class="h2">Доставка</h1>
+                <CustomGrid columns="2">
+                    <p>Предлагаем доставку готовой полиграфической продукции тремя способами: курьером до вашего адреса (в пределах города и ближайших районов), самовывозом из нашего офиса или через транспортную компанию — при необходимости быстрой доставки в другие регионы.</p>
+                    <p>Cтоимость и сроки уточняются в зависимости от объёма заказа и места доставки. Более точная информация уточнаяется у коммерческого менеджера. При доставке курьером уведомляем заранее, а при отправке ТК – передаём трек‑номер и документы для отслеживания.</p>
+                </CustomGrid>
+            </section>
+            <section>
+                <CustomGrid classes="fab-scrollbar" columns="2">
+                    <div class="fab-delivery-block">
+                        <h2>Курьером типографии по Москве</h2>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/1339628266685a96a6412828.33116694.webp" alt="">
+                        <h3>Доставка (следующий день после готовности)</h3>
+                        <div class="fab-delivery-parameters">
+                            <p>до 4 кг - 600 ₽</p>
+                            <p>до 50 кг - 900 ₽</p>
+                            <p>от 50 кг - 1650 ₽</p>
+                        </div>
+                        <h3>Срочная доставка (в день готовности)</h3>
+                        <div class="fab-delivery-parameters">
+                            <p>до 4 кг - 1050 ₽</p>
+                            <p>до 50 кг - 1650 ₽</p>
+                            <p>от 50 кг - 3150 ₽</p>
+                        </div>
+                    </div>
+                    <div class="fab-delivery-block">
+                        <h2>Самовывоз из типографии</h2>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/1259463972685a96a6971976.80931766.webp" alt="">
+                        <h3>Доставка (следующий день после готовности)</h3>
+                        <div>
+                            <p>Если вам не подходит доставка компаниями с которыми мы работаем, Вы можете забрать заказ самостоятельно с нашего офиса.</p>
+                            <p>Офис находится по адресу: ул. Зорге 15к1, Москва</p>
+                            <p>15 мин от метро Полежаевская или МЦК Зорге</p>
+                            <p>Работаем по будням с 10:00 до 19:00</p>
+                        </div>
+
+                    </div>
+                    <div class="fab-delivery-block">
+                        <h2>Транспортная компания СДЭК</h2>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/2097498098685a96a70cd534.75905423.webp" alt="">
+                        <p>Работает по всей России. Доставка возможна до двери или до пункта самовывоза в вашем городе. Рекомендуем для крупных заказов и для заказов, которым нужна специальная обрешетка. Список пунктов выдачи: www.cdek.ru/ru/offices</p>
+                        <p>Внимание! Доставка оформляется и оплачивается самостоятельно клиентом на сайте СДЭК. Обязательно с забором заказа из типографии. Вес и габариты вы можете узнать у менеджера.</p>
+                        <p><a href="www.cdek.ru" style="font-weight: 500;">www.cdek.ru</a></p>
+                    </div>
+                    <div class="fab-delivery-block">
+                        <h2>Почта России</h2>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/1558293527685a96a77b55b5.89013495.webp" alt="">
+                        <p>Выгодно для негабаритных заказов. Стоимость рассчитывается индивидуально менеджерами, исходя из веса заказа. Все отправки оформляются менеджерами типографии.</p>
+                        <p>Внимание! Отправки происходят исключительно по вторникам и пятницам.</p>
+                        <p><a href="www.pochta.ru" style="font-weight: 500;">www.pochta.ru</a></p>
+                    </div>
+                    
+                </CustomGrid>
+                
+            </section>
+            <SubscribeBlock />
+        </div>
+    </div>
+</Layout>
+
+<style lang="scss" is:global>
+    .fab-delivery-block {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+
+        & h2 {
+            font-size: var(--size-h3);
+        }
+
+        & h3 {
+            font-size: 1.25rem;
+            font-family: var(--font-family);
+            font-weight: 500;
+        }
+
+        & > div:not([class]) {
+            display: flex;
+            flex-direction: column;
+            row-gap: .5rem;
+        }
+                @media (max-width: 991.99px) {
+            min-width: clamp(18rem, 10.7066rem + 27.2285vw, 30rem);
+        }
+    }
+</style>
