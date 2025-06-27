@@ -1,38 +1,6 @@
 ---
 import Icon from "./Icon.astro";
 const {slug, filterConstructions} = Astro.props;
-const constructionsLinksData = [
-    {
-        idIcon: "",
-        label: "Стандартная",
-        href: "krishka-dno"
-    },
-    {
-        idIcon: "",
-        label: "С вырезом <br />под палец",
-        href: "#"
-    },
-    {
-        idIcon: "",
-        label: "С бортом",
-        href: "#"
-    },
-    {
-        idIcon: "",
-        label: "С наклонными <br />бортами",
-        href: "#"
-    },
-    {
-        idIcon: "",
-        label: "С объёмным <br />бортом",
-        href: "#"
-    },
-    {
-        idIcon: "",
-        label: "С накладками",
-        href: "#"
-    }
-]
 ---
 
 <section class="constructions-switch">
@@ -41,12 +9,16 @@ const constructionsLinksData = [
         {
             filterConstructions?.map( (item, num) =>
                 <>
-                    <a href={item.slug ? item.slug : "#"} class={`construction-item ${ item.slug === slug && "active"}`}>
-                        <Icon width="94" height="94" id={`Icon-${num + 1}-Unselected`} />
-                        <Icon width="94" height="94" id={`Icon-${num + 1}-Hover`} />
-                        <Icon width="94" height="94" id={`Icon-${num + 1}-Active`} />
-                        <span set:html={item.label} />
-                    </a>
+                    <label for={`construction-${num+1}`}>
+                        <input type="radio" id={`construction-${num+1}`} name={`construction`} value={item.slug} checked={num == 0 && "checked"} hidden />
+                        <div data-tab={item.slug ? item.slug : "#"} class={`construction-item`}>
+                            <Icon width="94" height="94" id={`Icon-${num + 1}-Unselected`} />
+                            <Icon width="94" height="94" id={`Icon-${num + 1}-Hover`} />
+                            <Icon width="94" height="94" id={`Icon-${num + 1}-Active`} />
+                            <span set:html={item.label} />
+                        </div>
+                    </label>
+                    
                 </>
             )
         }
@@ -55,19 +27,34 @@ const constructionsLinksData = [
 </section>
 
 <style lang="scss" is:global>
-        .constructions-switch-wrap {
+    .constructions-switch-wrap {
         display: flex;
         flex-wrap: nowrap;
         gap: var(--global-gap);
         overflow-x: auto;
 
+        & input:checked + .construction-item {
+             span {
+                background: var(--color-orange);
+                color: var(--color-white);
+            }
+            & a {
+                text-decoration: none;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
     }
     .construction-item {
+        cursor: pointer;
         position: relative;
         display: flex;
         flex-direction: column;
         min-width: clamp(10rem, 9.5599rem + 1.8779vw, 11.25rem);
         width: clamp(10rem, 9.5599rem + 1.8779vw, 11.25rem);
+        height: 100%;
         & span {
             flex: 1;
             background: var(--color-gray-1);
@@ -77,17 +64,14 @@ const constructionsLinksData = [
             margin: -1.5em 0 0;
             z-index: 1;
             font-family: var(--font-family);
+            transition: var(--transition-default);
         }
 
-        &:not(.active):hover span {
+        &:hover span {
             background: var(--color-gray-4);
             color: var(--color-white);
         }
 
-        &.active span {
-            background: var(--color-orange);
-            color: var(--color-white);
-        }
         & a {
             text-decoration: none;
             &:hover {

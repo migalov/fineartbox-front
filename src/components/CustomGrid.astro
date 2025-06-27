@@ -1,8 +1,8 @@
 ---
-const {columns, classes} = Astro.props;
+const {columns, classes, margin} = Astro.props;
 ---
 
-<div class="fab-custom-grid" class:list={classes} style={`--grid-template-columns: repeat(${columns}, 1fr)`}>
+<div class="fab-custom-grid" class:list={classes} style={`--grid-template-columns: repeat(${columns}, 1fr); margin: ${margin}`}>
     <slot />
 </div>
 
@@ -10,6 +10,7 @@ const {columns, classes} = Astro.props;
     .fab-custom-grid {
         display: grid;
         gap: var(--global-gap);
+        margin: var(--margin)
         & figure {
             margin: 0;
             gap: .5rem!important;

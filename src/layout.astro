@@ -22,7 +22,7 @@ import Sprite from "./sprite.astro";
     <style lang="scss" is:global>
         
     body {
-        --width-page: 1440px;
+        --width-page: 1424px;
         --width-header: 14rem;
         --header-height: 84px;
         --global-template-columns: 1fr minmax(0, calc(var(--width-page) - var(--width-header))) var(--width-header) 1fr;
@@ -45,6 +45,7 @@ import Sprite from "./sprite.astro";
     }
     .content-html-source {
         grid-area: c;
+        margin-right: clamp(0rem, -1.714rem + 3.571vw, 1.5rem);
     }
     </style>
 </head>

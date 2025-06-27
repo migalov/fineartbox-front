@@ -112,6 +112,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
 
 <style lang="scss" is:global>
     .fab-header {
+        --padding-header-left: 1.5rem;
         display: flex;
         flex-direction: column;
         background-color: var(--color-white);
@@ -139,6 +140,13 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                 overflow-y: auto;
                 flex-direction: column;
             }
+        }
+
+        & :is(.fab-mobile-top, .fab-personal-account, .fab-header-contacts) {
+            @media (min-width: 768px) {
+                padding-left: var(--padding-header-left);
+            }
+            
         }
 
         @media (min-width: 768px) {
@@ -292,7 +300,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
         border-left: 1px solid var(--color-gray-2);
     }
     .fab-header-menu-lvl-1 {
-        --padding-level-one: 20px;
+        --padding-level-one: 1.2rem;
         padding: 1rem var(--padding-level-one) 0;
         flex: 1;
         overflow-y: auto;
@@ -343,12 +351,12 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
-                        left: calc( -1 * var(--padding-level-one));
+                        left: -1.5rem;
                         width: 14px;
                         height: 100%;
                         min-height: 2rem;
                         background: var(--color-orange);
-                        clip-path: polygon(100% 0, 100% calc(100% - 14px), 0 100%, 0% 14px);
+                        clip-path: polygon(0 0, 100% 14px, 100% 100%, 0 calc(100% - 14px));;
                     }
                 }
                 &:hover {
@@ -364,9 +372,10 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
             outline: none;
             border-top: 1px solid var(--color-gray-2);
             border-bottom: 0;
+            width: 100%;
         }
         @media (min-width: 768px) {
-            padding: 0 .5rem 0 var(--padding-level-one);
+            padding: 0 .5rem 0 1.5rem;
         }
     }
     .fab-header-menu-lvl-2 {
@@ -380,6 +389,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
         display: flex;
         flex-direction: column;
         row-gap: .25rem;
+        padding: 0;
         & > li {
             padding: 0 0 0 var(--padding-marker);
             position: relative;

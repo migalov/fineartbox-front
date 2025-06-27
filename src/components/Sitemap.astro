@@ -25,20 +25,20 @@ const mapSiteData = mapSite.data.Content;
                 mapSiteData.map( item => 
                     <>
                         <li style={`--grid-area: ${item.gridArea}`} data-label={item.label}>
-                            <span class="fab-sitemap-grid__title">{item.label}</span>
+                            <a href={item?.href ? item?.href.replace("https://fineartbox.ru", "") : ""} class="fab-sitemap-grid__title">{item.label}</a>
                             <ul class={`fab-sitemap-grid-block ${item.gridArea == "po" ? "fab-sitemap-grid-block-portfolio" : ""}`} style="margin-left: 1rem;">
                                 {
                                     item?.listsMenus?.map( _item => 
                                         <>
                                             <li>
-                                                <a href={_item?.href ? _item?.href : ""}>{_item.label}</a>
+                                                <a href={_item?.href ? _item?.href.replace("https://fineartbox.ru", "") : ""}>{_item.label}</a>
                                                 {
                                                     _item.itemsMenu.length > 0 &&
                                                     <ul class="fab-sitemap-grid-block-list" style="margin-left: 2rem;">
                                                         {
                                                             _item.itemsMenu.map( __item => 
                                                                 <li>
-                                                                    <a href={__item?.href ? __item?.href : ""} class={}>{__item.label}</a>
+                                                                    <a href={__item?.href ? __item?.href.replace("https://fineartbox.ru", "") : ""} class={}>{__item.label}</a>
                                                                 </li>
                                                             )
                                                         }
@@ -115,9 +115,14 @@ const mapSiteData = mapSite.data.Content;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             grid-template-areas:    "gp c"
                                     "gp p"
+                                    "gp pos"
+                                    "gp mgk"
+                                    "gp bo"
                                     "l f"
                                     "s cl"
-                                    "po po";
+                                    "po po"
+                                    "eq m"
+                                    "ot .";
             gap: var(--global-gap);
         }
     }

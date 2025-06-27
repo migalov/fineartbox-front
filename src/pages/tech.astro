@@ -1,8 +1,10 @@
 ---
 import CustomGrid from "../components/CustomGrid.astro";
 import OneHero from "../components/OneHero.astro";
+import SubscribeBlock from "../components/SubscribeBlock.astro";
 import TechDocs from "../components/TechDocs.astro";
 import Layout from "../layout.astro";
+import StaticPageSprite from "../sprites/StaticPagesSprite.astro";
 const Banner = {
     Banner: {
         backgoundDesktop: "https://static0.wow2print.com/storage/119/content/image/738713142685aa55cc44bf6.83154737.webp",
@@ -21,7 +23,7 @@ const Banner = {
                         <p>Технические требования к макетам полиграфической продукции доступны для скачивания на сайте в разделе «Подготовка макета».</p>
                         <p>Файлы представлены в популярных форматах (PDF, AI, CDR) и включают параметры обрезки, вылетов, цветовой модели и других требований.</p>
                     </CustomGrid>
-                    <CustomGrid columns="3">
+                    <CustomGrid columns="3" margin="0 2rem">
                         <TechDocs
                             title="Основные требования"
                             description="Как правильно сохранить файл для печати и в какой программе прислать."
@@ -49,6 +51,8 @@ const Banner = {
 
 
                 </section>
+                <SubscribeBlock />
         </div>
     </div>
+        <StaticPageSprite />
 </Layout>

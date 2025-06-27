@@ -38,9 +38,11 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
             }
         }
         @media (max-width:991.99px) {
-            grid-column: full-width;
             background-image: var(--background-image);
             height: 40vh;
+        }
+        @media (max-width: 767.99px) {
+            grid-column: full-width!important;
         }
 
     }

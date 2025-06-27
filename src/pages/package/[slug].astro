@@ -100,8 +100,18 @@ const pageData = landingPageData?.data[0];
            <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
             <OneHero {...pageData}  />
             <ConstructionLinks {slug} {...pageData} />
-            <Announce maxWidthBlock="58rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"  text={pageData.announce} />
-            <ReadyWorks {...pageData?.readyProjects[0]} />
+            <Announce
+                maxWidthBlock="58rem"
+                colorMark="var(--color-orange)"
+                marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"
+                text={pageData.announce}
+            />
+            <section>
+                <h2>Реализованные проекты</h2>
+                    <ReadyWorks {...pageData?.readyProjects[0]} id="1" />
+                    <ReadyWorks {...pageData?.readyProjects[1]} id="2" />
+            </section>
+
             <!-- <div class="fab-widgets">
                 {
                     pageData?.descriptions?.map( b => <>
@@ -165,27 +175,18 @@ const pageData = landingPageData?.data[0];
         font-family: var(--second-family);
         font-weight: 700;
         padding: .5em 2.7em;
-        //         &::before, &::after {
-        //     content: "";
-        //     position: absolute;
-        //     width: 0px;
-        //     height: 0px;
-        //     border-style: solid;
-        //     transform: rotate(0deg);
-        // }
-        // &::before {
-        //     border-width: 0 var(--triangle-width) var(--triangle-width) 0;
-        //     border-color: transparent var(--color-white) transparent transparent;
-        //     transform: rotate(90deg);
-        //     top: 0px;
-        //     left: calc(100% - 65px);
-        // }
-        // &::after {
-        //     border-width: 0 var(--triangle-width) var(--triangle-width) 0 ;
-        //     border-color: transparent var(--color-black) transparent transparent;
-        //     top: 0px;
-        //     left: calc(100% - 65px);
-        // }
-        // box-shadow: 0px 0px 1px 1px rgba(34, 60, 80, 1) inset;
     }
 </style>
+
+<script>
+    const projects = document.querySelectorAll(".fab-ready-works");
+    const hideProjects = () => {
+        
+    }
+
+    document.querySelectorAll(".constructions-switch input").forEach(input => {
+        input.addEventListener("click", (e) => {
+            console.log(e.target.id);
+        })
+    })
+</script>

@@ -1,9 +1,8 @@
 ---
-const {projectsList} = Astro.props;
+const {projectsList, id} = Astro.props;
 ---
 
-<section class="fab-ready-works">
-    <h2>Реализованные работы</h2>
+<section class="fab-ready-works" data-id={`construction-${id}`}>
     <div class="fab-ready-works-row fab-scrollbar">
         {
             projectsList?.map( project => 

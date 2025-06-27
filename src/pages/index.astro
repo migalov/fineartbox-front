@@ -15,6 +15,7 @@ import qs from "qs";
 import FAQSection from "../components/FAQ/FAQSection.astro";
 import SubscribeBlock from "../components/SubscribeBlock.astro";
 import Sandbox from "../sandbox.astro";
+import Victory from "../components/Victory.astro";
 
 const paramsPage = {
     populate: {
@@ -131,12 +132,21 @@ let dataServices = {
 <Layout title="Главная">
         <div class="content-grid">
             <Hero {...pageData} />
-            <Announce maxWidthBlock="42rem" widthMark="14px" heightMark="90px" colorMark="var(--color-orange)" marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)" text="FINEARTBOX — производство упаковки и полиграфические услуги в Москве" />
+            <Announce
+                maxWidthBlock="42rem"
+                widthMark="14px"
+                heightMark="90px"
+                colorMark="var(--color-orange)"
+                marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"
+                text="FINEARTBOX — производство упаковки и полиграфические услуги в Москве"
+                fontSize="1.5rem"
+                />
             <GridBannersType1 data={dataServices.data} />
             <FeaturesRoot />
             <GridBannersType1 data={dataOne.data} title={dataServices.title} />
             <DeadlineRoot />
             <StageWorkRoot />
+            <Victory />
             <div class="fab-widgets" style="">
                 <YandexWidget />
                 <BlogRoot />

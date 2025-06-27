@@ -1,9 +1,26 @@
 ---
 import Icon from "./Icon.astro";
+const {title, description} = Astro.props;
 ---
 
 <div class="fab-tech-doc">
-    <Icon id="arrow-download" />
-    <h2></h2>
-    <p></p>
+    <Icon id="arrow-download" width="16" height="16" id="arrow-download" />
+    <a href="#">{title}</a>
+    <p>{description}</p>
 </div>
+
+<style lang="scss" is:global>
+    .fab-tech-doc {
+        display: flex;
+        flex-direction: column;
+        & :is(a, p) {
+            font-size: 1rem;
+        }
+        & a {
+            margin: 1em 0 0;
+            color: var(--color-black);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+    }
+</style>
