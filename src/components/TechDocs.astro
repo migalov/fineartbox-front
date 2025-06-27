@@ -1,11 +1,11 @@
 ---
 import Icon from "./Icon.astro";
-const {title, description} = Astro.props;
+const {title, description, href} = Astro.props;
 ---
 
 <div class="fab-tech-doc">
     <Icon id="arrow-download" width="16" height="16" id="arrow-download" />
-    <a href="#">{title}</a>
+    <a href={href && href.replace("https://fineartbox.ru", "")}>{title}</a>
     <p>{description}</p>
 </div>
 

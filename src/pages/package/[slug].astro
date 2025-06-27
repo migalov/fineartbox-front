@@ -30,6 +30,7 @@ export function getStaticPaths() {
     { params: { slug: "books" }},
     { params: { slug: "paper-bags" }},
     { params: { slug: "cardboard" }},
+    { params: { slug: "test" }}
   ];
 }
 
@@ -41,41 +42,31 @@ const paramsPage = {
             $eq: slug
         }
     },
+
     populate: {
         Banner: {
             populate: "*"
         },
-        readyProjects: {
-            populate: "*"
-        },
-        descriptions: {
-            populate: "*"
-        },
-        cardsSection: {
-            populate: "*"
-        },
-        SEO: {
-            populate: "*"
-        },
-        filterConstructions: {
-            populate: "*"
+        packageTypes: {
+            populate: {
+                packages: {
+                    populate: "*"
+                }
+            }
         }
-	},
-    SVGSprite: {
-        populate: "*"
-    },
+    }
 };
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
 const pageData = landingPageData?.data[0];
 ---
-<code>
-<!-- {JSON.stringify(queryStringPage)} -->
-    
-</code>
+
 <Layout title={pageData.title}>
-    <script>
+    <!-- <code>
+{JSON.stringify(pageData)}
+</code> -->
+    <!-- <script>
 (function(w, d, s, o){
   var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
     if (document.readyState !== 'loading') Marquiz.init(o);
@@ -94,22 +85,26 @@ const pageData = landingPageData?.data[0];
     disableOnMobile: false
   }
 );
-</script>
-    <div class="content-grid">    
+</script> -->
+    <div class="content-grid">
+        <!-- <code>
+            {JSON.stringify(pageData.Banner)}
+        </code> -->
         <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
-           <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
-            <OneHero {...pageData}  />
+           <!-- <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
+             -->
+            <OneHero {...pageData} />
             <ConstructionLinks {slug} {...pageData} />
             <Announce
                 maxWidthBlock="58rem"
                 colorMark="var(--color-orange)"
                 marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"
-                text={pageData.announce}
+                text={pageData?.announce}
             />
             <section>
                 <h2>Реализованные проекты</h2>
-                    <ReadyWorks {...pageData?.readyProjects[0]} id="1" />
-                    <ReadyWorks {...pageData?.readyProjects[1]} id="2" />
+                    <!-- <ReadyWorks {...pageData?.readyProjects[0]} id="1" />
+                    <ReadyWorks {...pageData?.readyProjects[1]} id="2" /> -->
             </section>
 
             <!-- <div class="fab-widgets">
@@ -119,9 +114,9 @@ const pageData = landingPageData?.data[0];
                     </>)
                 }
             </div> -->
-            {
+            <!-- {
                 pageData?.cardsSection.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
-            }
+            } -->
             <DeadlineRoot />
             <StageWorkRoot />
             <!-- <SubscribeBlock status="default" /> -->
@@ -181,12 +176,13 @@ const pageData = landingPageData?.data[0];
 <script>
     const projects = document.querySelectorAll(".fab-ready-works");
     const hideProjects = () => {
-        
+        projects.forEach(project => project.style.display = "none")
     }
 
     document.querySelectorAll(".constructions-switch input").forEach(input => {
         input.addEventListener("click", (e) => {
-            console.log(e.target.id);
+            hideProjects()
+            document.querySelector(`[data-id=${e.target.id}]`).style.display = "";
         })
     })
 </script>
