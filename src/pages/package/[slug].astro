@@ -114,9 +114,9 @@ const pageData = landingPageData?.data[0];
                     </>)
                 }
             </div> -->
-            <!-- {
-                pageData?.cardsSection.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
-            } -->
+            {
+                pageData?.cardsSection?.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
+            }
             <DeadlineRoot />
             <StageWorkRoot />
             <!-- <SubscribeBlock status="default" /> -->

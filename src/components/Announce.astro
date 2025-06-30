@@ -3,8 +3,7 @@ import Mark from "./Mark.astro";
 const {maxWidthBlock, fontSize, marginBlock, text} = Astro.props;
 ---
 
-<div class="fab-announce" style={`--max-width: ${maxWidthBlock}; --margin-block: ${marginBlock}; --font-size: ${fontSize}`}>
-    <h2 set:html={text}></h2>
+<div class="fab-announce" style={`--max-width: ${maxWidthBlock}; --margin-block: ${marginBlock}; --font-size: ${fontSize}`} set:html={text}>
 </div>
 
 <style lang="scss" is:global>
