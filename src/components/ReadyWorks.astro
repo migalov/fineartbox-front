@@ -1,14 +1,22 @@
 ---
-const {projectsList, id} = Astro.props;
+const {projectsList, id, packages} = Astro.props;
+
 ---
 
-<section class="fab-ready-works" data-id={`construction-${id}`}>
+<!-- <code>
+    {JSON.stringify(packages)}
+</code> -->
+
+<section class="fab-ready-works" data-id={`construction-${id}`} style={id > 1 && `display: none`}>
     <div class="fab-ready-works-row fab-scrollbar">
         {
-            projectsList?.map( project => 
+            packages?.map( project => 
                 <a href={project.href}>
-                    <img src={project.src} alt="" />
+                    <img src={`${import.meta.env.HOST}${project.image.url ? project.image.url : project.srcAlternative}`} alt={project.title} />
                 </a>
+                // <>
+                //     {JSON.stringify(`${project.image.url}`)}
+                // </>
             )
         }
 

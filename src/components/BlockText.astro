@@ -1,15 +1,15 @@
 ---
-const {title, htmlContent} = Astro.props;
+const {processDescription, description} = Astro.props;
 ---
 
-<div class="fab-text" set:html={htmlContent}>
+<div class="fab-text" set:html={processDescription ? processDescription : description}>
     <!-- {JSON.stringify(title)} -->
 </div>
 
-<style lang="scss" is:global>
-    .fab-text {
+<!-- <style lang="scss" is:global>
+    .fab-block-package-description {
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
     }
-</style>
+</style> -->

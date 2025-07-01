@@ -53,9 +53,25 @@ const paramsPage = {
                     populate: "*"
                 }
             }
+        },
+        cardsSection: {
+            populate: "*"
         }
     }
 };
+
+import sanitizeHtml from 'sanitize-html';
+const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
+       allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
+       allowedAttributes: {
+        'a': ['href']
+       } // Разрешенные атрибуты
+   });
+   const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
+   const addNonBreakingSpace = (text) => {
+        return text.replace(prepositions, (match) => `${match}\u00A0`);
+   };
+
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
@@ -88,7 +104,7 @@ const pageData = landingPageData?.data[0];
 </script> -->
     <div class="content-grid">
         <!-- <code>
-            {JSON.stringify(pageData.Banner)}
+            {JSON.stringify(pageData.packageTypes)}
         </code> -->
         <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
            <!-- <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
@@ -103,23 +119,31 @@ const pageData = landingPageData?.data[0];
             />
             <section>
                 <h2>Реализованные проекты</h2>
-                    <!-- <ReadyWorks {...pageData?.readyProjects[0]} id="1" />
-                    <ReadyWorks {...pageData?.readyProjects[1]} id="2" /> -->
+                    {
+                        pageData?.packageTypes?.map( (packagesType, id) => 
+                            <>
+                                {
+                                    <ReadyWorks {...packagesType} id={id+1} />
+                                }
+                            </>
+                        )
+                    }
             </section>
 
-            <!-- <div class="fab-widgets">
+            <div class="fab-widgets">
                 {
-                    pageData?.descriptions?.map( b => <>
-                        <BlockText {...b} />
-                    </>)
+                    pageData?.packageTypes?.map( (packagesType, id) => 
+                        <div class="fab-block-package-description" style={id > 0 ? "display: none;" : ""} data-id={`construction-${id+1}`} set:html={cleanHtml(packagesType.description)}>
+                        </div>
+                    )
                 }
-            </div> -->
+                <div class="fab-block-package-description" set:html={cleanHtml(pageData.processDescription)}></div>
+            </div>
             {
                 pageData?.cardsSection?.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
             }
             <DeadlineRoot />
             <StageWorkRoot />
-            <!-- <SubscribeBlock status="default" /> -->
             <SEOBlock {...pageData?.SEO} />
 
 
@@ -147,6 +171,12 @@ const pageData = landingPageData?.data[0];
         font-size: 1.5rem;
         line-height: 1.5;
     }
+    .fab-block-package-description {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+</style>
 </style>
 
 <style lang="scss" is:global>
@@ -173,16 +203,21 @@ const pageData = landingPageData?.data[0];
     }
 </style>
 
-<script>
-    const projects = document.querySelectorAll(".fab-ready-works");
+<script is:inline>
+    const projects = document.querySelectorAll(".fab-ready-works, .fab-block-1");
     const hideProjects = () => {
         projects.forEach(project => project.style.display = "none")
     }
 
     document.querySelectorAll(".constructions-switch input").forEach(input => {
         input.addEventListener("click", (e) => {
-            hideProjects()
-            document.querySelector(`[data-id=${e.target.id}]`).style.display = "";
+            hideProjects();
+            document.querySelectorAll(`[data-id=${e.target.id}]`).forEach( block => {
+                block.style.display = "";
+                console.log(block.getAttribute("data-id"));
+                
+            })
+            
         })
     })
 </script>
