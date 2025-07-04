@@ -13,7 +13,7 @@ const { Slider } = Astro.props;
                       <picture>
                         <source srcset={item.backgoundDesktop} media="(max-width: 767.99px)" />
                         <source srcset={item.backgroundMobile} media="(min-width: 768)" />
-                        <img src={item.backgoundDesktop} alt="Абстрактное изображение" />
+                        <img src={item.backgoundDesktop} alt="" />
                       </picture>
                       <figcaption>
                         <h2 set:html={item.title}></h2>
@@ -50,6 +50,8 @@ const { Slider } = Astro.props;
         max-width: 35rem;
         & h2 {
           font-size: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
+          font-family: var(--second-family);
+          font-weight: 700;
         }
         & p {
           font-size: .85rem;

@@ -1,29 +1,44 @@
 ---
-const { Banner } = Astro.props;
+const { Banner, slide, classes, dataId, style, hidden } = Astro.props;
 
 
 import sanitizeHtml from 'sanitize-html';
+import replaceSpacesAfterPrepositions from '../scripts/words';
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
-       allowedTags: ['p', 'h1', 'h2' ,'br'], // Разрешенные теги
+       allowedTags: ['p', 'h1', 'h2' ,'br', 'strong'], // Разрешенные теги
        allowedAttributes: {
         'span': [ 'style' ],
-        'a': ['href']
+        'a': ['href'],
+        'p': ['class'],
+        'strong': ['class']
        } // Разрешенные атрибуты
    });
    const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
-   const addNonBreakingSpace = (text) => {
-        return text.replace(prepositions, (match) => `${match}\u00A0`);
-   };
----
-<!-- <code>
-    {JSON.stringify(Banner)}
-</code> -->
 
-<section class="fab-hero-package" style={`--background-image: url(${Banner?.backgroundMobile})`}>
+
+let textBanner = slide?.htmlContent;
+let newTextBanner = textBanner
+  .replace('<h1>', '<strong class="h1">')
+  .replace('</h1>', '</strong>')
+  .replace('<h2>', '<strong class="h2">')
+  .replace('</h2>', '</strong>')
+  .replace('<p>&nbsp;</p>', '');
+---
+{
+  Banner && <section class:list={["fab-hero-package", classes]} style={`--background-image: url(${Banner?.backgroundMobile})`}>
     <img src={Banner?.backgoundDesktop} alt="" />
     <div class="fab-hero-package__text" set:html={cleanHtml(Banner?.htmlContent)}>
     </div>
 </section>
+}
+{
+  slide &&
+  <section hidden={hidden} style={`--background-image: url(${slide?.backgroundMobile}); ${style}`} data-id={dataId} class:list={["fab-hero-package"]}>
+    <img src={slide?.backgoundDesktop} alt="" />
+    <div class="fab-hero-package__text" set:html={replaceSpacesAfterPrepositions(cleanHtml(newTextBanner))}>
+    </div>
+</section>
+}
 
 <style lang="scss" is:global>
     .fab-hero-package {
@@ -54,21 +69,28 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
         display: flex;
         flex-direction: column;
         row-gap: .7rem;
-        padding: .7rem .7rem 1rem;
+        padding: .7rem .7rem 1rem!important;
         position: absolute;
         left: 4rem;
         top: 50%;
-        max-width: 60vw;
+        // max-width: 60vw;
 
-        & h1 {
-          font-size: clamp(2.25rem, 1.6338rem + 2.6291vw, 4rem);
+        & .h1 {
+          font-size: clamp(2.25rem, 1.6338rem + 2.6291vw, 3rem);
+          font-weight: 700;
         }
         & p {
           font-size: .85rem;
+          width: min(500px, 50%);
           @media (min-width: 768px) {
             font-size: 1rem;
             font-weight: 400;
           }
+        }
+
+        & .h2 {
+          font-family: var(--second-family);
+          font-weight: 700;
         }
 
         @media (min-width: 768px) {
@@ -78,7 +100,7 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 
         @media (min-width: 992px) {
             transform: translateY(-50%);
-            max-width: 24rem;
+            // max-width: 24rem;
         }
 
         @media (max-width: 991.99px) {

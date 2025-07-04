@@ -18,19 +18,20 @@ import SubscribeBlock from "../../components/SubscribeBlock.astro";
 import AccordeonCards from "../../components/AccordeonBlock/AccordeonCards.astro";
 import OneHero from "../../components/OneHero.astro";
 
+import replaceSpacesAfterPrepositions from "../../scripts/words";
+
 export function getStaticPaths() {
   return [
-    { params: { slug: "krishka-dno" }},
-    { params: { slug: "magnet-print" }},
-    { params: { slug: "penal" }},
-    { params: { slug: "transformer" }},
-    { params: { slug: "advent" }},
-    { params: { slug: "board-game" }},
-    { params: { slug: "suitcase" }},
-    { params: { slug: "books" }},
-    { params: { slug: "paper-bags" }},
-    { params: { slug: "cardboard" }},
-    { params: { slug: "test" }}
+    { params: { slug: "box-cover-bottom-laminated" }},
+    { params: { slug: "box-on-the-magnet-laminated" }},
+    { params: { slug: "box-pencil-box" }},
+    { params: { slug: "box-transformer" }},
+    { params: { slug: "advent-package" }},
+    { params: { slug: "boardgame" }},
+    { params: { slug: "box-suitcase" }},
+    { params: { slug: "kofr" }},
+    { params: { slug: "packages" }},
+    { params: { slug: "box-cover-bottom-cardboard" }}
   ];
 }
 
@@ -65,16 +66,18 @@ const paramsPage = {
 
 import sanitizeHtml from 'sanitize-html';
 import Hero from "../../components/Hero.astro";
+import Empty from "../../layouts/Empty.astro";
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
        allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
        allowedAttributes: {
         'a': ['href']
        } // Разрешенные атрибуты
    });
-   const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
-   const addNonBreakingSpace = (text) => {
-        return text.replace(prepositions, (match) => `${match}\u00A0`);
-   };
+
+// const prepositions = ['в', 'на', 'с', 'к', 'по', 'из', 'от', 'для']; // Добавьте нужные предлоги
+// const conjunctions = ['и', 'да', 'или', 'но']; // Добавьте нужные союзы
+// // Создаем регулярное выражение из массива, убирая пробел перед предлогом
+// const regex = new RegExp(`(${prepositions.join('|')})\\s+|(${conjunctions.join('|')})\\s+`, 'g');
 
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
@@ -83,10 +86,7 @@ const pageData = landingPageData?.data[0];
 ---
 
 <Layout title={pageData.title}>
-    <!-- <code>
-{JSON.stringify(pageData)}
-</code> -->
-    <!-- <script>
+<!-- <script>
 (function(w, d, s, o){
   var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
     if (document.readyState !== 'loading') Marquiz.init(o);
@@ -106,24 +106,26 @@ const pageData = landingPageData?.data[0];
   }
 );
 </script> -->
+<div class="fab-page">
+        <h1 class="visually-hidden">{pageData.title}</h1>
     <div class="content-grid">
-        <!-- <code>
-            {JSON.stringify(pageData.packageTypes)}
-        </code> -->
-        <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
-           <!-- <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
+
+        <!-- <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
+           <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
              -->
-             {
-                pageData?.packageTypes?.map(packageType => {
-                    <code>1</code>
-                })
-             }
+            {
+                pageData?.packageTypes?.map( (packagesType, id) =>
+                    <>
+                        <OneHero hidden={id > 0 ? true : false } dataId={`construction-${id+1}`} {...packagesType} />
+                    </>
+                )
+            }
             <ConstructionLinks {slug} {...pageData} />
             <Announce
                 maxWidthBlock={pageData.announceMaxWidth}
                 colorMark="var(--color-orange)"
-                marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"
-                text={pageData?.announce}
+                marginBlock="0 auto"
+                text={replaceSpacesAfterPrepositions(cleanHtml(pageData?.announce))}
             />
             <section>
                 <h2>Реализованные проекты</h2>
@@ -141,9 +143,9 @@ const pageData = landingPageData?.data[0];
             <div class="fab-widgets">
                 {
                     pageData?.packageTypes?.map( (packagesType, id) => 
-                        <div class="fab-block-package-description" style={id > 0 ? "display: none;" : ""} data-id={`construction-${id+1}`} set:html={cleanHtml(packagesType.descriptionTypePackage)}>
+                        <div class="fab-block-package-description" hidden={id > 0 ? true : false} data-id={`construction-${id+1}`} set:html={replaceSpacesAfterPrepositions(cleanHtml(packagesType.descriptionTypePackage))}>
                         </div>
-                        <div class="fab-block-package-description" style={id > 0 ? "display: none;" : ""} data-id={`construction-${id+1}`} set:html={cleanHtml(`<h2>Как происходить процесс</h2>${packagesType.descriptionProcess}`)}>
+                        <div class="fab-block-package-description" hidden={id > 0 ? true : false} data-id={`construction-${id+1}`} set:html={replaceSpacesAfterPrepositions(cleanHtml(`<h2>Как происходит процесс</h2>${packagesType.descriptionProcess}`))}>
                         </div>
                     )
                 }
@@ -159,6 +161,8 @@ const pageData = landingPageData?.data[0];
 
 </div>
             <div set:html={pageData?.SVGSprite}></div>
+</div>
+
 </Layout>
 
 
@@ -170,7 +174,7 @@ const pageData = landingPageData?.data[0];
 		@media (min-width: 992px) {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			gap: var(--global-gap);
+			gap: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
 		}
 	}
     .fab-announce h2 {
@@ -208,20 +212,17 @@ const pageData = landingPageData?.data[0];
 </style>
 
 <script is:inline>
-    const projects = document.querySelectorAll(".fab-ready-works, .fab-block-package-description[data-id]");
-    const hideProjects = () => {
-        projects.forEach(project => project.style.display = "none")
-    }
-
-    document.querySelectorAll(".constructions-switch input").forEach(input => {
-        input.addEventListener("click", (e) => {
-            hideProjects();
-            document.querySelectorAll(`[data-id=${e.target.id}]`).forEach( block => {
-                block.style.display = "";
-                console.log(block.getAttribute("data-id"));
-                
-            })
-            
-        })
-    })
+  const projects = document.querySelectorAll(`[data-id*=construction]`);
+  const hideProjects = () => {
+    projects.forEach((project) => (project.hidden = true));
+  };
+  document.querySelectorAll(".constructions-switch input").forEach((input) => {
+    input.addEventListener("click", (e) => {
+      hideProjects();
+      document.querySelectorAll(`[data-id=${e.target.id}]`).forEach((block) => {
+        block.hidden = false;
+        console.log(block.getAttribute("data-id"));
+      });
+    });
+  });
 </script>

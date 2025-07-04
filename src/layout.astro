@@ -60,6 +60,28 @@ import Sprite from "./sprite.astro";
     <Footer />
     <!-- <Footer /> -->
     <Sprite />
+    <script>
+	const imageObserver = new IntersectionObserver(
+		(entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					if(entry.target.hasAttribute("data-src")) {
+						entry.target.src = entry.target.dataset.src;
+						observer.unobserve(entry.target)
+					}
+					if(entry.target.hasAttribute("data-bg-src")) {
+						entry.target.style.backgroundImage = `url('${entry.target.dataset.bgSrc}')`;
+						observer.unobserve(entry.target);
+					}
+				}
+			})
+		},
+		{
+			rootMargin: "0px"
+		}
+	)
+	document.querySelectorAll("div, img, a, iframe, li").forEach((image) => imageObserver.observe(image));
+</script>
 
 </body>
 </html>

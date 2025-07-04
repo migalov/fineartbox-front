@@ -64,7 +64,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                 <>
                     <li>
                         
-                        <a href={item?.href?.replace("https://fineartbox.ru/", "")} class={`${item?.active ? "active" : ""}`}>
+                        <a href={item?.href?.replace("https://fineartbox.ru", "")} class={`${item?.active ? "active" : ""}`}>
                             <span>{item.label}</span>
                         </a>
                         {
@@ -74,7 +74,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                                 item.itemsMenu.map( (_item, _id) => 
                                     <>
                                         <li>
-                                            <a href={_item?.href?.replace("https://fineartbox.ru/", "")}  class={`${_item?.active ? "active" : ""}`}>{_item.label}</a>
+                                            <a href={_item?.href?.replace("https://fineartbox.ru", "")}  class={`${_item?.active ? "active" : ""}`}>{_item.label}</a>
                                         </li>
                                     </>
                                 )
@@ -502,4 +502,12 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
     window.addEventListener("load", movingBlockOptions);
     window.addEventListener("resize", movingBlockOptions);
     window.addEventListener("DOMContentLoaded", movingBlockOptions);
+</script>
+
+<script is:inline>
+document.querySelectorAll(".fab-header-menu-lvl-1 a").forEach(link => {
+    if (document.location.href == link.href) {
+       link.classList.add("active");
+    }
+});
 </script>

@@ -2,16 +2,11 @@
 const {projectsList, id, packages} = Astro.props;
 
 ---
-
-<!-- <code>
-    {JSON.stringify(packages)}
-</code> -->
-
-<section class="fab-ready-works" data-id={`construction-${id}`} style={id > 1 && `display: none`}>
+<section class="fab-ready-works" data-id={`construction-${id}`} hidden={id > 1 ? true : false}>
     <div class="fab-ready-works-row fab-scrollbar">
         {
             packages?.map( project => 
-                <a href={project.href}>
+                <a href={project.href.replace("https://fineartbox.ru", "")}>
                     <img src={`${project?.image?.url ? `${import.meta.env.HOST}${project?.image?.url}` : (project?.srcAlternative ? project?.srcAlternative : "/no-image.jpg")}`} alt={project?.title} />
                 </a>
                 // <>

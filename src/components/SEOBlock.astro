@@ -1,6 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 const {columnOne, columnTwo} = Astro.props;
+import replaceSpacesAfterPrepositions from "../scripts/words";
 
 
 import sanitizeHtml from 'sanitize-html';
@@ -20,8 +21,8 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 
 <div class="fab-seo-block">
     <div class="fab-seo-block-wrap">
-        <div class="fab-seo-block-column" set:html={cleanHtml(columnOne)} />
-        <div class="fab-seo-block-column" set:html={cleanHtml(columnTwo)} />
+        <div class="fab-seo-block-column" set:html={replaceSpacesAfterPrepositions(cleanHtml(columnOne))} />
+        <div class="fab-seo-block-column" set:html={replaceSpacesAfterPrepositions(cleanHtml(columnTwo))} />
     </div>
     <label class="fab-seo-toggle" for="seo-toggle">
         <input hidden type="checkbox" name="" id="seo-toggle">

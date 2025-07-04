@@ -1,6 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 const {slug, filterConstructions, packageTypes} = Astro.props;
+import replaceSpacesAfterPrepositions from "../scripts/words";
 ---
 <!-- <code>
     {JSON.stringify(packageTypes)}
@@ -46,7 +47,16 @@ const {slug, filterConstructions, packageTypes} = Astro.props;
                     text-decoration: none;
                 }
             }
+            & svg {
+                &:nth-child(1), &:nth-child(2) {
+                    display: none;
+                }
+                &:nth-child(3) {
+                    display: block;
+                }
+            }
         }
+
 
     }
     .construction-item {
@@ -110,20 +120,5 @@ const {slug, filterConstructions, packageTypes} = Astro.props;
                 }
             }
         }
-
-        &:not(.active):hover svg {
-            // opacity: .85;
-        }
-
-        &.active svg {
-            &:nth-child(1), &:nth-child(2) {
-                display: none;
-            }
-            &:nth-child(3) {
-                display: block;
-            }
-        }
-
-
     }
 </style>
