@@ -12,7 +12,7 @@ const {projectsList, id, packages} = Astro.props;
         {
             packages?.map( project => 
                 <a href={project.href}>
-                    <img src={`${import.meta.env.HOST}${project.image.url ? project.image.url : project.srcAlternative}`} alt={project.title} />
+                    <img src={`${project?.image?.url ? `${import.meta.env.HOST}${project?.image?.url}` : (project?.srcAlternative ? project?.srcAlternative : "/no-image.jpg")}`} alt={project?.title} />
                 </a>
                 // <>
                 //     {JSON.stringify(`${project.image.url}`)}
@@ -28,16 +28,26 @@ const {projectsList, id, packages} = Astro.props;
         display: flex;
         flex-direction: row;
         column-gap: 1.5rem;
+        overflow-x: auto;
 
         & a {
             display: block;
-            flex: 1;
+            // flex: 1;
+            min-width: clamp(12.5rem, 10.3571rem + 10.7143vw, 20rem);
+            width: clamp(12.5rem, 10.3571rem + 10.7143vw, 20rem);
         }
         & img {
 
             aspect-ratio: 1/1;
+            width: 100%;
             @media (max-width: 991.92px) {
-                min-width: clamp(12.5rem, 10.3571rem + 10.7143vw, 20rem);
+
+            }
+
+            &[src="/no-image"] {
+                // object-fit: cover;
+                // width: 100%;
+                // height: 100%;
             }
         }
     }

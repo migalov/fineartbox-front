@@ -44,23 +44,27 @@ const paramsPage = {
     },
 
     populate: {
-        Banner: {
-            populate: "*"
-        },
         packageTypes: {
             populate: {
                 packages: {
+                    populate: "*"
+                },
+                slide: {
                     populate: "*"
                 }
             }
         },
         cardsSection: {
             populate: "*"
+        },
+        SEO: {
+            populate: "*"
         }
     }
 };
 
 import sanitizeHtml from 'sanitize-html';
+import Hero from "../../components/Hero.astro";
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
        allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
        allowedAttributes: {
@@ -109,10 +113,14 @@ const pageData = landingPageData?.data[0];
         <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
            <!-- <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
              -->
-            <OneHero {...pageData} />
+             {
+                pageData?.packageTypes?.map(packageType => {
+                    <code>1</code>
+                })
+             }
             <ConstructionLinks {slug} {...pageData} />
             <Announce
-                maxWidthBlock="58rem"
+                maxWidthBlock={pageData.announceMaxWidth}
                 colorMark="var(--color-orange)"
                 marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"
                 text={pageData?.announce}
@@ -133,11 +141,13 @@ const pageData = landingPageData?.data[0];
             <div class="fab-widgets">
                 {
                     pageData?.packageTypes?.map( (packagesType, id) => 
-                        <div class="fab-block-package-description" style={id > 0 ? "display: none;" : ""} data-id={`construction-${id+1}`} set:html={cleanHtml(packagesType.description)}>
+                        <div class="fab-block-package-description" style={id > 0 ? "display: none;" : ""} data-id={`construction-${id+1}`} set:html={cleanHtml(packagesType.descriptionTypePackage)}>
+                        </div>
+                        <div class="fab-block-package-description" style={id > 0 ? "display: none;" : ""} data-id={`construction-${id+1}`} set:html={cleanHtml(`<h2>Как происходить процесс</h2>${packagesType.descriptionProcess}`)}>
                         </div>
                     )
                 }
-                <div class="fab-block-package-description" set:html={cleanHtml(pageData.processDescription)}></div>
+                <!-- <div class="fab-block-package-description" set:html={cleanHtml(pageData.processDescription)}></div> -->
             </div>
             {
                 pageData?.cardsSection?.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
@@ -163,10 +173,6 @@ const pageData = landingPageData?.data[0];
 			gap: var(--global-gap);
 		}
 	}
-    .fab-announce {
-        margin: 0 auto!important;
-        max-width: 34rem!important;
-    }
     .fab-announce h2 {
         font-size: 1.5rem;
         line-height: 1.5;
@@ -177,8 +183,6 @@ const pageData = landingPageData?.data[0];
         row-gap: 1rem;
     }
 </style>
-</style>
-
 <style lang="scss" is:global>
     .marquiz__container {
         --triangle-width: 64px;
@@ -204,7 +208,7 @@ const pageData = landingPageData?.data[0];
 </style>
 
 <script is:inline>
-    const projects = document.querySelectorAll(".fab-ready-works, .fab-block-1");
+    const projects = document.querySelectorAll(".fab-ready-works, .fab-block-package-description[data-id]");
     const hideProjects = () => {
         projects.forEach(project => project.style.display = "none")
     }

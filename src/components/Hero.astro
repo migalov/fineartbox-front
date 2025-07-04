@@ -1,5 +1,5 @@
 ---
-const { Slider } = Astro.props;
+const { Slider, packageTypes } = Astro.props;
 ---
 <section class="fab-hero splide" aria-label="Splide Basic HTML Example">
     <div class="splide__track">
@@ -12,7 +12,7 @@ const { Slider } = Astro.props;
                     <picture>
                       <source srcset={slide.backgroundMobile} media="(max-width: 767.99px)" />
                       <source srcset={slide.backgoundDesktop} media="(min-width: 768)" />
-                      <img src={slide.backgoundDesktop} alt="Абстрактное изображение" />
+                      <img src={slide.backgoundDesktop} alt="" />
                     </picture>
                     <figcaption>
                         <h2 set:html={slide.title} />
