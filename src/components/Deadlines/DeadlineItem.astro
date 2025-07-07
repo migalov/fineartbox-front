@@ -24,12 +24,21 @@ const { number, text } = Astro.props
     .cb-deadline-number {
         font-family: var(--second-family);
         font-weight: 700;
-        font-size: clamp(4.5rem, 4.0599rem + 1.8779vw, 5.75rem);
+        font-size: clamp(4.5rem, 4.0599rem + 1.8779vw, 5rem);
         color: var(--color-orange);
         line-height: .9;
+
+        & h3 {
+            font-size: 1rem;
+
+        }
         
     }
     .cb-deadline-about {
-
+        
+        & h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
     }
 </style>
