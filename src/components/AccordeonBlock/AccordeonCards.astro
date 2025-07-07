@@ -6,7 +6,7 @@ const {title, cardsList, id, num} = Astro.props
 
 <div class="fab-accordeon-cards">
     {
-        num == 0 ? <input hidden type="checkbox" checked id={`accordeon-${id}`} /> : <input hidden type="checkbox" id={`accordeon-${id}`} />
+        <input hidden type="checkbox" id={`accordeon-${id}`} />
     }
     
     <label for={`accordeon-${id}`}>
@@ -64,6 +64,7 @@ const {title, cardsList, id, num} = Astro.props
         gap: var(--global-gap);
         overflow-x: auto;
         overflow-y: hidden;
+        scroll-snap-type: x mandatory;
         @media (min-width: 992px) {
             display: grid;
             grid-template-columns: repeat(3, 1fr);

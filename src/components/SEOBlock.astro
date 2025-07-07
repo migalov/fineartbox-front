@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-const {columnOne, columnTwo} = Astro.props;
+const {columnOne, columnTwo, id, hidden} = Astro.props;
 import replaceSpacesAfterPrepositions from "../scripts/words";
 
 
@@ -18,8 +18,8 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 
 
 ---
-
-<div class="fab-seo-block">
+<!-- <div class:list={["fab-seo-block"]}> -->
+<div class:list={["fab-seo-block"]} data-id={`construction-${id+1}`} hidden={hidden}>
     <div class="fab-seo-block-wrap">
         <div class="fab-seo-block-column" set:html={replaceSpacesAfterPrepositions(cleanHtml(columnOne))} />
         <div class="fab-seo-block-column" set:html={replaceSpacesAfterPrepositions(cleanHtml(columnTwo))} />

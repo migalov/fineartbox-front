@@ -8,12 +8,12 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
 </code> -->
 <section class="constructions-switch">
     <h2>Виды конструкций</h2>
-    <div class="constructions-switch-wrap">
+    <div class="constructions-switch-wrap fab-scrollbar">
         {
             packageTypes?.map( (item, num) =>
                 <>
                     <label for={`construction-${num+1}`}>
-                        <input type="radio" id={`construction-${num+1}`} name={`construction`} value={item.slug} checked={num == 0 && "checked"} hidden />
+                        <input data-tag={item?.tag} type="radio" id={`construction-${num+1}`} name={`construction`} value={item.slug} checked={num == 0 && "checked"} hidden />
                         <div data-tab={item.slug ? item.slug : "#"} class={`construction-item`}>
                             <Icon width="94" height="94" id={`Icon-${num + 1}-Unselected`} />
                             <Icon width="94" height="94" id={`Icon-${num + 1}-Hover`} />
@@ -122,3 +122,26 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
         }
     }
 </style>
+
+<script>
+    document.querySelectorAll(`.constructions-switch-wrap input`).forEach( label => {
+        label.addEventListener("click", () => {
+            console.log(label.getAttribute("data-tag"));
+            label.closest("section").scrollIntoView();
+            window.location.hash = label.getAttribute("data-tag");
+        })
+    })
+</script>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        if (window.location.hash) {
+            document.querySelectorAll(".constructions-switch input").forEach( el => {
+                // console.log(el?.getAttribute("data-tag"));
+                if (`#${el?.getAttribute("data-tag")}` == window.location.hash) {
+                    el.click();
+                }
+            })
+        }
+    });
+</script>

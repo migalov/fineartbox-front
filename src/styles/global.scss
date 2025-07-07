@@ -47,6 +47,7 @@
 html, body {
     font: var(--size-body)/1.375 var(--font-family);
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 img {
@@ -130,12 +131,16 @@ a:has( svg) {
 }
 
 .fab-scrollbar {
+    scroll-snap-type: x mandatory;
     @media (max-width: 991.99px) {
         display: flex!important;
         flex-direction: row;
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: flex-start!important;
+    }
+    & > * {
+        scroll-snap-align: start;
     }
 
 }

@@ -15,6 +15,7 @@ const { src, title, description, num } = Astro.props;
 <style lang="scss" is:global>
     .cb-fab-card {
         // width: clamp(12.5rem, 11.3571rem + 5.7143vw, 16.5rem);
+        scroll-snap-align: start;
         display: flex;
         flex-direction: column;
         & h3 {

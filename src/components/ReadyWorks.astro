@@ -19,6 +19,9 @@ const {projectsList, id, packages} = Astro.props;
 </section>
 
 <style lang="scss">
+    // section:has( .fab-ready-works:not([hidden]) a) {
+    //     display: none;
+    // }
     .fab-ready-works-row {
         display: flex;
         flex-direction: row;
@@ -47,3 +50,9 @@ const {projectsList, id, packages} = Astro.props;
         }
     }
 </style>
+
+<script>
+      const toggleVisibleSection = () => {
+        let section = document.querySelector(".fab-reay-works-section");
+    }
+</script>

@@ -52,6 +52,9 @@ const paramsPage = {
                 },
                 slide: {
                     populate: "*"
+                },
+                SEO: {
+                    populate: "*"
                 }
             }
         },
@@ -127,7 +130,7 @@ const pageData = landingPageData?.data[0];
                 marginBlock="0 auto"
                 text={replaceSpacesAfterPrepositions(cleanHtml(pageData?.announce))}
             />
-            <section>
+            <section class="fab-ready-works-section">
                 <h2>Реализованные проекты</h2>
                     {
                         pageData?.packageTypes?.map( (packagesType, id) => 
@@ -140,6 +143,9 @@ const pageData = landingPageData?.data[0];
                     }
             </section>
 
+        
+
+
             <div class="fab-widgets">
                 {
                     pageData?.packageTypes?.map( (packagesType, id) => 
@@ -151,12 +157,33 @@ const pageData = landingPageData?.data[0];
                 }
                 <!-- <div class="fab-block-package-description" set:html={cleanHtml(pageData.processDescription)}></div> -->
             </div>
+            <DeadlineRoot />
+            <StageWorkRoot />
             {
                 pageData?.cardsSection?.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
             }
-            <DeadlineRoot />
-            <StageWorkRoot />
-            <SEOBlock {...pageData?.SEO} />
+
+            <!-- {
+                pageData?.packageTypes?.map( (packagesType, id) =>
+                    <SEOBlock {...packagesType?.SEO} id={id} />
+                )
+            } -->
+                {
+                    pageData?.SEO?.columnOne && <SEOBlock {...pageData?.SEO} />
+                }
+                {
+                    pageData?.packageTypes?.map( (packagesType, id, hidden) =>
+                        <>
+                            {
+                                packagesType?.SEO && <SEOBlock {...packagesType?.SEO} hidden={id > 0 ? true : false} id={id} />
+                            }
+                        </>
+   
+                    )
+                }
+            
+
+            
 
 
 </div>
@@ -212,17 +239,25 @@ const pageData = landingPageData?.data[0];
 </style>
 
 <script is:inline>
-  const projects = document.querySelectorAll(`[data-id*=construction]`);
+  const projectsList = document.querySelectorAll(`[data-id*=construction]`);
+  const hideSection = (numProjects) => {
+    let projectsSection = document.querySelector(".fab-ready-works-section");
+    numProjects >= 0 && (projectsSection.style.display = "")
+    numProjects == 0 && (projectsSection.style.display = "none")
+  }
   const hideProjects = () => {
-    projects.forEach((project) => (project.hidden = true));
+    projectsList.forEach((project) => (project.hidden = true));
   };
   document.querySelectorAll(".constructions-switch input").forEach((input) => {
+
+    let id = "";
     input.addEventListener("click", (e) => {
       hideProjects();
       document.querySelectorAll(`[data-id=${e.target.id}]`).forEach((block) => {
         block.hidden = false;
-        console.log(block.getAttribute("data-id"));
+        id = e.target.id;
       });
+      hideSection(document.querySelectorAll(`.fab-ready-works[data-id=${id}] a`).length);
     });
   });
 </script>

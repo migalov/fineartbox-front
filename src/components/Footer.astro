@@ -45,6 +45,7 @@ import Sitemap from "./Sitemap.astro";
         grid-area: f;
         display: grid;
         padding: 2rem clamp(1.7rem, 0.6479rem + 1.3146vw, 2rem);
+        margin: 0 1.5rem 0 0;
         gap: calc(0.3 * var(--global-gap));
         grid-template-areas: "cop net"
                              "leg leg";
@@ -95,8 +96,10 @@ import Sitemap from "./Sitemap.astro";
 
     .fab-footer-menu {
         flex-wrap: wrap;
+        padding: 0;
         @media (max-width:797.99px) {
             display: none!important;
+            margin: 0;
         }
     }
 

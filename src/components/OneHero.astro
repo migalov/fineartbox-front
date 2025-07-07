@@ -18,11 +18,11 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 
 let textBanner = slide?.htmlContent;
 let newTextBanner = textBanner
-  .replace('<h1>', '<strong class="h1">')
-  .replace('</h1>', '</strong>')
-  .replace('<h2>', '<strong class="h2">')
-  .replace('</h2>', '</strong>')
-  .replace('<p>&nbsp;</p>', '');
+  ?.replace('<h1>', '<strong class="h1">')
+  ?.replace('</h1>', '</strong>')
+  ?.replace('<h2>', '<strong class="h2">')
+  ?.replace('</h2>', '</strong>')
+  ?.replace('<p>&nbsp;</p>', '');
 ---
 {
   Banner && <section class:list={["fab-hero-package", classes]} style={`--background-image: url(${Banner?.backgroundMobile})`}>

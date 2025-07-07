@@ -358,6 +358,9 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
                         background: var(--color-orange);
                         clip-path: polygon(0 0, 100% 14px, 100% 100%, 0 calc(100% - 14px));;
                     }
+                    & + .fab-header-menu-lvl-2 {
+                        display: flex;
+                    }
                 }
                 &:hover {
                     font-weight: 700;
@@ -491,7 +494,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
     let buttonAccount = document.querySelector(".fab-personal-account");
     let blockOptions = document.querySelector(".fab-personal-account-options");
     const movingBlockOptions = () => {
-        console.log(blockOptions);
+        // console.log(blockOptions);
         
         if (window.innerWidth > 1440) {
             blockOptions.style.left = `${buttonAccount.getBoundingClientRect()}px`;
