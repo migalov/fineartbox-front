@@ -3,6 +3,9 @@
         <a href="#sitemap" onclick="document.querySelector('.fab-sitemap')?.classList?.toggle('fab-sitemap--show');" class="link--gray">Карта сайта</a>
     </li>
     <li>
+        <a class="link--gray" href="/fab_dogovor-ofert-td.pdf">Договор оферты</a>
+    </li>
+    <li>
         <a href="/agreement" class="link--gray">Политика конфиденциальности</a>
     </li>
 </ul>
@@ -10,10 +13,14 @@
 
 <style lang="scss">
     .fab-legacy-content {
-        gap: 1.5rem;
+        padding: 0;
+        column-gap: 1.5rem;
+        row-gap: .5rem;
         justify-content: space-between;
+        flex-direction: column;
         @media (min-width: 768px) {
             justify-content: flex-end;
+            flex-direction: row;
         }
     }
 </style>

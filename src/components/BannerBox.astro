@@ -1,14 +1,14 @@
 ---
-import Icon from "../Icon.astro";
+import Icon from "./Icon.astro";
 
-const {columns, backgroundDefault, title} = Astro.props;
+const {columns, backgroundDefault, title, href} = Astro.props;
 ---
 
 
     {
         backgroundDefault && 
 
-        <div class="fab-box-banner" style={`
+        <a href={href} class="fab-box-banner" style={`
             --background-color: ${!backgroundDefault && "var(--color-orange)"};
             --background-default: url('${backgroundDefault}');
             --background-hover: url('/img/Announce-Box-hover.jpg');
@@ -19,9 +19,8 @@ const {columns, backgroundDefault, title} = Astro.props;
         </div>
         <div class="fab-box-banner__shadow">
             <h3>{title}</h3>
-            <p>Текстовое описание</p>
         </div>
-        </div>
+        </a>
     }
     {
         !backgroundDefault &&
@@ -35,7 +34,7 @@ const {columns, backgroundDefault, title} = Astro.props;
     
 
 
-<style lang="scss" scoped>
+<style lang="scss" is:global>
     .fab-box-banner {
         position: relative;
         overflow: hidden;
@@ -46,10 +45,11 @@ const {columns, backgroundDefault, title} = Astro.props;
         flex-direction: column;
         justify-content: flex-end;
         color: var(--color-white);
-        // aspect-ratio: var(--columns) / 1;
 
         &:hover {
             background-size: 110% 110%;
+            color: var(--color-white);
+            text-decoration: none;
 
             & p {
                 display: block;
@@ -57,12 +57,18 @@ const {columns, backgroundDefault, title} = Astro.props;
                 max-height: 100px;
             }
         }
+        &:visited {
+            color: var(--color-white);
+        }
 
         & p {
             transition: ease .5s;
-            // display: none;
             max-height: 0;
             opacity: 0;
+        }
+        & h3 {
+            font-size: clamp(1.25rem, 1.0115rem + 1.0178vw, 1.5rem);
+            font-family: var(--second-family);
         }
         &:not(:has( .fab-box-banner-background)) {
             display: flex;
@@ -84,6 +90,7 @@ const {columns, backgroundDefault, title} = Astro.props;
         background-position: center;
         background-size: cover;
         transition: ease .5s;
+        color: var(--color-white);
         &:hover {
             transform: scale(1.1);
         }
@@ -94,7 +101,7 @@ const {columns, backgroundDefault, title} = Astro.props;
         left: 0;
         right: 0;
         padding: 1rem;
-        background: linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(0deg,rgba(0, 0, 0, .6) 0%, rgba(255, 255, 255, 0) 100%);
     }
 
 </style>
@@ -109,7 +116,9 @@ const {columns, backgroundDefault, title} = Astro.props;
         transition: var(--transition-default);
     }
     .fab-box-banner {
+        
         &:hover {
+            color: inherit;
             & .fab-box-banner__arrow {
                 opacity: .4;
                 transform: translate(0, 0);

@@ -34,7 +34,7 @@ let newTextBanner = textBanner
 {
   slide &&
   <section hidden={hidden} style={`--background-image: url(${slide?.backgroundMobile}); ${style}`} data-id={dataId} class:list={["fab-hero-package"]}>
-    <img src={slide?.backgoundDesktop} alt="" />
+    <img src={slide?.backgoundDesktop ? slide?.backgoundDesktop : `/no-image.jpg`} height={!slide?.backgoundDesktop && 500} alt="" />
     <div class="fab-hero-package__text" set:html={replaceSpacesAfterPrepositions(cleanHtml(newTextBanner))}>
     </div>
 </section>

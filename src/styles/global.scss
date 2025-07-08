@@ -161,3 +161,7 @@ a:has( svg) {
 [hidden] {
     display: none !important;
 }
+
+.d-none, .hidden, .hidden > * {
+    display: block !important;
+}

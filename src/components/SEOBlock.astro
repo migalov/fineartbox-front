@@ -11,24 +11,17 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
         'a': ['href']
        } // Разрешенные атрибуты
    });
-   const prepositions = /\b(в|на|за|под|с|к|о|от|до|для|по|через|или|при|между)\b/g;
-   const addNonBreakingSpace = (text) => {
-        return text.replace(prepositions, (match) => `${match}\u00A0`);
-   };
-
 
 ---
-<!-- <div class:list={["fab-seo-block"]}> -->
 <div class:list={["fab-seo-block"]} data-id={`construction-${id+1}`} hidden={hidden}>
     <div class="fab-seo-block-wrap">
         <div class="fab-seo-block-column" set:html={replaceSpacesAfterPrepositions(cleanHtml(columnOne))} />
         <div class="fab-seo-block-column" set:html={replaceSpacesAfterPrepositions(cleanHtml(columnTwo))} />
     </div>
-    <label class="fab-seo-toggle" for="seo-toggle">
-        <input hidden type="checkbox" name="" id="seo-toggle">
+    <label class="fab-seo-toggle" for={id !== "" ? `seo-toggle-${id+1}` : `seo-toggle`}>
+        <input hidden type="checkbox" name="" id={id !== "" ? `seo-toggle-${id+1}` : `seo-toggle`}>
         <Icon id="arrow" width="24" height="24" />
     </label>
-
 </div>
 
 <style lang="scss" is:global>

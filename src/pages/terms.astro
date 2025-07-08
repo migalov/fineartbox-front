@@ -3,6 +3,7 @@ import CustomGrid from "../components/CustomGrid.astro";
 import OneHero from "../components/OneHero.astro";
 import Layout from "../layout.astro";
 import qs from "qs";
+import replaceSpacesAfterPrepositions from "../scripts/words";
 
 import sanitizeHtml from 'sanitize-html';
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
@@ -69,10 +70,9 @@ const pageData = landingPageData.data;
                 {
                   block.__component == "grids.seo-block" &&
                       <CustomGrid columns="2">
-                        <div set:html={cleanHtml(block?.columnOne)} />
-                        <div set:html={cleanHtml(block?.columnTwo)} />
+                        <div set:html={replaceSpacesAfterPrepositions(cleanHtml(block?.columnOne))} />
+                        <div set:html={replaceSpacesAfterPrepositions(cleanHtml(block?.columnTwo))} />
                       </CustomGrid>
-                    </>
                 }
               </>
             </div>

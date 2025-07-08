@@ -127,7 +127,6 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
     document.querySelectorAll(`.constructions-switch-wrap input`).forEach( label => {
         label.addEventListener("click", () => {
             console.log(label.getAttribute("data-tag"));
-            label.closest("section").scrollIntoView();
             window.location.hash = label.getAttribute("data-tag");
         })
     })

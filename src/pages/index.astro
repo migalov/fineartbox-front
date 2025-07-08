@@ -16,6 +16,8 @@ import FAQSection from "../components/FAQ/FAQSection.astro";
 import SubscribeBlock from "../components/SubscribeBlock.astro";
 import Sandbox from "../sandbox.astro";
 import Victory from "../components/Victory.astro";
+import replaceSpacesAfterPrepositions from "../scripts/words";
+import CustomGrid from "../components/CustomGrid.astro";
 
 const paramsPage = {
     populate: {
@@ -133,24 +135,24 @@ let dataServices = {
         <div class="content-grid">
             <Hero {...pageData} />
             <Announce
-                maxWidthBlock="42rem"
-                widthMark="14px"
-                heightMark="90px"
+                maxWidthBlock={pageData.announceMaxWidth}
                 colorMark="var(--color-orange)"
-                marginBlock="0 0 0 clamp(0rem, -13.2857rem + 21.4286vw, 6rem)"
-                text="FINEARTBOX — производство упаковки и полиграфические услуги в Москве"
-                fontSize="1.5rem"
-                />
+                marginBlock="0 0 0 clamp(0rem, -1.4085rem + 6.0094vw, 4rem)"
+                fontSize={"1.5rem"}
+                text={`<h2>FINEARTBOX — производство упаковки и&nbsp;полиграфические услуги в Москве<h2>`}
+                maxWidthBlock={"38.25rem"}
+            />
             <GridBannersType1 data={dataServices.data} />
             <FeaturesRoot />
             <GridBannersType1 data={dataOne.data} title={dataServices.title} />
             <DeadlineRoot />
             <StageWorkRoot />
             <Victory />
-            <div class="fab-widgets" style="">
+            <CustomGrid columns="2">
                 <YandexWidget />
                 <BlogRoot />
-            </div>
+            </CustomGrid>
+
             <Achievements />
             <!-- <FAQSection {...pageData} />-->
             <!-- <SubscribeBlock status="default" /> -->
