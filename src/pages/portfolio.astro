@@ -1,0 +1,318 @@
+---
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import SEOBlock from "../components/SEOBlock.astro";
+import SubscribeBlock from "../components/SubscribeBlock.astro";
+import Layout from "../layout.astro";
+import qs from "qs";
+const paramsPage = {
+    populate: "*"
+};
+
+const queryStringPage = qs.stringify(paramsPage, { encode: true });
+const landingPageData = await fetch(`${import.meta.env.HOST_API}/packages?${queryStringPage}`).then(res => res.json());
+const pageData = landingPageData.data;
+
+const dataFilters = [
+    {
+        purpose: "",
+        types: "",
+        forms: ""
+    }
+]
+---
+
+<Layout title="Портфолио">
+    <!-- <code>{JSON.stringify(pageData)}</code> -->
+    <div class="content-grid">
+        <Breadcrumbs />
+       <div class="filters">
+      <!-- Кастомный селект: Тип -->
+      <div class="select-wrapper">
+        <div id="typeToggle" class="select-button">
+          <span id="typeLabel">Тип</span>
+          <span>▼</span>
+        </div>
+        <ul id="typeOptions" class="select-list">
+          <li data-tag="">Тип</li>
+          <li data-tag="коробка">Коробка</li>
+          <li data-tag="пакет">Пакет</li>
+          <li data-tag="банка">Банка</li>
+        </ul>
+      </div>
+
+      <!-- Кастомный селект: Назначение -->
+      <div class="select-wrapper">
+        <div id="purposeToggle" class="select-button">
+          <span id="purposeLabel">Назначение</span>
+          <span>▼</span>
+        </div>
+        <ul id="purposeOptions" class="select-list">
+          <li data-tag="">Назначение</li>
+          <li data-tag="еда">Еда</li>
+          <li data-tag="косметика">Косметика</li>
+          <li data-tag="техника">Техника</li>
+        </ul>
+      </div>
+
+      <!-- Кастомный селект: Форма -->
+      <div class="select-wrapper">
+        <div id="shapeToggle" class="select-button">
+          <span id="shapeLabel">Форма</span>
+          <span>▼</span>
+        </div>
+        <ul id="shapeOptions" class="select-list">
+          <li data-tag="">Форма</li>
+          <li data-tag="прямоугольная">Прямоугольная</li>
+          <li data-tag="круглая">Круглая</li>
+          <li data-tag="особая">Особая</li>
+        </ul>
+      </div>
+    </div>
+        <!-- <div class="fab-select-section" data-parameters-filter={JSON.stringify(dataFilters)}>
+            {
+                pageData.FilterSection.map( select => 
+                    <div class="fab-custom-select">
+                        <div class="fab-custom-select__dropdown" data-category={select.category}>
+                          <div class="fab-custom-select__dropdown-title">
+                            <a href={select.slug}>{select.title}</a>
+                            {
+                              select.options.length > 0 && <Icon id="arrow-dropdown" width="16" height="16" />
+                            }
+                          </div>
+                          <div class="fab-custom-select__dropdown-inner">
+                            {select.options.map( option => 
+                              <a href={option?.slug}>{option.label}</a>
+                            )}
+                          </div>
+                        </div>
+                        
+                    </div>
+                    
+                )
+            }
+        </div> -->
+        <div class="portfolio-grid">
+          {
+            pageData?.map( (pkg) => 
+            
+              <a href={pkg?.href.replace("https://fineartbox.ru","")} style="--desktop-columns: 3">
+                <img data-src={pkg?.srcAlternative} alt={pkg?.title} title={pkg?.title} />
+              </a>
+
+            )
+          }
+
+        </div>
+    </div>
+    <script>
+    const state = {
+      type: '',
+      purpose: '',
+      shape: ''
+    };
+
+    function filterPackages() {
+      const packages = document.querySelectorAll('.package');
+      packages.forEach(pkg => {
+        const matchesType = !state.type || pkg.dataset.type === state.type;
+        const matchesPurpose = !state.purpose || pkg.dataset.purpose === state.purpose;
+        const matchesShape = !state.shape || pkg.dataset.shape === state.shape;
+
+        pkg.style.display = (matchesType && matchesPurpose && matchesShape) ? '' : 'none';
+      });
+    }
+
+    function setupCustomSelect(toggleId, listId, labelId, key) {
+      const toggle = document.getElementById(toggleId);
+      const list = document.getElementById(listId);
+      const label = document.getElementById(labelId);
+
+      toggle.addEventListener('click', () => {
+        document.querySelectorAll('.select-list').forEach(el => {
+          if (el !== list) el.style.display = 'none';
+        });
+        list.style.display = list.style.display === 'block' ? 'none' : 'block';
+      });
+
+      list.querySelectorAll('li').forEach(item => {
+        item.addEventListener('click', () => {
+          const tag = item.dataset.tag;
+          state[key] = tag;
+          label.textContent = item.textContent;
+          list.style.display = 'none';
+          filterPackages();
+        });
+      });
+    }
+
+    setupCustomSelect('typeToggle', 'typeOptions', 'typeLabel', 'type');
+    setupCustomSelect('purposeToggle', 'purposeOptions', 'purposeLabel', 'purpose');
+    setupCustomSelect('shapeToggle', 'shapeOptions', 'shapeLabel', 'shape');
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.select-wrapper')) {
+        document.querySelectorAll('.select-list').forEach(el => el.style.display = 'none');
+      }
+    });
+  </script>
+
+
+</Layout>
+
+<style lang="scss" is:global>
+.filters {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      .filters {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+    .select-button {
+      width: 100%;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .select-list {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .select-list li {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .select-list li:hover {
+      background-color: #f0f0f0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    .fab-select-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: var(--global-gap);
+        @media (min-width: 768px) {
+            flex-direction: row;
+        }
+    }
+    .fab-custom-select {
+      flex: 1;
+      & a {
+        color: var(--color-gray-5);
+        text-decoration: none;
+        width: 100%;
+      }
+    }
+    .fab-custom-select__dropdown-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .7em;
+    }
+    .fab-custom-select__dropdown {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-gray-1);
+      border-bottom: 1px solid var(--color-gray-4);
+      &:hover .fab-custom-select__dropdown-inner {
+        display: flex;
+      }
+    }
+    .fab-custom-select__dropdown-inner {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: none;
+      max-height: 20em;
+      overflow: auto;
+      z-index: 1;
+      background-color: var(--color-white);
+      & > a {
+        padding: .35em .7em;
+        background-color: var(--color-gray-1);
+        color: var(--color-gray-5);
+        text-decoration: none;
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--color-gray-2);
+        }
+      }
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--global-gap);
+      @media (min-width: 992px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (min-width: 1200px) {
+        grid-template-columns: repeat(12, 1fr);
+        & > :is(a, div) {
+          grid-area: auto / span var(--desktop-columns);
+        }
+      }
+      & > :is(a, div) {
+
+
+        border: 1px solid var(--color-gray-1);
+        overflow: hidden;
+      }
+      & a {
+        display: block;
+      }
+      & div {
+        display: flex;
+        clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
+      }
+      & img:hover {
+        transform: scale(1.15);
+      }
+    }
+    .portfolio-box-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(0.5rem, -0.3803rem + 3.7559vw, 3rem);
+        background-color: var(--color-orange);
+        color: var(--color-white);
+        row-gap: .75rem;
+        & h3 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
