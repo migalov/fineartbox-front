@@ -1,0 +1,42 @@
+---
+const {tag,  href, idButton, reverse, sizeLabel} = Astro.props
+---
+
+{
+    tag == "a" && <a class:list={[`fab-button`]} style={sizeLabel && `--font-size: ${sizeLabel}`} href={href} data-reverse={reverse} id={idButton}>
+        <slot />
+    </a>
+}
+{
+    tag == "button" &&
+        <button class:list={[`fab-button`]} style={sizeLabel && `--font-size: ${sizeLabel}`} data-reverse={reverse} id={idButton}>
+            <slot />
+        </button>
+}
+
+<style lang="scss" is:global>
+    .fab-button {
+        font-size: 1.25rem;
+        padding: .5em;
+        background-color: var(--color-orange);
+        color: var(--color-white);
+        font-family: var(--font-family);
+        font-weight: 500;
+        outline: 1px solid transparent;
+        border: none;
+        &:hover {
+            background-color: var(--color-white);
+            color: var(--color-orange);
+            outline: 1px solid var(--color-orange);
+        }
+        &[reverse="true"] {
+            background-color: var(--color-white);
+            color: var(--color-orange);
+            &:hover {
+                background-color: var(--color-orange);
+                color: var(--color-white);
+            }
+        }
+
+    }
+</style>

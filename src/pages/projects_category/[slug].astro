@@ -131,7 +131,7 @@ const pageData = landingPageData?.data[0];
                 marginBlock="0 auto"
                 text={replaceSpacesAfterPrepositions(cleanHtml(pageData?.announce))}
             />
-            <section class="fab-ready-works-section">
+            {pageData?.packageTypes?.length > 0 && <section class="fab-ready-works-section">
                 <h2>Реализованные проекты</h2>
                     {
                         pageData?.packageTypes?.map( (packagesType, id) => 
@@ -142,7 +142,7 @@ const pageData = landingPageData?.data[0];
                             </>
                         )
                     }
-            </section>
+            </section>}
 
         
 
