@@ -7,7 +7,7 @@ const {projectsList, id, packages} = Astro.props;
         {
             packages?.map( project => 
                 <a href={project.href.replace("https://fineartbox.ru", "")}>
-                    <img src={`${project?.image?.url ? `${import.meta.env.HOST}${project?.image?.url}` : (project?.srcAlternative ? project?.srcAlternative : "/no-image.jpg")}`} alt={project?.title} />
+                    <img data-src={`${project?.image?.url ? `${import.meta.env.HOST}${project?.image?.url}` : (project?.srcAlternative ? project?.srcAlternative : "/no-image.jpg")}`} alt={project?.title} />
                 </a>
                 // <>
                 //     {JSON.stringify(`${project.image.url}`)}

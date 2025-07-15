@@ -1,0 +1,127 @@
+---
+import CardType1 from "../Cards/Type1.astro";
+import Icon from "../Icon.astro";
+
+const data = [
+    {
+        title: "Переплетный картон",
+        description: "Прессованный прочный материал, толщиной от 1 до 3 мм. Производят из макулатуры и древесной массы, используют для книжных переплётов и кашированной упаковки",
+        src: "https://static0.wow2print.com/storage/119/content/image/1812604661684d1c50c99525.29695875.webp"
+    },
+    {
+        title: "Мелованная бумага",
+        description: "Бумага с ровной, гладкой поверхностью и белизной. Матовая или глянцевая. Плотность — от 90 до 250 г/м². Обеспечивает четкую печать и насыщенные цвета. Используется для обложек, вкладышей, лайнеров",
+        src: "https://static0.wow2print.com/storage/119/content/image/505272379684d1c51520974.78287903.webp"
+    },
+    {
+        title: "Дизайнерская бумага",
+        description: "Материал из чистой целлюлозы, окрашенной в массе. Имеет различные цвета и текстуры, плотность от 115 до 350 г/м2",
+        src: "https://static0.wow2print.com/storage/119/content/image/346096955684d1c51b40126.29634729.webp"
+    },
+    {
+        title: "Переплетный материал",
+        description: "Тканевые, флокированные, синтетические и бумажные покрытия с плотной фактурой. Используются для упаковки и переплета. Придают премиальность, хорошо работают в сочетании с тиснением и фольгой",
+        src: "https://static0.wow2print.com/storage/119/content/image/2126390496684d1c5265e7b4.12899894.webp"
+    }
+]
+---
+<div class="fab-accordion">
+    <div class="fab-accordion-header">
+        <Icon id="arrow" width="24" height="24" />
+        <h2>Материалы для упаковки</h2>
+    </div>
+    <div class="fab-accordion-wrap fab-scrollbar">
+        {
+            data.map( item => <CardType1 classesImage="lazy-img" {...item} /> )
+        }
+    </div>
+</div>
+
+<style lang="scss" is:global>
+    .fab-accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .fab-accordion-header {
+        display: flex;
+        flex-direction: row;
+        gap: inherit;
+        align-items: center;
+        & svg {
+            transition: var(--transition-default);
+        }
+        & svg.open {
+            transform: rotate(-90deg);
+        }
+    }
+    .fab-accordion-wrap {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        max-height: 0;
+        opacity: 0;
+        transition: var(--transition-default);
+        overflow-x: auto;
+        &.open {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        &.fab-scrollbar--show {
+            padding: 0 0 1rem 0;
+        }
+
+        & .fab-card {
+            @media (max-width: 1199.99px) {
+                min-width: clamp(12.5rem, 11.3571rem + 5.7143vw, 16.5rem);
+                width: clamp(12.5rem, 11.3571rem + 5.7143vw, 16.5rem);
+            }
+            
+        }
+
+        @media (min-width: 1200px) {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+</style>
+
+  <script>
+    // Обработчики аккордеонов
+    document.querySelectorAll('.fab-accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const accordion = header.closest('.fab-accordion');
+        const wrap = accordion.querySelector('.fab-accordion-wrap');
+        const icon = header.querySelector('.icon');
+        
+        // Переключаем класс open
+        wrap.classList.toggle('open');
+        icon.classList.toggle('open');
+
+        // Если аккордеон открывается, загружаем изображения
+        if (wrap.classList.contains('open')) {
+          loadImagesInAccordion(wrap);
+        }
+      });
+    });
+
+    // Функция для загрузки изображений внутри аккордеона
+    function loadImagesInAccordion(accordionWrap) {
+      const images = accordionWrap.querySelectorAll('img[data-card-src]');
+      
+      images.forEach(img => {
+        // Проверяем, не загружено ли уже изображение
+        if (!img.src && img.dataset.cardSrc) {
+          const src = img.dataset.cardSrc;
+          
+          // Создаем изображение для предзагрузки
+          const tempImg = new Image();
+          tempImg.onload = () => {
+            img.src = src;
+            img.classList.add('loaded');
+          };
+          tempImg.src = src;
+        }
+      });
+    }
+  </script>

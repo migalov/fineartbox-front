@@ -521,7 +521,7 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
 
 <script is:inline>
 document.querySelectorAll(".fab-header-menu-lvl-1 a").forEach(link => {
-    if (document.location.href == link.href) {
+    if (document.location.href.includes(link.href)) {
         const span = document.createElement('span');
         span.textContent = link.textContent;
         link.classList.add("active");

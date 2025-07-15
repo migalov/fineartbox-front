@@ -71,18 +71,14 @@ const paramsPage = {
 import sanitizeHtml from 'sanitize-html';
 import Hero from "../../components/Hero.astro";
 import Empty from "../../layouts/Empty.astro";
+import TestAdaptiveBanner from "../../components/TestAdaptiveBanner.astro";
+import insertNbspAfterPrepositions from "../../scripts/testwords";
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
        allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
        allowedAttributes: {
         'a': ['href']
-       } // Разрешенные атрибуты
+       }
    });
-
-// const prepositions = ['в', 'на', 'с', 'к', 'по', 'из', 'от', 'для']; // Добавьте нужные предлоги
-// const conjunctions = ['и', 'да', 'или', 'но']; // Добавьте нужные союзы
-// // Создаем регулярное выражение из массива, убирая пробел перед предлогом
-// const regex = new RegExp(`(${prepositions.join('|')})\\s+|(${conjunctions.join('|')})\\s+`, 'g');
-
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
@@ -90,7 +86,8 @@ const pageData = landingPageData?.data[0];
 ---
 
 <Layout title={pageData.title}>
-<!-- <script>
+<!-- Marquiz script start -->
+<script>
 (function(w, d, s, o){
   var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
     if (document.readyState !== 'loading') Marquiz.init(o);
@@ -109,18 +106,18 @@ const pageData = landingPageData?.data[0];
     disableOnMobile: false
   }
 );
-</script> -->
+</script>
+<!-- Marquiz script end -->
+
+<a href=""></a>
 <div class="fab-page">
         <h1 class="visually-hidden">{pageData.title}</h1>
     <div class="content-grid">
-
-        <!-- <div data-marquiz-id="684ee254f13a8d0019d0a865"></div>
-           <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Button', {id: '684ee254f13a8d0019d0a865', buttonText: 'Заказать', bgColor: 'var(--color-orange)', textColor: 'var(--color-white)'})</script>
-             -->
+        <a href="#" class="fab-button-open-marquiz" onclick="Marquiz.showModal('684ee254f13a8d0019d0a865')">Заказать</a>
             {
                 pageData?.packageTypes?.map( (packagesType, id) =>
                     <>
-                        <OneHero hidden={id > 0 ? true : false } dataId={`construction-${id+1}`} {...packagesType} />
+                        <TestAdaptiveBanner hidden={id > 0 ? true : false } dataId={`construction-${id+1}`} {...packagesType} />
                     </>
                 )
             }
@@ -129,7 +126,7 @@ const pageData = landingPageData?.data[0];
                 maxWidthBlock={pageData.announceMaxWidth}
                 colorMark="var(--color-orange)"
                 marginBlock="0 auto"
-                text={replaceSpacesAfterPrepositions(cleanHtml(pageData?.announce))}
+                text={insertNbspAfterPrepositions(cleanHtml(pageData?.announce))}
             />
             {pageData?.packageTypes?.length > 0 && <section class="fab-ready-works-section">
                 <h2>Реализованные проекты</h2>
@@ -150,9 +147,9 @@ const pageData = landingPageData?.data[0];
             <div class="fab-widgets">
                 {
                     pageData?.packageTypes?.map( (packagesType, id) => 
-                        <div class="fab-block-package-description" hidden={id > 0 ? true : false} data-id={`construction-${id+1}`} set:html={replaceSpacesAfterPrepositions(cleanHtml(packagesType.descriptionTypePackage))}>
+                        <div class="fab-block-package-description" hidden={id > 0 ? true : false} data-id={`construction-${id+1}`} set:html={insertNbspAfterPrepositions(cleanHtml(packagesType.descriptionTypePackage))}>
                         </div>
-                        <div class="fab-block-package-description" hidden={id > 0 ? true : false} data-id={`construction-${id+1}`} set:html={replaceSpacesAfterPrepositions(cleanHtml(`<h2>Как происходит процесс</h2>${packagesType.descriptionProcess}`))}>
+                        <div class="fab-block-package-description" hidden={id > 0 ? true : false} data-id={`construction-${id+1}`} set:html={insertNbspAfterPrepositions(cleanHtml(`<h2>Как происходит процесс</h2>${packagesType.descriptionProcess}`))}>
                         </div>
                     )
                 }
@@ -216,8 +213,8 @@ const pageData = landingPageData?.data[0];
     }
 </style>
 <style lang="scss" is:global>
-    .marquiz__container {
-        --triangle-width: 64px;
+    .fab-button-open-marquiz {
+        --triangle-width: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
         position: fixed;
         top: 25rem;
         left: 0;
@@ -226,16 +223,18 @@ const pageData = landingPageData?.data[0];
         width: fit-content;
         transform-origin: 0 0;
         clip-path: polygon(100% 0, calc(100% - var(--triangle-width)) 100%, 0% 100%, var(--triangle-width) 0%);
-
-
-    }
-    .marquiz__button {
-        position: relative;
         background-color: var(--color-orange);
-        font-size: 2rem;
+        font-size: clamp(0.9rem, 0.5127rem + 1.5493vw, 2rem);
         font-family: var(--second-family);
         font-weight: 700;
-        padding: .5em 2.7em;
+        padding: clamp(0.25rem, 0.1620rem + 0.3756vw, 0.5rem) 2.7em;
+        color: var(--color-white)!important;
+        &:hover {
+            text-decoration: none;
+        }
+        @media (max-width: 767.99px) {
+            top: calc(var(--header-height) + 50vh);
+        }
     }
 </style>
 

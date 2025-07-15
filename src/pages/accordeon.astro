@@ -1,0 +1,16 @@
+---
+import AccordeonTest from "../components/AccordeonBlock/AccordeonTest.astro";
+import Layout from "../layout.astro";
+import insertNbspAfterPrepositions from "../scripts/testwords";
+
+const hello = `Одна из самых популярных форм упаковки. Основание и крышка одинакового размера плотно соединяются без бортиков, вырезов или дополнительных элементов. Такая упаковка подходит для самых разных задач: от косметики до электроники и подчеркивает статус вложения. Ее выбирают для деловых подарков, ювелирных изделий, сувениров, брендированной продукции. Минималистичная форма делает ее уместной как в лаконичном исполнении, так и с ярким декором.`
+---
+
+<Layout>
+    <div class="fab-page">
+        <div class="content-grid">
+            <AccordeonTest />
+        </div>
+    </div>
+    <div set:html={insertNbspAfterPrepositions(hello)}></div>
+</Layout>

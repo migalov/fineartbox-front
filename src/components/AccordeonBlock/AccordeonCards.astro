@@ -12,14 +12,13 @@ const {title, cardsList, id, num} = Astro.props
     <label for={`accordeon-${id}`}>
         <Icon width="24" height="24" id="arrow" />
         <h2>{title}</h2></label>
-    <div class="fab-accordeon-cards-wrap fab-scrollbar">
-        <div class="fab-accordeon-cards-row">
-            {
-                cardsList.map( (card, num) => <CardType1 {...card} /> )
-            }     
+        <div class="fab-accordeon-cards-wrap fab-scrollbar">
+            <div class="fab-accordeon-cards-row">
+                {
+                    cardsList.map( (card, num) => <CardType1 {...card} /> )
+                }     
+            </div>
         </div>
-
-    </div>
 </div>
 
 <style lang="scss" is:global>
