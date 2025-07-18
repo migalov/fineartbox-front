@@ -73,6 +73,7 @@ import Hero from "../../components/Hero.astro";
 import Empty from "../../layouts/Empty.astro";
 import TestAdaptiveBanner from "../../components/TestAdaptiveBanner.astro";
 import insertNbspAfterPrepositions from "../../scripts/testwords";
+import AccordeonTest from "../../components/AccordeonBlock/AccordeonTest.astro";
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
        allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
        allowedAttributes: {
@@ -83,6 +84,8 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
 const pageData = landingPageData?.data[0];
+
+const projectsOne
 ---
 
 <Layout title={pageData.title}>
@@ -121,7 +124,7 @@ const pageData = landingPageData?.data[0];
                     </>
                 )
             }
-            <ConstructionLinks {slug} {...pageData} />
+            <ConstructionLinks {slug} titlePage={pageData.title} {...pageData} />
             <Announce
                 maxWidthBlock={pageData.announceMaxWidth}
                 colorMark="var(--color-orange)"
@@ -157,9 +160,13 @@ const pageData = landingPageData?.data[0];
             </div>
             <DeadlineRoot />
             <StageWorkRoot />
-            {
+            <!-- {
                 pageData?.cardsSection?.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
+            } -->
+            {
+                pageData?.cardsSection?.map( (accordeon, num) => <AccordeonTest {...accordeon} {num} /> )
             }
+            
 
             <!-- {
                 pageData?.packageTypes?.map( (packagesType, id) =>

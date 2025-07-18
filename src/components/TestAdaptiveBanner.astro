@@ -25,7 +25,7 @@ let newTextBanner = textBanner
   ?.replace('<p>&nbsp;</p>', '');
 ---
 
-<section class="test-banner"
+<div class="one-hero-banner"
      data-id={dataId}
      hidden={hidden}
     style={`
@@ -34,12 +34,12 @@ let newTextBanner = textBanner
         --background-size: ${slide?.backgroundSize ? `${slide.backgroundSize}%` : "160%"};
         --background-position: ${slide?.backgroundPosition ? slide.backgroundPosition : "30% 80%"};
     `}>
-    <div class="test-banner-text" set:html={insertNbspAfterPrepositions(cleanHtml(slide?.htmlContent))}></div>
-</section>
+    <div class="one-hero-banner-text" set:html={insertNbspAfterPrepositions(cleanHtml(newTextBanner))}></div>
+</div>
 
 
 <style lang="scss" is:global>
-    .test-banner {
+    .one-hero-banner {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -62,15 +62,19 @@ let newTextBanner = textBanner
             box-sizing: content-box;
         }
     }
-    .test-banner-text {
+    .one-hero-banner-text {
         display: flex;
         flex-direction: column;
         width: min(300px, 50%);
         row-gap: 1rem;
+
+        & .h2 {
+            font-family: var(--second-family);
+            font-weight: 700;
+        }
         @media (min-width: 768px) {
             width: clamp(21rem, 13.0000rem + 16.6667vw, 28rem);
             padding: .7rem .7rem 1rem !important;
-
         }
     }
 

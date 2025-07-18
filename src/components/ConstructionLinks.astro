@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-const {slug, filterConstructions, packageTypes} = Astro.props;
+const {titlePage, slug, filterConstructions, packageTypes} = Astro.props;
 import replaceSpacesAfterPrepositions from "../scripts/words";
 ---
 <!-- <code>
@@ -9,7 +9,7 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
 {
     packageTypes.length > 0 && 
     <section class="constructions-switch">
-        <h2>Виды конструкций</h2>
+        <h2>Виды конструкций {titlePage}</h2>
         <div class="constructions-switch-wrap fab-scrollbar">
             {
                 packageTypes?.map( (item, num) =>
