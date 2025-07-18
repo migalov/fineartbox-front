@@ -29,10 +29,10 @@ const {maxWidthBlock, fontSize, marginBlock, text} = Astro.props;
             height: 100%;
             min-height: 2rem;
             background: var(--color-orange);
-            clip-path: polygon(100% 0, 100% calc(100% - 14px), 0 100%, 0% 14px);
+            clip-path: polygon(0 0, 100% 14px, 100% 100%, 0% calc(100% - 14px));
         }
 
-        & h2 {
+        & > h2 {
             --margin-title: 2rem;
             padding: 0 0 0 var(--margin-title);
             font-size: var(--font-size);

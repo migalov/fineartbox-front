@@ -84,8 +84,6 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/constructions/?${queryStringPage}`).then(res => res.json());
 const pageData = landingPageData?.data[0];
-
-const projectsOne
 ---
 
 <Layout title={pageData.title}>
@@ -156,26 +154,14 @@ const projectsOne
                         </div>
                     )
                 }
-                <!-- <div class="fab-block-package-description" set:html={cleanHtml(pageData.processDescription)}></div> -->
             </div>
             <DeadlineRoot />
             <StageWorkRoot />
-            <!-- {
-                pageData?.cardsSection?.map( (accordeon, num) => <AccordeonCards {...accordeon} {num} /> )
-            } -->
+
             {
                 pageData?.cardsSection?.map( (accordeon, num) => <AccordeonTest {...accordeon} {num} /> )
             }
-            
 
-            <!-- {
-                pageData?.packageTypes?.map( (packagesType, id) =>
-                    <SEOBlock {...packagesType?.SEO} id={id} />
-                )
-            } -->
-                {
-                    pageData?.SEO?.columnOne && <SEOBlock {...pageData?.SEO} />
-                }
                 {
                     pageData?.packageTypes?.map( (packagesType, id, hidden) =>
                         <>

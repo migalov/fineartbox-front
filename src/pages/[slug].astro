@@ -1,0 +1,301 @@
+---
+import qs from "qs";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "lodgements" }},
+  ];
+}
+
+const { slug } = Astro.params;
+
+const paramsPage = {
+    filters: {
+        slug: {
+            $eq: slug
+        }
+    },
+
+    populate: {
+        Content: {
+            populate: "*"
+        },
+        packagesOne: {
+            populate: "*"
+        },
+        packagesTwo: {
+            populate: "*"
+        },
+        SEOBlock: {
+            populate: "*"
+        }
+    },
+};
+
+import sanitizeHtml from 'sanitize-html';
+import Layout from "../layout.astro";
+import TestAdaptiveBanner from "../components/TestAdaptiveBanner.astro";
+import ReadyWorks from "../components/ReadyWorks.astro";
+import Announce from "../components/Announce.astro";
+import insertNbspAfterPrepositions from "../scripts/testwords";
+import CustomGrid from "../components/CustomGrid.astro";
+import SEOBlock from "../components/SEOBlock.astro";
+
+const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
+       allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
+       allowedAttributes: {
+        'a': ['href']
+       }
+});
+
+const queryStringPage = qs.stringify(paramsPage, { encode: true });
+const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/?${queryStringPage}`).then(res => res.json());
+
+---
+
+<Layout title={""}>
+<div class="fab-page">
+    <div class="content-grid">
+        <!-- <code>
+            {
+                JSON.stringify(landingPageData.data[0].packagesOne)
+            }
+        </code> -->
+       {
+        landingPageData?.data[0]?.Content?.map( block =>
+            <>
+                {
+                    block.__component == "slider.slide" && <TestAdaptiveBanner slide={block} {...block} />
+                }
+                {/* <code>{JSON.stringify(block)}</code> */}
+                {
+                    block.__component == "grids.cards-list" &&
+                    <section>
+                        <h2>{block.title}</h2>
+                        <CustomGrid classes={[block.mobileScrollbar && "fab-scrollbar"]} columns={block.columns}>
+                            {
+                                block.cardsList.map( _card => 
+                                    <>
+                                        <div class="fab-card-about-lodgement">
+                                            <img src={_card.src} alt="" />
+                                            <h3>{_card.title}</h3>
+                                            <p>{_card.description}</p>
+                                        </div>
+                                    </>
+                                )
+                            }
+                        </CustomGrid>
+                    </section>
+                    
+                }
+            </CustomGrid>
+         )
+       }
+       <section>
+            <h1>Ложементы</h1>
+            <CustomGrid columns="2">
+                <div>
+                    <p>Современная упаковка – это сложная многослойная конструкция, продуманная до мелочей. Один из ключевых элементов – ложемент (от франц. logement) – это вкладыш из пенопласта, картона, пластика или других материалов, который точно повторяет форму продукта и надежно фиксирует его внутри коробки.</p>
+                    <p>Ложемент гасит внешние нагрузки, предотвращая механические повреждения при транспортировке и хранении. Фиксация изделия исключает смещение внутри упаковки – одна из частых причин повреждений. Презентабельная подача cоздает аккуратный и эстетичный вид при распаковке, формируя положительное впечатление у покупателя</p>
+                </div>
+                <div>
+                    <p>Специализированные вставки-разделители упрощают сборку комплектов, предотвращают соприкосновения и обеспечивают целостность каждой единицы товара.</p>
+                    <p>Помимо этого, ложемент позволяет оптимизировать логистику: он легкий, фактически не увеличивает вес упаковки, что способствует снижению транспортных расходов. Огромное значение имеет и экономическая выгода: уменьшение числа поврежденных товаров в пути снижает возвраты и расходы.</p>
+                    <p>Ложемент – это комплексное решение, обеспечивающее защиту, комфорт, экономию и первоклассный визуальный эффект</p>
+                </div>
+            </CustomGrid>
+       </section>
+       <section>
+            <h2>Зачем нужен ложемент?</h2>
+            <CustomGrid columns="2">
+                <div>
+                    <p>Главная цель создания упаковки любого вида — защита её содержимого. Поэтому каждый ложемент должен выполнять следующие задачи:</p>
+                    <ul class="fab-list-mark">
+                        <li>Надежная фиксация товара в таре</li>
+                        <li>Амортизация ударов, тряски, вибрации при транспортировке</li>
+                        <li>Разделение содержимого для исключения соударений, сколов</li>
+                        <li>Комфортное хранение и использование товара</li>
+                        <li>Защита от влаги, плесени, перепадов температур</li>
+                    </ul>
+                </div>
+                <img src="https://static0.wow2print.com/storage/119/content/image/13489124946879f4179323a6.01266670.webp" />
+            </CustomGrid>
+       </section>
+       <section>
+            <h2>Виды</h2>
+            <CustomGrid columns="2">
+                <div>
+                    <h3 style="color: var(--color-gray-4)">Рекламный ложемент</h3>
+                    <img src="https://static0.wow2print.com/storage/119/content/image/17658548686879f417e1cb05.70795393.webp" alt="" />
+                    <p>В зависимости от конструкции, материала, назначения, вкладыши бывают упаковочные и рекламные. Упаковочные фиксируют товар при перевозке или хранении, разделяют внутренние элементы, берегут их от ударов, условий окружающей среды</p>
+                </div>
+                <div>
+                    <h3 style="color: var(--color-gray-4)">Упаковочный ложемент</h3>
+                    <img src="https://static0.wow2print.com/storage/119/content/image/19368762156879f4184a5a38.63541233.webp" alt="" />
+                    <p>Рекламные создаются, чтобы выделить плюсы товара. Их используют для подарочной или выставочной упаковки. Такие вкладыши применяются в ювелирных, косметических магазинах, в отделах электроники</p>
+                </div>
+            </CustomGrid>
+       </section>
+        <section>
+            <h2>Изготавливаем ложемент для</h2>
+            <CustomGrid columns="2">
+                <div>
+                    <p>Главная цель создания упаковки любого вида — защита её содержимого. Поэтому каждый ложемент должен выполнять следующие задачи:</p>
+                    <ul class="fab-list-mark" style="--height: 6.3rem">
+                        <li>Медицинское оборудование</li>
+                        <li>Парфюмерия</li>
+                        <li>Гаджетов</li>
+                        <li>Подарочных наборов</li>
+                        <li>Алкоголя</li>
+                        <li>Чая и кофе</li>
+                        <li>Конфет</li>
+                        <li>Бьюти боксов</li>
+                    </ul>
+                </div>
+            </CustomGrid>
+       </section>
+       {
+            landingPageData.data[0].packagesOne?.length > 0 &&
+                <section class="fab-ready-works-section">
+                        <h2>Реализованные проекты картонной упаковки</h2>
+                        {
+                            <ReadyWorks packages={landingPageData.data[0].packagesOne} />
+                        }
+                </section>
+        }
+        {
+            landingPageData.data[0].packagesTwo?.length > 0 &&
+                <section class="fab-ready-works-section">
+                        <h2>Реализованные проекты кашированной упаковки</h2>
+                        {
+                            <ReadyWorks packages={landingPageData.data[0].packagesTwo} />
+                        }
+                </section>
+        }
+        <Announce
+                maxWidthBlock={"40rem"}
+                fontSize={"1rem"}
+                colorMark="var(--color-orange)"
+                marginBlock="0 auto"
+                text={insertNbspAfterPrepositions(cleanHtml(`<h2>Верный выбор материала не только сохранит вашу продукцию в целости. Это еще и отличный способ показать покупателю, что вы заботитесь обо всех тонкостях своей работы. Надежно упакованный товар в красивом аккуратном ложементе всегда выглядит эффектно. Многоразовый вкладыш можно дополнить флокированным бархатным покрытием, нанести на него слоган или логотип компании</h2>`))}
+            />
+        <SEOBlock {...landingPageData?.data[0]?.SEOBlock} />
+         <!-- <code>
+            {
+                JSON.stringify(landingPageData.data[0])
+            }
+         </code> -->
+    </div>
+</div>
+
+</Layout>
+
+<style lang="scss" is:global>
+    .fab-list-mark {
+        display: flex;
+        flex-direction: column;
+        row-gap: .25em;
+        position: relative;
+        flex-wrap: wrap;
+
+        & li::marker {
+            color: var(--color-violet-2);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 14px;
+            height: 100%;
+            min-height: 2rem;
+            background: var(--color-orange);
+            clip-path: polygon(0 0, 100% 14px, 100% 100%, 0% calc(100% - 14px));
+        }
+
+        @media (min-width: 768px) {
+            height: var(--height);
+        }
+    }
+    .fab-card-about-lodgement {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        & h3 {
+            font-size: 1rem;
+        }
+    }
+    @media (max-width: 991.99px) {
+        .fab-scrollbar .fab-card-about-lodgement {
+            min-width: clamp(18rem, 16.9437rem + 4.2254vw, 21rem);
+        }
+    }
+</style>
+<style lang="scss" is:global>
+	.fab-widgets {
+		display: flex;
+		flex-direction: column;
+		row-gap: 2rem;
+		@media (min-width: 992px) {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
+		}
+	}
+    .fab-block-package-description {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+</style>
+<style lang="scss" is:global>
+    .fab-button-open-marquiz {
+        --triangle-width: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
+        position: fixed;
+        top: 25rem;
+        left: 0;
+        transform: rotate(-90deg);
+        z-index: 4;
+        width: fit-content;
+        transform-origin: 0 0;
+        clip-path: polygon(100% 0, calc(100% - var(--triangle-width)) 100%, 0% 100%, var(--triangle-width) 0%);
+        background-color: var(--color-orange);
+        font-size: clamp(0.9rem, 0.5127rem + 1.5493vw, 2rem);
+        font-family: var(--second-family);
+        font-weight: 700;
+        padding: clamp(0.25rem, 0.1620rem + 0.3756vw, 0.5rem) 2.7em;
+        color: var(--color-white)!important;
+        &:hover {
+            text-decoration: none;
+        }
+        @media (max-width: 767.99px) {
+            top: calc(var(--header-height) + 50vh);
+        }
+    }
+</style>
+
+<script is:inline>
+  const projectsList = document.querySelectorAll(`[data-id*=construction]`);
+  const hideSection = (numProjects) => {
+    let projectsSection = document.querySelector(".fab-ready-works-section");
+    numProjects >= 0 && (projectsSection.style.display = "")
+    numProjects == 0 && (projectsSection.style.display = "none")
+  }
+  const hideProjects = () => {
+    projectsList.forEach((project) => (project.hidden = true));
+  };
+  document.querySelectorAll(".constructions-switch input").forEach((input) => {
+
+    let id = "";
+    input.addEventListener("click", (e) => {
+      hideProjects();
+      document.querySelectorAll(`[data-id=${e.target.id}]`).forEach((block) => {
+        block.hidden = false;
+        id = e.target.id;
+      });
+      hideSection(document.querySelectorAll(`.fab-ready-works[data-id=${id}] a`).length);
+    });
+  });
+</script>

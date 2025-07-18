@@ -1,0 +1,160 @@
+---
+import CustomGrid from "../components/CustomGrid.astro";
+import OneHero from "../components/OneHero.astro";
+import TestAdaptiveBanner from "../components/TestAdaptiveBanner.astro";
+import Layout from "../layout.astro";
+
+const Banner = {
+    slide: {
+        backgoundDesktop: "https://static0.wow2print.com/storage/119/content/image/602463513687a628ebf2eb0.04247467.webp",
+        backgroundMobile: "https://static0.wow2print.com/storage/119/content/image/602463513687a628ebf2eb0.04247467.webp",
+        htmlContent: `<h1>Наши награды</h1><p>Advent Creative Box – лауреат RosUpack Part Award 2025 в номинации «Производитель года» в категории «Упаковка для премиальных товаров»</p>`,
+        backgroundSize: 248,
+        backgroundPosition: "42% 80%"
+    }
+}
+---
+
+<Layout>
+    <div class="fab-page">
+        <div class="content-grid">
+            <TestAdaptiveBanner {...Banner}  />
+            <h1>Наши награды</h1>
+            <!-- Упаковка Advent Creative Box -->
+             <section>
+                <div class="fab-block-awards-header">
+                    <h2>Упаковка Advent Creative Box</h2>
+                    <h3>2025 год</h3>
+                </div>
+                <CustomGrid classes="fab-block-awards" columns="2">
+                        <figure>
+                            <img width="196" src="https://static0.wow2print.com/storage/119/content/image/87638966687a594682d988.29585863.webp" alt="">
+                            <figcaption>Победитель в номинации «Полиграфический арт-объект как медиакит в премиальном сегменте» на выставке RosUpack 2025</figcaption>
+                        </figure>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/434882349687a5948095147.65002830.webp" alt="">
+                </CustomGrid>
+             </section>
+
+            <CustomGrid columns="2">
+                <div>
+                    <p>Наша компания стала победителем в номинации «полиграфический арт-объект как медиакит в премиальном сегменте» на ежегодной выставке RosUpack 2025.</p>
+                    <p>Advent Creative Box — мини-лаборатория FINEARTBOX и арт-объект для презентации.</p>
+                </div>
+                <div>
+                    <p>Формат адвента: десять мини-кубов, каждая грань — буква, вместе — ВЕЧНОСТЬ / FINEARTBOX.</p>
+                    <p>Каждый куб раскрывает уникальную историю бренда, демонстрируя высокий уровень технологий производства; вовлекая, удивляя, подчёркивая статус премиального исполнения.</p>
+                </div>
+            </CustomGrid>
+            <CustomGrid columns="3">
+                <div>
+                    <img src="https://static0.wow2print.com/storage/119/content/image/1841914016687a5948e05611.08439974.webp" alt="" />
+                    <img src="https://static0.wow2print.com/storage/119/content/image/163799613687a59494b3762.52371900.webp" alt="" />
+                </div>
+                <img src="https://static0.wow2print.com/storage/119/content/image/303581218687a59498ce979.67726795.webp" alt="">
+                <div style="display: grid;">
+                    <img style="grid-area: auto / span 2" src="https://static0.wow2print.com/storage/119/content/image/83205808687a5945d561f2.10279280.webp" alt="" />
+                    <img src="https://static0.wow2print.com/storage/119/content/image/328804990687a5944515891.36644152.webp" alt="" />
+                    <img src="https://static0.wow2print.com/storage/119/content/image/1442270923687a594503c372.49786055.webp" alt="" />
+                </div>
+            </CustomGrid>
+            <!-- Упаковка Merten Antique -->
+
+             <section>
+                <div class="fab-block-awards-header">
+                    <h2>Упаковка Advent Creative Box</h2>
+                    <h3>2025 год</h3>
+                </div>
+                <CustomGrid classes="fab-block-awards" columns="2">
+                        <figure>
+                            <img width="196" src="https://static0.wow2print.com/storage/119/content/image/1770244702687a5946c47cb0.10885651.webp" alt="">
+                            <figcaption>2-е место в номинации «Производитель года», категория «Прочие промышленные товары» на выставке RosUpak 2018</figcaption>
+                        </figure>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/1925535604687a59485a04f3.88327626.webp" alt="">
+                </CustomGrid>
+             </section>
+
+
+            <CustomGrid columns="2">
+                <div>
+                    <p>Данный проект разрабатывался для бренда Schneider Electric, серии продуктов — Merten Antique. Заказчик ООО «Альтавиа Рус».</p>
+                </div>
+                <div>
+                    <p>Задача: создать премиальную упаковку для серии продуктов Merten Antique</p>
+                    <p>Решение: жесткая конструкция квадратной формы крышка-дно. Верхняя крышка упаковки имеет высечку, логотип — блинтовое тиснение. Ложемент выполнен из флокированного материала</p>
+                </div>
+            </CustomGrid>
+            <CustomGrid columns="3">
+                <div>
+                    <img src="https://static0.wow2print.com/storage/119/content/image/1888311155687a5949d19162.47086229.webp" alt="" />
+                    <img src="https://static0.wow2print.com/storage/119/content/image/1800308428687a594a285704.81164504.webp" alt="" />
+                </div>
+                <img src="https://static0.wow2print.com/storage/119/content/image/860729069687a594a5d3416.68311912.webp" alt="">
+                <img src="https://static0.wow2print.com/storage/119/content/image/593346523687a59454f9277.80601107.webp" alt="" />
+            </CustomGrid>
+            <!-- Упаковка Furland -->
+            <section>
+                <div class="fab-block-awards-header">
+                    <h2>Упаковка Advent Creative Box</h2>
+                    <h3>2025 год</h3>
+                </div>
+                <CustomGrid classes="fab-block-awards" columns="2">
+                        <figure>
+                            <img width="196" src="https://static0.wow2print.com/storage/119/content/image/1770244702687a5946c47cb0.10885651.webp" alt="">
+                            <figcaption>Победитель в номинации «Концепт года» RosUpack 2017</figcaption>
+                        </figure>
+                        <img src="https://static0.wow2print.com/storage/119/content/image/2079332981687a59489c0795.22511773.webp" alt="">
+                </CustomGrid>
+             </section>
+
+            <CustomGrid columns="2">
+                <div>
+                    <p>Данный проект разрабатывался для мехового головного убора бренда Furland</p>
+                </div>
+                <div>
+                    <p>Задача: создать упаковку для мехового головного убора из меха соболя.</p>
+                    <p>Решение: жесткая конструкция квадратной формы. Раздвижная конструкция упаковки служит для удобного доставания продукта изнутри упаковки. Верхняя крышка имеет вырубку и задекорирована мехом. Упаковка оснащена ручками для удобства переноски</p>
+                </div>
+            </CustomGrid>
+            <CustomGrid columns="3">
+                <img style="grid-area: span 2 / span 2;" src="https://static0.wow2print.com/storage/119/content/image/1332126708687a594630ddc4.13386890.webp" alt="">
+                    <img style="" src="https://static0.wow2print.com/storage/119/content/image/1616033777687a5944c07d45.53468088.webp" alt="">
+                    <img style="" src="https://static0.wow2print.com/storage/119/content/image/500132914687a59459769b4.84279710.webp" alt="">
+            </CustomGrid>
+
+
+
+        </div>
+    </div>
+</Layout>
+
+<style lang="scss" is:global>
+    .fab-block-awards-header {
+        display: flex;
+        flex-direction: column;
+        row-gap: .25rem;
+        margin: 0 0 2rem;
+        & h3 {
+            color: var(--color-gray-3);
+            font-size: 1rem;
+        }
+    }
+    .fab-block-awards {
+        padding: 0rem clamp(1.5rem, 0.4437rem + 4.5070vw, 4.5rem);
+        background-color: var(--color-gray-1);
+        & figure {
+            max-width: 25rem;
+            margin: -2rem 0 4rem;
+        }
+        & figcaption {
+            font-weight: 700;
+            color: var(--color-black);
+            margin: 1rem 0 0;
+        }
+        & > img {
+            @media (min-width: 768px) {
+                transform: scale(1.2);
+            }
+
+        }
+    }
+</style>
