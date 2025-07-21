@@ -115,13 +115,19 @@ const pageData = landingPageData?.data[0];
         <h1 class="visually-hidden">{pageData.title}</h1>
     <div class="content-grid">
         <a href="#" class="fab-button-open-marquiz" onclick="Marquiz.showModal('684ee254f13a8d0019d0a865')">Заказать</a>
-            {
+        {
+            pageData?.packageTypes?.length > 0 && 
+            <div>
+{
                 pageData?.packageTypes?.map( (packagesType, id) =>
                     <>
                         <TestAdaptiveBanner hidden={id > 0 ? true : false } dataId={`construction-${id+1}`} {...packagesType} />
                     </>
                 )
             }
+            </div>
+        }
+            
             <ConstructionLinks {slug} titlePage={pageData.title} {...pageData} />
             <Announce
                 maxWidthBlock={pageData.announceMaxWidth}

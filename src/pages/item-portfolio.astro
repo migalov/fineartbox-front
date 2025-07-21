@@ -1,0 +1,303 @@
+---
+import CustomGrid from "../components/CustomGrid.astro";
+import Layout from "../layout.astro";
+import ReadyWorks from "../components/ReadyWorks.astro";
+import qs from "qs";
+import Icon from "../components/Icon.astro";
+
+
+
+const paramsPage = {
+    populate: "*",
+};
+
+const queryStringPage = qs.stringify(paramsPage, { encode: true });
+const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1xt1cub3hl4u8tlz1gginxv/?${queryStringPage}`).then(res => res.json());
+---
+
+<Layout>
+
+    <div class="fab-page">
+        <div class="content-grid">
+            <div class="fab-product-portfolio">
+                <div class="fab-product-portfolio-left">
+                    <div class="splide fab-product-portfolio-preview" aria-labelledby="carousel-heading" id="main-slider">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide"><img src="/img/item-portfolio/1.jpg" /></li>
+                            <li class="splide__slide"><img src="/img/item-portfolio/2.jpg" /></li>
+                            <li class="splide__slide"><img src="/img/item-portfolio/3.jpg" /></li>
+                            <li class="splide__slide"><img src="/img/item-portfolio/4.jpg" /></li>
+                            <li class="splide__slide"><img src="/img/item-portfolio/5.jpg" /></li>
+                            <li class="splide__slide"><img src="/img/item-portfolio/6.jpg" /></li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div class="fab-product-portfolio-right">
+                    <div class="splide  fab-product-portfolio-thumbs" aria-labelledby="carousel-heading" id="thumbnail-slider">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                            <li class="splide__slide" style="background-image: url(/img/item-portfolio/1.jpg);"></li>
+                            <li class="splide__slide" style="background-image: url(/img/item-portfolio/2.jpg);"></li>
+                            <li class="splide__slide" style="background-image: url(/img/item-portfolio/3.jpg);"></li>
+                            <li class="splide__slide" style="background-image: url(/img/item-portfolio/4.jpg);"></li>
+                            <li class="splide__slide" style="background-image: url(/img/item-portfolio/5.jpg);"></li>
+                            <li class="splide__slide" style="background-image: url(/img/item-portfolio/6.jpg);"></li>
+                            </ul>
+                        </div>
+                        <div class="splide__arrows">
+                            <button class="splide__arrow splide__arrow--prev">
+                                <Icon id="arrow-slider" width="20" height="40" />
+                            </button>
+                            <button class="splide__arrow splide__arrow--next">
+                                <Icon id="arrow-slider" width="20" height="40" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <h1>Картонная коробка крышка-дно</h1>
+                <CustomGrid columns="2">
+                    <div>
+                        Коробка крышка-дно – одна из наиболее популярных форм упаковки товара. Она удобна в использовании и подходит для разных товарных нишь: от косметической до электронной промышленности. Такая конструкция используется при создании подарочных полиграфических материалов. 
+                    </div>
+                    <div>
+                        И не только благодаря своей универсальной форме, но и потому что выигрышно смотрится на фоне большинства прочих вариантов, не говоря уже о широчайших дизайнерских возможностях.
+                    </div>
+                </CustomGrid>
+                <CustomGrid columns="2">
+                    <div>
+                        <h2>Процесс изготовления</h2>
+                        <p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p>
+                        <p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>
+                        <p>Следующим этапом является выбор материала — обычно используют плотный картон или дизайнерскую бумагу, в зависимости от назначения коробки и желаемого визуального эффекта. Затем проводится вырубка: на специальном оборудовании листы картона нарезаются по заданному шаблону, включая элементы крышки и донышка. После этого детали проходят процесс биговки — нанесения линий сгиба, благодаря которым коробка легко и аккуратно собирается.</p>
+                        <p>На этапе печати и отделки применяется множество техник: тиснение, ламинация, выборочный лак, фольгирование и другие виды декоративной обработки. Это придаёт коробке уникальность и повышает её привлекательность. Далее следует ручная или автоматизированная сборка, после чего изделия упаковываются и подготавливаются к отправке заказчику. Таким образом, производство коробок крышка-дно — это комплексный процесс, сочетающий технологии, дизайн и внимание к деталям.</p>
+                    </div>
+                    <div>
+                        <h2>Конструкция в чертеже</h2>
+                        <img src="/img/Blueprint.png" />
+                        <p>Для запроса стоимости и заказа тиража просим указать:</p>
+                        <ul>
+                            <li>размеры коробки в сантиметрах или миллиметрах, ШГВ (ширина, глубина, высота);</li>
+                            <li>тип и конструкцию коробки (самосборная, клееная, с обтяжкой); </li>
+                            <li>вид и вес содержимого, нужен ли ложемент; </li>
+                            <li>требуемое количество и сроки</li>
+                        </ul>
+                    </div>
+                </CustomGrid>
+                <!-- <code>
+                    {JSON.stringify(landingPageData.data.packagesTwo)}
+                </code> -->
+                <section>
+                    <h2>Реализованные работы</h2>
+                    {
+                        <ReadyWorks packages={landingPageData.data.packagesTwo} />
+                    }
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <style lang="scss " is:global>
+        /* General Splide Styling */
+    .splide {
+    margin: 0 auto;
+    }
+
+.splide__slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+}
+
+.splide__arrow {
+    background: transparent;
+}
+
+#main-slider {
+  height: 100%;
+  margin-bottom: 20px; /* Space between main slider and thumbnails */
+}
+
+#main-slider .splide__slide {
+  height: 100%; /* Larger height for main slider */
+  font-size: 28px; /* Larger font for main slider */
+}
+
+#main-slider .splide__track {
+  height: 100%;
+}
+
+#thumbnail-slider {
+    /* height: auto!important; */
+    @media (min-width: 768px) {
+    height: auto ;
+    }
+  
+}
+
+#thumbnail-slider .splide__slide {
+  height: 100px; /* Smaller thumbnails */
+  font-size: 16px;
+}
+
+.fab-product-portfolio {
+  width: 100%;
+  height: min(50vh, 640px);
+  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  /* display: flex;
+  align-items: stretch; */
+  flex-wrap: wrap;
+  gap: 20px;
+  @media (min-width: 768px) {
+      display: grid;
+        grid-template-columns: 5fr 1fr;
+  }
+}
+.fab-product-portfolio .fab-product-portfolio-left {
+  /* width: 75%; */
+  width: 100%;
+  /* height: 100%; */
+  overflow: hidden;
+  flex: 1;
+}
+
+.fab-product-portfolio .fab-product-portfolio-right {
+  /* width: 22%; */
+  width: 100%;
+  margin-left: auto;
+
+  overflow: hidden;
+  @media (min-width: 768px) {
+  /* height: 100%; */
+  }
+}
+
+/* Main slider styling */
+#main-slider {
+  width: 100%; /* Adjust width as needed */
+  height: 100%;
+}
+
+/* Vertical thumbnail slider styling */
+#thumbnail-slider {
+  width: 100%; /* Adjust width as needed */
+  height: 100%; /* Full height for vertical layout */
+  overflow: hidden; /* Prevent overflowing slides */
+}
+
+#thumbnail-slider .splide__list {
+  display: flex;
+  @media (min-width: 768px) {
+  flex-direction: column;
+  }
+ /* Make the slides stack vertically */
+}
+
+#thumbnail-slider .splide__slide {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    height: 100px; /* Adjust thumbnail height */
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .5;
+
+    &::before, &::after {
+        content: "";
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        transform: rotate(0deg);
+        left: 0px;
+        transition: var(--transition-default);
+    }
+    &::before {
+        border-width: 1rem 0 1rem 1rem;
+        border-color: transparent transparent transparent transparent;
+    }
+    &::after {
+        border-width: .75rem 0 .75rem .75rem;
+        border-color: transparent transparent transparent transparent;
+    }
+}
+
+#thumbnail-slider .splide__slide.is-active {
+
+  background-color: #fff;
+  color: #007bff;
+  opacity: 1;
+  border-color: transparent;
+  /* clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 calc(50% + 1rem), 1rem 50%, 0 calc(50% - 1rem), 0 0); */
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    transform: rotate(0deg);
+    left: 0px;
+  }
+  &::before {
+    border-width: 1rem 0 1rem 1rem;
+    border-color: transparent transparent transparent var(--color-white);
+  }
+  &::after {
+    border-width: .75rem 0 .75rem .75rem;
+    border-color: transparent transparent transparent var(--color-orange);
+  }
+}
+    </style>
+    <script src="./splide.min.js" is:inline></script>
+    <script>
+        var main = new Splide("#main-slider", {
+            type: "fade",
+            pagination: false,
+            arrows: false,
+            cover: true
+            });
+
+            var thumbnails = new Splide("#thumbnail-slider", {
+            type: 'slide',
+            pagination: false,
+            isNavigation: true,
+            height: "100%",
+            perPage: 1,
+            perMove: 1,
+            wheel: true,
+            mediaQuery: "min",
+            fixedHeight: `6rem`,
+            gap: `1rem`,
+            breakpoints: {
+                640: {
+                    // fixedWidth: 66,
+                    
+                },
+                768: {
+                    direction: "ttb",
+                    fixedHeight: `20%`,
+                    dragMinThreshold: ""
+                }
+                
+            }
+        });
+
+        main.sync(thumbnails);
+        main.mount();
+        thumbnails.mount();
+    </script>
+</Layout>
