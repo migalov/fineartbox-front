@@ -8,6 +8,11 @@ import ButtonDefault from "../components/Button/ButtonDefault.astro";
 const paramsPage = {
     populate: "*"
 };
+const paperBugsParameters = {
+
+        populate: "*"
+
+};
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/packages?${queryStringPage}`).then(res => res.json());
@@ -15,10 +20,27 @@ const pageData = landingPageData.data;
 const typesArray = await fetch(`${import.meta.env.HOST_API}/package-types`).then(res => res.json());
 const formsArray = await fetch(`${import.meta.env.HOST_API}/package-forms`).then(res => res.json());
 const appointmentsArray = await fetch(`${import.meta.env.HOST_API}/package-appointments`).then(res => res.json());
+const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paperBugsParameters}`).then(res => res.json());
+
 ---
 
 <Layout title="Портфолио">
     <div class="content-grid">
+        <code>
+          {
+            JSON.stringify(paperBagsArray.data[10])
+          }
+        </code>
+        <!-- {
+          JSON.stringify(paperBagsArray.data.map( item => 
+            // <>
+            //   {
+            //     item?.package_appointment?.title == "Бумажная упаковка" && <code>{JSON.stringify(item)}</code>
+            //   }
+            // </>
+            <code>{JSON.stringify(item)}</code>
+          ))
+        } -->
         <Breadcrumbs />
        <div class="fab-filters">
       <!-- Кастомный селект: Тип -->

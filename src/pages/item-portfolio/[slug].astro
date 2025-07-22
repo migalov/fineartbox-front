@@ -1,0 +1,45 @@
+---
+import CustomGrid from "../components/CustomGrid.astro";
+import Layout from "../../layout.astro";
+import ReadyWorks from "../components/ReadyWorks.astro";
+import qs from "qs";
+import Icon from "../components/Icon.astro";
+
+export async function getStaticPaths() {
+  const response = await fetch(`${import.meta.env.HOST_API}/packages/`);
+  const data = await response.json();
+
+  return data.data.map((card) => {
+    return {params: {slug: `${card.href.replace("https://fineartbox.ru/", "")}`}};
+  });
+}
+
+const { slug } = Astro.props;
+
+
+  // const response = await fetch(`${import.meta.env.HOST_API}/packages/`);
+  // const data = await response.json();
+---
+
+<Layout>
+    <code>
+      {
+        JSON.stringify(slug)
+      }
+    </code>
+    <!-- <code>
+      {
+        JSON.stringify(data)
+      }
+    </code> -->
+    <!-- {
+      data.data.map( card =>
+        <code>
+          {
+            JSON.stringify({params: {slug: card.href}})
+          }
+        </code>
+      )
+    } -->
+</Layout>
+    

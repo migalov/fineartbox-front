@@ -4,6 +4,7 @@ import Layout from "../layout.astro";
 import ReadyWorks from "../components/ReadyWorks.astro";
 import qs from "qs";
 import Icon from "../components/Icon.astro";
+import ButtonDefault from "../components/Button/ButtonDefault.astro";
 
 
 
@@ -57,6 +58,11 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
                     </div>
                 </div>
             </div>
+            <CustomGrid columns="2">
+                <ButtonDefault tag="button">Оставить заявку</ButtonDefault>
+                <ButtonDefault tag="a">Cвязаться с нами</ButtonDefault>
+            </CustomGrid>
+
             <section>
                 <h1>Картонная коробка крышка-дно</h1>
                 <CustomGrid columns="2">

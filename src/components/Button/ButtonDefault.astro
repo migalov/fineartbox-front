@@ -3,7 +3,7 @@ const {tag,  href, idButton, reverse, sizeLabel} = Astro.props
 ---
 
 {
-    tag == "a" && <a class:list={[`fab-button`]} style={sizeLabel && `--font-size: ${sizeLabel}`} href={href} data-reverse={reverse} id={idButton}>
+    tag == "a" && <a class:list={[`fab-button`]} style={sizeLabel && `--font-size: ${sizeLabel};` + `dd`} href={href} data-reverse={reverse} id={idButton}>
         <slot />
     </a>
 }
@@ -16,6 +16,9 @@ const {tag,  href, idButton, reverse, sizeLabel} = Astro.props
 
 <style lang="scss" is:global>
     .fab-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 1.25rem;
         padding: .5em;
         background-color: var(--color-orange);
