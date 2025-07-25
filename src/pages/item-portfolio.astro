@@ -5,6 +5,7 @@ import ReadyWorks from "../components/ReadyWorks.astro";
 import qs from "qs";
 import Icon from "../components/Icon.astro";
 import ButtonDefault from "../components/Button/ButtonDefault.astro";
+import PortfolioSprite from "../sprites/PortfolioSprite.astro";
 
 
 
@@ -59,8 +60,12 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
                 </div>
             </div>
             <CustomGrid columns="2">
-                <ButtonDefault tag="button">Оставить заявку</ButtonDefault>
-                <ButtonDefault tag="a">Cвязаться с нами</ButtonDefault>
+                <div>
+                    <script data-b24-form="click/64/gaf2nv" data-skip-moving="true" is:inline>(function(w,d,u){var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})(window,document,'https://cdn-ru.bitrix24.ru/b13109976/crm/form/loader_64.js');</script>
+                    <ButtonDefault color="var(--color-orange)" tag="button">Оставить заявку</ButtonDefault>
+                </div>
+                
+                <ButtonDefault tag="a" href="tel:+74952150977"  color="violet"><Icon id="phone" width="25" height="24" />&nbsp;Cвязаться с нами</ButtonDefault>
             </CustomGrid>
 
             <section>
@@ -105,6 +110,7 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
             </section>
         </div>
     </div>
+    <PortfolioSprite />
 
     <style lang="scss " is:global>
         /* General Splide Styling */
@@ -152,6 +158,8 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
 #thumbnail-slider .splide__slide {
   height: 100px; /* Smaller thumbnails */
   font-size: 16px;
+  margin: 0;
+  border: 0;
 }
 
 .fab-product-portfolio {
@@ -289,14 +297,18 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
             fixedHeight: `6rem`,
             gap: `1rem`,
             breakpoints: {
+                0: {
+                    fixedWidth: `20%`,
+                },
                 640: {
-                    // fixedWidth: 66,
+                    
                     
                 },
                 768: {
                     direction: "ttb",
                     fixedHeight: `20%`,
-                    dragMinThreshold: ""
+                    dragMinThreshold: "",
+                    fixedWidth: `100%`,
                 }
                 
             }

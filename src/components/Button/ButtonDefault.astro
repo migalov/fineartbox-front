@@ -1,15 +1,15 @@
 ---
-const {tag,  href, idButton, reverse, sizeLabel} = Astro.props
+const {tag,  href, idButton, reverse, sizeLabel, color} = Astro.props
 ---
 
 {
-    tag == "a" && <a class:list={[`fab-button`]} style={sizeLabel && `--font-size: ${sizeLabel};` + `dd`} href={href} data-reverse={reverse} id={idButton}>
+    tag == "a" && <a class:list={[`fab-button`, color == "violet" && `fab-button--violet`]} style={sizeLabel && `--font-size: ${sizeLabel};` + `dd`} href={href} data-reverse={reverse} id={idButton}>
         <slot />
     </a>
 }
 {
     tag == "button" &&
-        <button class:list={[`fab-button`]} style={sizeLabel && `--font-size: ${sizeLabel}`} data-reverse={reverse} id={idButton}>
+        <button class:list={[`fab-button`, color == "violet" && `fab-button--violet`]} style={sizeLabel && `--font-size: ${sizeLabel}`} data-reverse={reverse} id={idButton}>
             <slot />
         </button>
 }
@@ -31,6 +31,7 @@ const {tag,  href, idButton, reverse, sizeLabel} = Astro.props
             background-color: var(--color-white);
             color: var(--color-orange);
             outline: 1px solid var(--color-orange);
+            text-decoration: none;
         }
         &[reverse="true"] {
             background-color: var(--color-white);
@@ -38,6 +39,14 @@ const {tag,  href, idButton, reverse, sizeLabel} = Astro.props
             &:hover {
                 background-color: var(--color-orange);
                 color: var(--color-white);
+            }
+        }
+        &.fab-button--violet {
+            background-color: var(--color-violet-1);
+            &:hover {
+                outline: 1px solid var(--color-violet-1);
+                background-color: var(--color-white);
+                color: var(--color-violet-1);
             }
         }
 
