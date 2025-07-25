@@ -9,9 +9,7 @@ const paramsPage = {
     populate: "*"
 };
 const paperBugsParameters = {
-
-        populate: "*"
-
+  populate: "*"
 };
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
@@ -20,27 +18,17 @@ const pageData = landingPageData.data;
 const typesArray = await fetch(`${import.meta.env.HOST_API}/package-types`).then(res => res.json());
 const formsArray = await fetch(`${import.meta.env.HOST_API}/package-forms`).then(res => res.json());
 const appointmentsArray = await fetch(`${import.meta.env.HOST_API}/package-appointments`).then(res => res.json());
-const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paperBugsParameters}`).then(res => res.json());
+const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?populate=*`).then(res => res.json());
 
 ---
 
 <Layout title="Портфолио">
     <div class="content-grid">
-        <code>
+        <!-- <code>
           {
-            JSON.stringify(paperBagsArray.data[10])
+            JSON.stringify(paperBagsArray.data)
           }
-        </code>
-        <!-- {
-          JSON.stringify(paperBagsArray.data.map( item => 
-            // <>
-            //   {
-            //     item?.package_appointment?.title == "Бумажная упаковка" && <code>{JSON.stringify(item)}</code>
-            //   }
-            // </>
-            <code>{JSON.stringify(item)}</code>
-          ))
-        } -->
+        </code> -->
         <Breadcrumbs />
        <div class="fab-filters">
       <!-- Кастомный селект: Тип -->
@@ -69,7 +57,7 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
           <li data-tag="">Назначение</li>
           {
             appointmentsArray.data.map( type => 
-                <li data-tag={type?.tag}>{type?.title}</li>
+                type.tag !== "for-bottles" && <li data-tag={type?.tag}>{type?.title}</li>
             )
           }
         </ul>
@@ -91,6 +79,22 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
         </ul>
       </div>
 
+      <!-- Кастомный селект: Форма -->
+      <div class="fab-select-wrapper">
+        <div id="paperToggle" class="fab-select-button">
+          <span id="paperLabel">Бумажные пакеты</span>
+          <span><Icon id="dropdown-arrow" width="12" height="8"></span>
+        </div>
+        <ul id="paperOptions" class="fab-select-list">
+          <li data-tag="">Бумажные пакеты</li>
+          {
+            paperBagsArray.data.map( type => 
+                <li data-tag={type?.tag}>{type?.title}</li>
+            )
+          }
+        </ul>
+      </div>
+
     </div>
         <div class="fab-portfolio-grid">
           {
@@ -102,6 +106,7 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
                 data-type={pkg?.package_types.map( type => `${type.tag}` )}
                 data-purpose={pkg?.package_appointment?.tag}
                 data-shape={pkg?.package_form?.tag}
+                data-paper={pkg?.paperBags.map( type => `${type?.tag}` )}
 
                 
               >
@@ -141,7 +146,7 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
     }
     @media (min-width: 768px) {
       .fab-filters {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
@@ -240,12 +245,14 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
     let state = {
       type: '',
       purpose: '',
-      shape: ''
+      shape: '',
+      paper: ''
     };
 
       setupCustomSelect('typeToggle', 'typeOptions', 'typeLabel', 'type');
       setupCustomSelect('purposeToggle', 'purposeOptions', 'purposeLabel', 'purpose');
       setupCustomSelect('shapeToggle', 'shapeOptions', 'shapeLabel', 'shape');
+      setupCustomSelect('paperToggle', 'paperOptions', 'paperLabel', 'paper');
 
     function filterPackages() {
       const packages = document.querySelectorAll('.fab-portfolio-grid > a');
@@ -253,8 +260,9 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
         const matchesType = !state.type || pkg.dataset.type === state.type;
         const matchesPurpose = !state.purpose || pkg.dataset.purpose === state.purpose;
         const matchesShape = !state.shape || pkg.dataset.shape === state.shape;
+        const paperShape = !state.paper || pkg.dataset.paper.includes(state.paper);
 
-        pkg.style.display = (matchesType && matchesPurpose && matchesShape) ? '' : 'none';
+        pkg.style.display = (matchesType && matchesPurpose && matchesShape && paperShape) ? '' : 'none';
       });
     }
 
@@ -287,7 +295,8 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/packages?${paper
       state = {
         type: '',
         purpose: '',
-        shape: ''
+        shape: '',
+        paper: ''
       };
       filterPackages();
       document.querySelectorAll(".fab-select-list").forEach( list => {

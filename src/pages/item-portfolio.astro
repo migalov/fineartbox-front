@@ -59,7 +59,7 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
                     </div>
                 </div>
             </div>
-            <CustomGrid columns="2">
+            <CustomGrid classes={"fab-product-portfolio-buttons"} columns="2">
                 <div>
                     <script data-b24-form="click/64/gaf2nv" data-skip-moving="true" is:inline>(function(w,d,u){var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})(window,document,'https://cdn-ru.bitrix24.ru/b13109976/crm/form/loader_64.js');</script>
                     <ButtonDefault color="var(--color-orange)" tag="button">Оставить заявку</ButtonDefault>
@@ -229,6 +229,7 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
     background-repeat: no-repeat;
     background-size: cover;
     opacity: .5;
+    overflow: hidden;
 
     &::before, &::after {
         content: "";
@@ -256,6 +257,7 @@ const landingPageData = await fetch(`${import.meta.env.HOST_API}/custom-pages/r1
   color: #007bff;
   opacity: 1;
   border-color: transparent;
+  overflow: hidden;
   /* clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 calc(50% + 1rem), 1rem 50%, 0 calc(50% - 1rem), 0 0); */
   &::before, &::after {
     content: "";
