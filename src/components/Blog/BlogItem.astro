@@ -1,4 +1,4 @@
-<div class="fab-blog-item">
+<a class="fab-blog-item" href="#">
     <img src="/img/blog.jpg" alt="">
     <div>
         <h3>Оптовая упаковка для новогодних подарков — создайте магию праздника с FINEARTBOX</h3>
@@ -8,7 +8,7 @@
     <div class="fab-blog-item__annotation">
         Картонная упаковка новогодних подарков — простой и эффектный способ создать праздничное настроение, защитить содержимое и выразить заботу и внимание тому, кому предназначен презент. Профессиональное полиграфическое 3d-изделие, выполненное специалистами компании FINEARTBOX сделает праздничный момент волшебным для детей и взрослых. Но позаботиться об оптовом заказе лучше заранее.
     </div>
-</div>
+</a>
 
 <style lang="scss" is:global>
     .fab-blog-item {
@@ -17,10 +17,49 @@
         row-gap: var(--global-gap);
         & * {
             font-family: var(--font-family);
+            color: var(--color-black);
         }
 
         & time {
             color: var(--color-gray-4)
         }
+
+        &:hover {
+            text-decoration: none;
+            color: inherit;
+        }
     }
 </style>
+
+<script>
+
+  	const title = document.querySelector(".widget-blog__news_item_title h3").innerText;
+    const quote = document.querySelector(".widget-blog__news_item_quote").innerText;
+    const img = document.querySelector(".widget-blog__news_item img")?.src;
+    const href = document.querySelector(".widget-blog__news_item")?.getAttribute("data-url");
+    const newBlockBlog = document.querySelector(".fab-blog-item");
+    const formatDate = (input) => {
+        // Разделяем строку на дату и время
+        const [datePart] = input.split(' ');
+        
+        // Разделяем дату на день, месяц и год
+        const [day, month, year] = datePart.split('-').map(Number);
+        
+        // Массив названий месяцев в родительном падеже
+        const months = [
+            'января', 'февраля', 'марта', 'апреля', 
+            'мая', 'июня', 'июля', 'августа', 
+            'сентября', 'октября', 'ноября', 'декабря'
+        ];
+        
+        // Формируем итоговую строку
+        return `${day} ${months[month - 1]} ${year}`
+    }
+
+    newBlockBlog.querySelector("h3").innerText = title;
+    newBlockBlog.querySelector("time").innerText = formatDate(document.querySelector(".widget-blog__news_item .widget-blog__news_item_date").innerText);
+    newBlockBlog.querySelector(".fab-blog-item__annotation").innerText = quote;
+    newBlockBlog.querySelector("img").src = img;
+    newBlockBlog.href = href;
+    
+</script>

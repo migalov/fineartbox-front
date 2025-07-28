@@ -45,7 +45,7 @@
 }
 
 .content-grid {
-    row-gap: 4rem;
+    row-gap: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
     --content-max-width: 100%;
 
     * p {

@@ -1,0 +1,33 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<a href="/about-project/achievements" class="fab-achievement-banner">
+    <Icon width="100" height="72" id="achievement" />
+    <div>
+        <h3>Наши достижения</h3>
+        <p>Звания и награды за лучшую упаковку</p>
+    </div>
+    
+</a>
+
+<style lang="scss" is:global>
+    .fab-achievement-banner {
+        background-image: url("https://static0.wow2print.com/storage/119/content/image/61704957468873799c52b79.21139584.png");
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: clamp(1rem, 0.6479rem + 1.5023vw, 2rem) clamp(1rem, 0.2958rem + 3.0047vw, 3rem);
+        border: 1px solid var(--color-gray-2);
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 0 100%);
+        text-decoration: none;
+        color: var(--color-black);
+        &:hover {
+            box-shadow: 1px 0px 8px 52px rgba(0, 0, 0, 0.54);
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+</style>
