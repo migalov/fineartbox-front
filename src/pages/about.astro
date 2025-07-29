@@ -4,17 +4,20 @@ import Announce from "../components/Announce.astro";
 import BlogRoot from "../components/Blog/BlogRoot.astro";
 import CustomGrid from "../components/CustomGrid.astro";
 import FeaturesRoot from "../components/Features/FeaturesRoot.astro";
+import Icon from "../components/Icon.astro";
 import OneHero from "../components/OneHero.astro";
 import StageWorkRoot from "../components/StagesWorks/StageWorkRoot.astro";
+import TestAdaptiveBanner from "../components/TestAdaptiveBanner.astro";
 import YandexWidget from "../components/YandexWidget.astro";
 import Layout from "../layout.astro";
 import insertNbspAfterPrepositions from "../scripts/testwords";
 import SpriteFeature from "../SpriteFeature.astro";
 
 const Banner = {
-    Banner: {
+    slide: {
         backgoundDesktop: "https://static0.wow2print.com/storage/119/content/image/1736823257688731b917b6e9.67109619.webp",
-        backgroundMobile: "https://static0.wow2print.com/storage/119/content/image/1940737784688731b8a06086.29529607.webp"
+        backgroundMobile: "https://static0.wow2print.com/storage/119/content/image/1940737784688731b8a06086.29529607.webp",
+        backgroundSize: 125
     }
 }
 ---
@@ -22,7 +25,8 @@ const Banner = {
 <Layout title="О компании">
     <div class="fab-page">
         <div class="content-grid">
-            <OneHero {...Banner} />
+            <TestAdaptiveBanner {...Banner}  />
+            <!-- <OneHero {...Banner} /> -->
             <h1>О компании</h1>
             <section>
                 <h2>Кто мы</h2>
@@ -87,10 +91,75 @@ const Banner = {
                     <img style="grid-area: auto" src="https://static0.wow2print.com/storage/119/content/image/25834392368838595d50381.68536226.webp" alt="" />
                     <img style="grid-area: auto" src="https://static0.wow2print.com/storage/119/content/image/176045869268838595880e70.12556903.webp" alt="" />
                     <img style="grid-area: auto" src="https://static0.wow2print.com/storage/119/content/image/1170778549688385951965e5.32919228.webp" alt="" />
-                    <img style="grid-area: span 2 / span 2" src="https://static0.wow2print.com/storage/119/content/image/206146467168838594a31fc6.27164288.webp" alt="" />
+                    <img style="grid-area: auto / span 2" src="https://static0.wow2print.com/storage/119/content/image/206146467168838594a31fc6.27164288.webp" alt="" />
                 </CustomGrid>
             </section>
             <AchivementBanner />
+            <ul class="fab-faq-block" id="order">
+        <li>
+          <ul>
+            <!-- <li class="fab-faq-item">
+              <label class="fab-faq-item-head">
+                <h3>Кто мы</h3>
+                <input type="checkbox">
+                <Icon width="24" height="24" id="arrow" />
+              </label>
+              <div class="fab-faq-item-answer">
+                <div class="fab-faq-item-answer-inner">
+                  <p>Проект FINEARTBOX создан в 2016 году. Наш проект FINEARTBOX занимается разработкой и изготовлением упаковки различной сложности, в том числе, персонализированной малотиражной упаковкой. Проект FINEARTBOX входит в группу компаний FINEARTPRINT. Он принадлежит группе компаний: ООО АртСервис-Дизайн и ООО «ТиДжиПак», которые были образованы в 2005 году. Спектор наших услуг большой: дизайн-студия, конструкторское бюро и собственное производство. Мы создадим для вас уникальный продукт, который удивит всех – вас, ваших клиентов и партнеров. Удачная конструкция упаковки повышает интерес потребителя к товару более чем на 30%. При этом мы исходим из того, что упаковка должна быть удобной, эргономичной, эстетичной, привлекающей внимание. Собственное производство позволяет нам контролировать каждый этап качества продукции – от разработки конструкции и подготовки макетов до логистики. Накопленный опыт и профессионализм сотрудников позволяют FineArtBox предоставить клиентам полный комплекс услуг – инновационные дизайнерские идеи, качественную печать европейского уровня, а также самые актуальные и востребованные на рынке технологии послепечатной обработки. Это поможет вам повысить узнаваемость собственного бренда, успешно продвигать свой продукт на рынке, увеличивать объемы продаж.</p>
+                </div>
+              </div>
+            </li> -->
+            <li class="fab-faq-item">
+              <label class="fab-faq-item-head">
+                <h3>Почему выгодно работать с нами</h3>
+                <input type="checkbox">
+                <Icon width="24" height="24" id="arrow" />
+              </label>
+              <div class="fab-faq-item-answer">
+                <div class="fab-faq-item-answer-inner">
+                    <ul>
+                        <li>Мы экономим время и усилия клиента.</li>
+                        <li>Мы предлагаем решения, а не детализируем брифы.</li>
+                        <li>Мы внимательно относимся к айдентике бренда.</li>
+                        <li>Мы гарантируем качество продукции.</li>
+                        <li>От формата до управления цветом – все в строгом соответствии с корпоративным стилем.</li>
+                        <li>Мы экономим бюджет клиента.</li>
+                    </ul>
+                    <p>Свидетельства нашей способности решать любые задачи – современное оборудование, программы повышения квалификации персонала, опыт работы на высококонкурентном рынке, лояльные клиенты в лице глобальных корпораций.</p> 
+                </div>
+              </div>
+            </li>
+            <li class="fab-faq-item">
+              <label class="fab-faq-item-head">
+                <h3>Как мы работаем?</h3>
+                <input type="checkbox">
+                <Icon width="24" height="24" id="arrow" />
+              </label>
+              <div class="fab-faq-item-answer">
+                <div class="fab-faq-item-answer-inner">
+                  <p>Каждый проект подразумевает определенный алгоритм. Сначала – определение потребностей клиента, подбор конструкций упаковки и переплетных материалов. Далее мы конструируем упаковку, изготавливаем пилотные образцы, вносим правки, утверждаем финальную конструкцию. Следующий этап: подготовка проекта для запуска в производство (покупка материалов, изготовление штампов, клише и т.д.). Собственное производство позволяет нам контролировать и оптимизировать каждый этап проекта – печать, послепечатную обработку, отделку (ламинация, лак, тиснение, вырубка), сборку упаковки, отгрузку готовой продукции клиенту. Мы стараемся быстро и точно определять потребности своих клиентов, оперативно изготавливать пилотные образцы упаковки перед запуском в производство.</p>
+                </div>
+              </div>
+            </li>
+            <li class="fab-faq-item">
+              <label class="fab-faq-item-head">
+                <h3>Разработка конструкций</h3>
+                <input type="checkbox">
+                <Icon width="24" height="24" id="arrow" />
+              </label>
+              <div class="fab-faq-item-answer">
+                <div class="fab-faq-item-answer-inner">
+                    <p>Клиенты высоко ценят наш конструкторский отдел. Его сотрудники это заслужили – они постоянно экспериментируют в работе с материалами и конструктивными решениями. Мы оперативно создадим чертежи и изготовим пилотный образец упаковки для вашего проекта. Вы сможете увидеть реализованную конструкцию в объеме – это очень важно для зрительного восприятия конструкции упаковки. Затем в пилотный образец конструкции можно будет вносить корректировки и устранять недочеты до запуска финального тиража в производство.</p>
+                    <p>Также мы предлагаем вам разработку конструкции упаковки с вашей дизайнерской идей. К примеру, креативное бюро либо дизайн-агентство предоставляет нам оригинальную идею продукта, а мы в свою очередь предлагаем несколько вариантов конструкций с выбором переплетных материалов. Пилотный образец будет создан с учетом всех технологических деталей, необходимых для РЕАЛЬНОГО производства упаковки. Для нас разработка новых конструкций –ежедневная любимая работа. Мы активно развиваем конструкторский отдел и накапливаем опыт.</p>
+                    <p>FineArtBox решает следующие задачи клиента: конструирование упаковки, подбор технологии изготовления, предложение разных переплетных материалов для упаковки и ложемента, оперативное изготовление пилотных образцов упаковки для утверждения конструкции и материалов. У нас отработан стандартный процесс, при котором новый тираж нестандартной упаковки не запускается в производство до тех пор, пока не утвержден пилотный образец. Это значит, что все наши «коробочки» легко собираются и закрываются, все изделия, где используется ложемент, хорошо зафиксированы и их удобно извлекать.</p>
+                    <p>Мы сконструируем и изготовим для вас нетиповую премиальную продукцию. Конечно, стоимость нестандартной подарочной упаковки всегда выше, чем цена типовой упаковки, но и результат сравнивать нельзя!</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
         </div>
     </div>
@@ -102,3 +171,221 @@ const Banner = {
         </symbol>
     </svg>
 </Layout>
+
+<style lang="scss" is:global>
+    .fab-faq-item {
+    position: relative;
+    padding: 1em 0;
+    // border-bottom: 1px solid var(--color-medium-gray);
+    list-style-type: none!important;
+  }
+  .fab-faq-item ul > li {
+    list-style-type: disc!important;
+  }
+  .fab-faq-item ol > li {
+    list-style-type: decimal!important;
+  }
+  .fab-faq-item h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0 0 0.5em;
+    font-weight: 500;
+  }
+  .fab-faq-item:not(:last-child):after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-gray-2);
+  }
+  .fab-faq-item-head {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+  }
+  .fab-faq-item-head input {
+    display: none;
+    appearance: none;
+  }
+  .fab-faq-item-head input {
+    display: inline-block;
+  }
+  .fab-faq-item-head input + svg {
+    transition: var(--transition-default);
+  }
+  .fab-faq-item-head input + svg {
+    transform: rotate(90deg);
+    filter: invert(0);
+  }
+  .fab-faq-item-head input:checked + svg {
+    transform: rotate(0deg);
+    filter: invert(1);
+  }
+  .fab-faq-item-head:has(input:not(:checked)) h3 {
+    margin: 0;
+  }
+  .fab-faq-item-head h3 {
+    transition: var(--transition-default);
+    font-family: var(--font-family);
+    font-size: 1.25rem;
+  }
+  .fab-faq-item-head:has(input:checked) + .fab-faq-item-answer {
+    grid-template-rows: 1fr;
+  }
+  .fab-faq-item-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition-duration: 0.5s;
+    transition-property: grid-template-rows, padding;
+    width: 100%;
+    padding: 0;
+  }
+  .fab-faq-item-answer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    overflow: hidden;
+  }
+  .fab-faq-item-answer-inner p {
+    line-height: 1.6em;
+    margin: 0;
+  }
+  .fab-faq-item-answer-inner ul,
+  .fab-faq-item-answer-inner ol {
+    padding: 0 0 0 1.2em;
+  }
+  .fab-faq-block {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .fab-faq-block h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+  .fab-faq-block > li > ul {
+    padding: 0;
+  }
+  .fab-faq-block:before {
+    content: "";
+    display: block;
+    height: var(--anchor-margin);
+    margin-top: calc(-1 * var(--anchor-margin));
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  :root {
+    --anchor-margin: 64px;
+    --title-faq-offset-top: 0;
+    --anchors-faq-offset: 61px;
+  }
+  .fab-faq-page {
+    grid-template-areas: "t" "anc" "cont";
+    gap: 1.42rem;
+    margin: 2rem 0;
+  }
+  .fab-faq-page :is(h1, h2, h3) {
+    text-transform: none !important;
+    margin: 0 0 0.5em;
+  }
+  @media (min-width: 768px) {
+    .fab-faq-page {
+      display: grid;
+      grid-template-areas: "anc anc anc t t t t t t t t t" "anc anc anc cont cont cont cont cont cont cont cont cont";
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+  .fab-faq-page :is(h1, .fab-faq-page__anchors) {
+    background-color: #fff;
+  }
+  .fab-faq-page h1 {
+    padding: 1rem 0;
+    margin: 0;
+    background-color: var(--color-white);
+    grid-area: t;
+    z-index: 1;
+  }
+  @media (max-width: 767.99px) {
+    .fab-faq-page h1 {
+      position: sticky;
+      top: var(--title-faq-offset-top);
+    }
+  }
+  @media (min-width: 768px) {
+    .fab-faq-page h1 {
+      padding: 0;
+    }
+  }
+  .fab-faq-page__anchors {
+    position: sticky;
+    display: flex;
+    gap: 1.25rem;
+    background-color: #fff;
+    grid-area: anc;
+    overflow: auto;
+    gap: 1em;
+    list-style-type: none;
+    padding: 0;
+  }
+  .fab-faq-page__anchors a {
+    display: block;
+    text-align: center;
+  }
+  .fab-faq-page__anchors a.active {
+    background-color: var(--color-black);
+    color: var(--color-bright-white);
+  }
+  @media (max-width: 767.99px) {
+    .fab-faq-page__anchors {
+      white-space: nowrap;
+      padding: 0 0 1rem;
+      z-index: 1;
+      position: sticky;
+      top: var(--anchors-faq-offset);
+    }
+  }
+  @media (min-width: 768px) {
+    .fab-faq-page__anchors {
+      flex-direction: column;
+      position: sticky;
+      top: var(--anchor-margin);
+      align-self: start;
+    }
+  }
+  .fab-faq-page-content {
+    grid-area: cont;
+  }
+  .fab-faq-page-content > ul:last-child > li > ul > li:last-child {
+    border: none;
+  }
+  .fab-faq-item-answer {
+    grid-area: cont;
+    line-height: 1.6;
+  }
+  .fab-faq-item-answer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+  }
+  
+  .fab-faq-page__anchors a {
+    padding: 0.7em 1em;
+    font-size: 0.875rem;
+    font-weight: 400;
+    // background-color: var(--color-gray-2);
+    color: var(--color-black);
+  }
+  .fab-faq-page__anchors a:hover,
+  .fab-faq-page__anchors a.active {
+    background-color: var(--color-black);
+    color: var(--color-bright-white);
+    font-weight: 500;
+    opacity: 1;
+  }
+</style>
