@@ -14,6 +14,7 @@ import SEOBlock from "../../components/SEOBlock.astro";
 import AccordeonTest from "../../components/AccordeonBlock/AccordeonTest.astro";
 import SubscribeBlock from "../../components/SubscribeBlock.astro";
 import ConstructionLinks from "../../components/ConstructionLinks.astro";
+import OneHero from "../../components/OneHero.astro";
 
 const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
        allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
@@ -30,6 +31,12 @@ const paramsPage1 = {
                         populate: "*"
                     },
                     SEOBlock: {
+                        populate: "*"
+                    },
+                    packages: {
+                        populate: "*"
+                    },
+                    banner: {
                         populate: "*"
                     }
                 }
@@ -68,24 +75,40 @@ const landingPageData1 = await fetch(`${import.meta.env.HOST_API}/custom-pages/i
 <Layout title={""}>
 <div class="fab-page">
     <div class="content-grid">
+        {
+            landingPageData1?.data?.tabsSections?.map( (tab, id) =>
+                <>
+                    <TestAdaptiveBanner hidden={id > 0 ? true : false } dataId={`construction-${id+1}`} slide={tab.banner} />
+                </>
+            )
+        }
        <ConstructionLinks titlePage={"Виды отделки"} packageTypes={landingPageData1?.data?.tabsSections} />
        {
-            landingPageData1?.data?.tabsSections?.map( (tab, index) =>
+            landingPageData1?.data?.tabsSections?.map( (tab, id) =>
             <>
+                
+                {/* <code>
+                    {JSON.stringify(tab.banner)}
+                </code> */}
                 <Announce
+                    id={id + 1}
                     maxWidthBlock={`32.25rem`}
                     marginBlock="0 auto"
                     fontSize="1.5rem"
                     text={insertNbspAfterPrepositions(cleanHtml(`<h2>${tab?.announce}</h2>`))}
                 />
-                {
-                    tab?.packages?.length > 0 &&
-                    <section>
-                        <h2>Реализованные проекты</h2>
-                        <ReadyWorks packages={tab?.packages} />
-                    </section>
-                    
-                }
+            </>
+        )}
+        <section>
+            <h2>Реализованные проекты</h2>
+            {
+                landingPageData1?.data?.tabsSections?.map( (tab, index) =>
+                    tab?.packages?.length > 0 && <ReadyWorks packages={tab?.packages} hidden={index+1} id={index+1} />
+            )}
+        </section>
+        {
+            landingPageData1?.data?.tabsSections?.map( (tab, index) =>
+            <>
                 <div data-id={`construction-${index+1}`}>
                     <CustomGrid columns="2">
                         <div set:html={cleanHtml(tab.descriptionType)}></div>
@@ -95,12 +118,13 @@ const landingPageData1 = await fetch(`${import.meta.env.HOST_API}/custom-pages/i
                     </CustomGrid> 
 
                 </div>
+                <section data-id={`construction-${index+1}`}>
                     {
                         tab?.tabContents?.map((accordeon, num) =>
                             <AccordeonTest label={accordeon?.label} cardsList={accordeon?.tabCardItems} {num} />
                         )
                     }
-                
+                </section>
 
                 {/* <code>
                     {
@@ -114,10 +138,10 @@ const landingPageData1 = await fetch(`${import.meta.env.HOST_API}/custom-pages/i
        }
        <SubscribeBlock />
        {
-            landingPageData1?.data?.tabsSections?.map( (tab, index) =>
+            landingPageData1?.data?.tabsSections?.map( (tab, id) =>
             <>
                 {
-                    <SEOBlock columnOne={tab?.SEOBlock?.columnOne} columnTwo={tab?.SEOBlock?.columnTwo} />
+                    <SEOBlock columnOne={tab?.SEOBlock?.columnOne} columnTwo={tab?.SEOBlock?.columnTwo} hidden={id > 0 ? true : false} id={id} />
                 }
             </>
         )}

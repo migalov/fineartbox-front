@@ -1,20 +1,27 @@
 ---
+import cleanHtml from "../../scripts/cleanHtml";
+import insertNbspAfterPrepositions from "../../scripts/testwords";
 import replaceSpacesAfterPrepositions from "../../scripts/words";
 
-const { src, title, label, srcAlternative, description, num, classesImage } = Astro.props;
+const { src, title, label, srcAlternative, description, classesImage, srcFoil, availableFoil} = Astro.props;
 ---
 
 <div class="fab-card">
-    <img class:list={[classesImage]} data-card-src={src ? src : srcAlternative} alt="">
-    <div class="cb-card-wrap">
+    {
+        !availableFoil && <img class:list={[classesImage]} data-card-src={src ? src : srcAlternative} alt="" />
+    }
+    {
+        availableFoil && <img class="fab-card-foil" data-card-src={srcFoil} alt="" />
+    }
+    
+    
+    <div class="cb-card-wrap" set:html={insertNbspAfterPrepositions(cleanHtml(description))}>
         {
             label && <h3>{label}</h3>
         }
         {
             (!label && title) && <h3>{title}</h3>
         }
-
-        <p set:html={description}></p>
     </div>
 </div>
 
@@ -24,6 +31,7 @@ const { src, title, label, srcAlternative, description, num, classesImage } = As
         scroll-snap-align: start;
         display: flex;
         flex-direction: column;
+                background-color: var(--color-gray-2);
         & h3 {
             font-size: var(--size-h3);
         }
@@ -40,6 +48,15 @@ const { src, title, label, srcAlternative, description, num, classesImage } = As
             display: block;
             // aspect-ratio: 1/1;
             object-fit: cover;
+
+            &:not([src]) {
+                flex: 1;
+
+            }
+            &.fab-card-foil {
+                border-radius: 999px;
+                transform: scale(.6);
+            }
         }
         @media (max-width: 991.99px) {
             // min-width: clamp(12.5rem, 11.3571rem + 5.7143vw, 16.5rem);
@@ -53,5 +70,6 @@ const { src, title, label, srcAlternative, description, num, classesImage } = As
         flex: 1;
         padding: clamp(1rem, 0.4286rem + 1.1905vw, 1.5rem)!important;
         border: 1px solid var(--color-gray-2);
+        background-color: var(--color-white);
     }
 </style>

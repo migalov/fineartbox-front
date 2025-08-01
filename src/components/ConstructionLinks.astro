@@ -25,8 +25,8 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
                             }
                             {
                                 item?.previewTab &&
-                                    <div data-tab={item.slug ? item.slug : "#"} class={`construction-item`}>
-                                        <img src={item?.previewTab} />
+                                    <div data-tab={item.anchor ? item.anchor : "#"} class={`construction-item`}>
+                                        <img height="130" src={item?.previewTab} />
                                         <span set:html={item.title} />
                                     </div>
                             }
@@ -68,6 +68,7 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
                     display: block;
                 }
             }
+
         }
 
 
@@ -102,6 +103,10 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
             &:hover {
                 text-decoration: none;
             }
+        }
+
+        &:has( img) span {
+            margin: 0;
         }
 
 

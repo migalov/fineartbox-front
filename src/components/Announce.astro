@@ -1,10 +1,10 @@
 ---
 import Mark from "./Mark.astro";
 import cleanHtml from "../scripts/cleanHtml";
-const {maxWidthBlock, fontSize, marginBlock, text} = Astro.props;
+const {maxWidthBlock, fontSize, marginBlock, text, hidden, id} = Astro.props;
 ---
 
-<div class="fab-announce" style={`--max-width: ${maxWidthBlock}; --margin-block: ${marginBlock}; --font-size: ${fontSize}`} set:html={text}>
+<div class="fab-announce"  data-id={`construction-${id}`} hidden={id > 1 ? true : false} style={`--max-width: ${maxWidthBlock}; --margin-block: ${marginBlock}; --font-size: ${fontSize}`} set:html={text}>
 </div>
 
 <style lang="scss" is:global>
