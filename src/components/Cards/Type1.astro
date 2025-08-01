@@ -1,14 +1,20 @@
 ---
 import replaceSpacesAfterPrepositions from "../../scripts/words";
 
-const { src, title, description, num, classesImage } = Astro.props;
+const { src, title, label, srcAlternative, description, num, classesImage } = Astro.props;
 ---
 
 <div class="fab-card">
-    <img class:list={[classesImage]} data-card-src={src} alt="">
+    <img class:list={[classesImage]} data-card-src={src ? src : srcAlternative} alt="">
     <div class="cb-card-wrap">
-        <h3>{title}</h3>
-        <p>{description}</p>
+        {
+            label && <h3>{label}</h3>
+        }
+        {
+            (!label && title) && <h3>{title}</h3>
+        }
+
+        <p set:html={description}></p>
     </div>
 </div>
 

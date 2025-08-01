@@ -1,0 +1,150 @@
+---
+import qs from "qs";
+
+
+
+import sanitizeHtml from 'sanitize-html';
+import Layout from "../../layout.astro";
+import TestAdaptiveBanner from "../../components/TestAdaptiveBanner.astro";
+import ReadyWorks from "../../components/ReadyWorks.astro";
+import Announce from "../../components/Announce.astro";
+import insertNbspAfterPrepositions from "../../scripts/testwords";
+import CustomGrid from "../../components/CustomGrid.astro";
+import SEOBlock from "../../components/SEOBlock.astro";
+import AccordeonTest from "../../components/AccordeonBlock/AccordeonTest.astro";
+import SubscribeBlock from "../../components/SubscribeBlock.astro";
+import ConstructionLinks from "../../components/ConstructionLinks.astro";
+
+const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
+       allowedTags: ['p', 'h1', 'h2' ,'br', 'strong', 'ol', 'ul', 'li', 'br', 'table', 'tbody', 'tr', 'td'], // Разрешенные теги
+       allowedAttributes: {
+        'a': ['href']
+       }
+});
+
+const paramsPage1 = {
+    populate: {
+            tabsSections: {
+                populate: {
+                    tabContents: {
+                        populate: "*"
+                    },
+                    SEOBlock: {
+                        populate: "*"
+                    }
+                }
+            }
+        },
+};
+
+
+export async function getStaticPaths() {
+    const paramsPage = {
+        populate: {
+            tabsSections: {
+                populate: "*"
+            }
+        },
+    };
+const queryStringPage1 = qs.stringify(paramsPage, { encode: true });
+  const response = await fetch(`${import.meta.env.HOST_API}/custom-pages?${queryStringPage1}`);
+  const data = await response.json();
+
+  return data?.data?.map((page) => {
+    let slug = page?.slug
+    if (slug) 
+      return {
+        params: {slug: slug},
+        props: { page }
+      };
+  });
+}
+const { page } = Astro.props;
+const queryStringPage1 = qs.stringify(paramsPage1, { encode: true });
+const landingPageData1 = await fetch(`${import.meta.env.HOST_API}/custom-pages/i62osn9jef1oftxvik91uski?${queryStringPage1}`).then(res => res.json());
+
+---
+
+<Layout title={""}>
+<div class="fab-page">
+    <div class="content-grid">
+       <ConstructionLinks titlePage={"Виды отделки"} packageTypes={landingPageData1?.data?.tabsSections} />
+       {
+            landingPageData1?.data?.tabsSections?.map( (tab, index) =>
+            <>
+                <Announce
+                    maxWidthBlock={`32.25rem`}
+                    marginBlock="0 auto"
+                    fontSize="1.5rem"
+                    text={insertNbspAfterPrepositions(cleanHtml(`<h2>${tab?.announce}</h2>`))}
+                />
+                {
+                    tab?.packages?.length > 0 &&
+                    <section>
+                        <h2>Реализованные проекты</h2>
+                        <ReadyWorks packages={tab?.packages} />
+                    </section>
+                    
+                }
+                <div data-id={`construction-${index+1}`}>
+                    <CustomGrid columns="2">
+                        <div set:html={cleanHtml(tab.descriptionType)}></div>
+                        <div set:html={cleanHtml(tab.descriptionProcess)}>
+                            <h2>Как происходит процесс</h2>
+                        </div>
+                    </CustomGrid> 
+
+                </div>
+                    {
+                        tab?.tabContents?.map((accordeon, num) =>
+                            <AccordeonTest label={accordeon?.label} cardsList={accordeon?.tabCardItems} {num} />
+                        )
+                    }
+                
+
+                {/* <code>
+                    {
+                        JSON.stringify(tab)
+                    }
+                </code> */}
+                
+                
+            </>
+            )
+       }
+       <SubscribeBlock />
+       {
+            landingPageData1?.data?.tabsSections?.map( (tab, index) =>
+            <>
+                {
+                    <SEOBlock columnOne={tab?.SEOBlock?.columnOne} columnTwo={tab?.SEOBlock?.columnTwo} />
+                }
+            </>
+        )}
+    </div>
+</div>
+
+</Layout>
+<script is:inline>
+  const projectsList = document.querySelectorAll(`[data-id*=construction]`);
+  const hideSection = (numProjects) => {
+    let projectsSection = document.querySelector(".fab-ready-works-section");
+    numProjects >= 0 && (projectsSection.style.display = "")
+    numProjects == 0 && (projectsSection.style.display = "none")
+  }
+  const hideProjects = () => {
+    projectsList.forEach((project) => (project.hidden = true));
+  };
+  document.querySelectorAll(".constructions-switch input").forEach((input) => {
+
+    let id = "";
+    input.addEventListener("click", (e) => {
+      hideProjects();
+      document.querySelectorAll(`[data-id=${e.target.id}]`).forEach((block) => {
+        block.hidden = false;
+        id = e.target.id;
+      });
+      hideSection(document.querySelectorAll(`.fab-ready-works[data-id=${id}] a`).length);
+    });
+  });
+</script>

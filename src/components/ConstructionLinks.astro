@@ -1,27 +1,36 @@
 ---
 import Icon from "./Icon.astro";
-const {titlePage, slug, filterConstructions, packageTypes} = Astro.props;
+const {titlePage, slug, filterConstructions, packageTypes, previewTab} = Astro.props;
 import replaceSpacesAfterPrepositions from "../scripts/words";
 ---
 <!-- <code>
     {JSON.stringify(packageTypes)}
 </code> -->
 {
-    packageTypes.length > 0 && 
     <section class="constructions-switch">
-        <h2>Виды конструкций {titlePage}</h2>
+        <h2>{titlePage}</h2>
         <div class="constructions-switch-wrap fab-scrollbar">
             {
                 packageTypes?.map( (item, num) =>
                     <>
                         <label for={`construction-${num+1}`}>
                             <input data-tag={item?.tag} type="radio" id={`construction-${num+1}`} name={`construction`} value={item.slug} checked={num == 0 && "checked"} hidden />
-                            <div data-tab={item.slug ? item.slug : "#"} class={`construction-item`}>
-                                <Icon width="94" height="94" id={`Icon-${num + 1}-Unselected`} />
-                                <Icon width="94" height="94" id={`Icon-${num + 1}-Hover`} />
-                                <Icon width="94" height="94" id={`Icon-${num + 1}-Active`} />
-                                <span set:html={item.title} />
-                            </div>
+                            {
+                                !item?.previewTab && <div data-tab={item.slug ? item.slug : "#"} class={`construction-item`}>
+                                    <Icon width="94" height="94" id={`Icon-${num + 1}-Unselected`} />
+                                    <Icon width="94" height="94" id={`Icon-${num + 1}-Hover`} />
+                                    <Icon width="94" height="94" id={`Icon-${num + 1}-Active`} />
+                                    <span set:html={item.title} />
+                                </div>
+                            }
+                            {
+                                item?.previewTab &&
+                                    <div data-tab={item.slug ? item.slug : "#"} class={`construction-item`}>
+                                        <img src={item?.previewTab} />
+                                        <span set:html={item.title} />
+                                    </div>
+                            }
+                            
                         </label>
                         
                     </>

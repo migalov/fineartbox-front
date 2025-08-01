@@ -2,13 +2,23 @@
 import CardType1 from "../Cards/Type1.astro";
 import Icon from "../Icon.astro";
 
-const {title, cardsList, id, num} = Astro.props
+const {title, cardsList, label, id, num} = Astro.props
 ---
 <div class="fab-accordion">
     <div class="fab-accordion-header">
         <Icon id="arrow" width="24" height="24" />
-        <h2>{title}</h2>
+        {
+          label && <h2>{label}</h2>
+        }
+        {
+          (!label && title) && <h2>{title}</h2>
+        }
     </div>
+    <!-- <code>
+      {
+        JSON.stringify(cardsList)
+      }
+    </code> -->
     <div class="fab-accordion-wrap fab-scrollbar">
         {
             cardsList.map( item => <CardType1 classesImage="lazy-img" {...item} /> )
