@@ -213,7 +213,7 @@ const data1 = await response1.json();
   gap: 20px;
   @media (min-width: 768px) {
       display: grid;
-        grid-template-columns: 5fr 1fr;
+      grid-template-columns: 5fr 1fr;
   }
 }
 .fab-product-portfolio .fab-product-portfolio-left {
@@ -316,6 +316,7 @@ const data1 = await response1.json();
   }
 }
     </style>
+    <script src="./splide.min.js" is:inline></script>
     <script src="../splide.min.js" is:inline></script>
     <script>
         var main = new Splide("#main-slider", {
@@ -359,5 +360,53 @@ const data1 = await response1.json();
         main.mount();
         thumbnails.mount();
     </script>
+
+    <script>
+      // Функция, которая будет вызываться после загрузки формы
+      function onFormLoaded() {
+          console.log("Форма загружена!");
+          // Здесь вы можете добавить свой код для обработки события
+          document.querySelectorAll(".b24-form-control-label").forEach(el => {
+              let input = el.previousSibling?.parentNode.children[0];
+              if (el.innerText.includes("Название страницы")) {
+                input.value = `${document.title}`;
+                console.log(input);
+                input.value = document.title;
+                // input.value(document.title);
+                
+                
+                // input?.closest(".b24-form-field").style.display = 'none';
+              }
+              if (el.innerText.includes("Сайт")) {
+                input.value = document.location.href;
+              }
+              if (el.innerText.includes("Название страницы") || (el.innerText.includes("Сайт"))) {
+                // input.closest(".b24-form-field").style.display = 'none';
+              }
+          })
+          
+      }
+
+// Настройки для наблюдателя
+const config = { childList: true, subtree: true };
+
+// Создаем экземпляр MutationObserver
+const observer = new MutationObserver((mutationsList) => {
+    for (let mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            // Проверяем, появилась ли форма
+            const form = document.querySelector('.b24-form-wrapper'); // Замените на селектор вашей формы
+            if (form) {
+                onFormLoaded(); // Вызываем функцию при загрузке формы
+                observer.disconnect(); // Отключаем наблюдателя, если форма найдена
+                break;
+            }
+        }
+    }
+});
+
+// Начинаем наблюдение за изменениями в документе
+observer.observe(document.body, config);
+</script>
 </Layout>
     

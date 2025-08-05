@@ -1,0 +1,46 @@
+---
+import Layout from "../layout.astro";
+---
+
+<Layout>
+    <div class="fab-page">
+        <div class="content-grid">
+            <div class="test-box" style="width: 600px; overflow-x: auto;">
+                <div class="test-box-wrap" style="width: 1400px;">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia in maiores alias, quia tempore voluptate sint consequuntur veniam laudantium fugit iure sit tempora iste exercitationem at repellendus nam praesentium. Laboriosam?
+                    Eum, facilis. Eveniet aliquid commodi quis! Rerum magni quas ea labore sunt modi, nostrum quasi inventore animi vel tempore laboriosam obcaecati sed earum, dicta dolores pariatur amet ipsa reiciendis. Ipsa?
+                    Tempore, natus pariatur ipsum doloribus quisquam, provident ea cupiditate similique exercitationem inventore numquam sapiente adipisci, quis harum error cum quasi quaerat fuga. Aliquid, tempore. Provident, ab! Deserunt, dolores. Modi, accusamus.
+                    Inventore quisquam eius, veritatis tenetur expedita culpa autem? Nesciunt cumque eum at, qui exercitationem praesentium odit? Fugit, pariatur maiores fugiat reiciendis, aspernatur culpa, quibusdam porro blanditiis deleniti placeat totam adipisci?
+                    Vero, maxime quam. Cum, libero ad? Illo libero doloribus optio temporibus, doloremque nesciunt rem illum officiis inventore hic dolore atque, modi cumque? Quod eveniet iusto soluta repellat ipsum quisquam dolorum!
+                    Rerum asperiores, repellendus eaque aliquid minima illum odio cum itaque deleniti voluptates error modi magni dolorem corporis sapiente obcaecati aperiam sunt consequatur assumenda natus libero dolore odit. Ipsum, porro magni.
+                    Recusandae dignissimos est repellendus nulla ullam iste voluptatum, porro dolorum deserunt veritatis, delectus quo necessitatibus eligendi natus quisquam dolorem officiis quidem corrupti laboriosam dolore? Neque quidem cum esse provident ab?
+                   </div> 
+            </div>
+        </div>
+    </div>
+    <link href="./simplebar.css" rel="stylesheet" />
+    <style lang="scss" is:global>
+        .simplebar-scrollbar:before {
+            cursor: grab;
+            opacity: 1!important;
+            clip-path: polygon(100% 0, calc(100% - 5px) 100%, 0 100%, 5px 0);
+            background-color: var(--color-gray-2)!important;
+            border-radius: 0!important;
+        }
+        .simplebar-horizontal::before {
+            content: "";
+            position: absolute;
+            top: calc(50% + 2px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% - 10px);
+            height: 2px;
+            background-color: var(--color-gray-1)!important;
+
+        }
+    </style>
+    <script is:inline src="./simplebar.min.js" />
+    <script>
+        new SimpleBar(document.querySelector('.test-box'));
+    </script>
+</Layout>
