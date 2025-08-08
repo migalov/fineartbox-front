@@ -26,12 +26,17 @@ export async function getStaticPaths() {
 const { slug } = Astro.props;
 const { card } = Astro.props;
 
-const response1 = await fetch(`${import.meta.env.HOST_API}/packages?populate=*`);
+const response1 = await fetch(`${import.meta.env.HOST_API}/packages?populate[PreviewSourceImageArray][populate]=*`);
 const data1 = await response1.json();
 ---
 
 <Layout title={card?.title}>
     <div class="fab-page">
+      <!-- <code>
+        {
+          JSON.stringify(card)
+        }
+      </code> -->
         <div class="content-grid">
 
               <div class="fab-product-portfolio" style="--position: 1">
@@ -40,9 +45,9 @@ const data1 = await response1.json();
                       <div class="splide__track">
                           <ul class="splide__list">
                             {
-                              card?.previews?.map( item => 
+                              card?.PreviewSourceImageArray?.map( item => 
                                 <>
-                                  <li class="splide__slide"><img src={`${import.meta.env.HOST}${item.url}`} /></li>
+                                  <li class="splide__slide"><img src={`${item.src}`} /></li>
                                 </>
                               )
                             }
@@ -50,6 +55,7 @@ const data1 = await response1.json();
                       </div>
                       </div>
                   </div>
+
                   <div class="fab-product-portfolio-right">
                       <div class="fab-custom-scrollbar">
                         <div class="fab-custom-scrollbar__thumb"></div>
@@ -58,11 +64,11 @@ const data1 = await response1.json();
                           <div class="splide__track">
                               <ul class="splide__list">
                               {
-                                card?.previews?.map( item => 
-                                  <>
-                                    <li class="splide__slide"><img src={`${import.meta.env.HOST}${item.url}`} /></li>
-                                  </>
-                                )
+                                  card?.PreviewSourceImageArray?.map( item => 
+                                    <>
+                                      <li class="splide__slide"><img src={`${item.src}`} /></li>
+                                    </>
+                                  )
                               }
                               </ul>
                           </div>
