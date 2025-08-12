@@ -24,11 +24,6 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
 
 <Layout title="Портфолио">
     <div class="content-grid">
-        <!-- <code>
-          {
-            JSON.stringify(paperBagsArray.data)
-          }
-        </code> -->
         <Breadcrumbs />
        <div class="fab-filters">
       <!-- Кастомный селект: Тип -->
@@ -100,7 +95,7 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
           {
             pageData?.map( (pkg) => 
               <a
-                href={pkg?.href.replace("https://fineartbox.ru","")}
+                href={pkg?.href?.replace("https://fineartbox.ru","")}
                 style="--desktop-columns: 3"
 
                 data-type={pkg?.package_types.map( type => `${type.tag}` )}
@@ -111,7 +106,7 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
                 
               >
                 <img
-                  data-src={pkg?.srcAlternative}
+                  data-src={pkg?.srcAlternative ? pkg?.srcAlternative : pkg?.PreviewSourceImageArray[0].src}
                   alt={pkg?.title}
                   title={pkg?.title}
                   

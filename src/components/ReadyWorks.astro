@@ -12,7 +12,7 @@ const {id, packages} = Astro.props;
                     <a class="splide__slide" href={project.href.replace("https://fineartbox.ru", "")}>
                         <img data-splide-lazy={`${project?.image?.url ? `${import.meta.env.HOST}${project?.image?.url}` : (project?.srcAlternative ? project?.srcAlternative : "/no-image.jpg")}`} alt={project?.title} />
                     </a>
-                
+            
                 )
             }
         </div>
