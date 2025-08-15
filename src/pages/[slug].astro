@@ -9,6 +9,7 @@ import ButtonDefault from "../components/Button/ButtonDefault.astro";
 import SEOBlock from "../components/SEOBlock.astro";
 import SubscribeBlock from "../components/SubscribeBlock.astro";
 import Empty from "../layouts/Empty.astro";
+import cleanHtml from "../scripts/cleanHtml";
 
 export async function getStaticPaths() {
   const paramsPage = {
@@ -51,7 +52,7 @@ const response1 = await fetch(
 const data1 = await response1.json();
 ---
 
-<Layout title={card?.title}>
+<Empty title={card?.title}>
   <div class="fab-page">
     <div class="content-grid">
       <div class="fab-product-portfolio" style="--position: 1">
@@ -66,11 +67,9 @@ const data1 = await response1.json();
                 {
                   card?.PreviewSourceImageArray?.map((item) => (
                     <>
-                      {" "}
                       <li class="splide__slide">
-                        {" "}
-                        <img src={`${item.src}`} />{" "}
-                      </li>{" "}
+                        <img src={`${item.src}`} />
+                      </li>
                     </>
                   ))
                 }
@@ -80,9 +79,12 @@ const data1 = await response1.json();
         </div>
 
         <div class="fab-product-portfolio-right">
-          <div class="fab-custom-scrollbar">
+          {
+            card?.PreviewSourceImageArray?.length > 1 && <div class="fab-custom-scrollbar">
             <div class="fab-custom-scrollbar__thumb"></div>
           </div>
+          }
+          
           <div
             class="splide fab-product-portfolio-thumbs"
             aria-labelledby="carousel-heading"
@@ -93,11 +95,9 @@ const data1 = await response1.json();
                 {
                   card?.PreviewSourceImageArray?.map((item) => (
                     <>
-                      {" "}
                       <li class="splide__slide">
-                        {" "}
-                        <img src={`${item.src}`} />{" "}
-                      </li>{" "}
+                        <img src={`${item.src}`} />
+                      </li>
                     </>
                   ))
                 }
@@ -115,7 +115,7 @@ const data1 = await response1.json();
         </div>
       </div>
 
-      <CustomGrid columns="2" classes={"fab-product-portfolio-buttons"}>
+      <!-- <CustomGrid columns="2" classes={"fab-product-portfolio-buttons"}>
         <div>
           <ButtonDefault tag="a" href="tel:+74952150977" reverse="true">
             <svg
@@ -154,13 +154,13 @@ const data1 = await response1.json();
             >&nbsp;&nbsp;<span>Оставить заявку</span>
           </ButtonDefault>
         </div>
-      </CustomGrid>
+      </CustomGrid> -->
 
       <section>
         <h1>{card?.title}</h1>
         <CustomGrid columns="2">
-          <div set:html={card?.description?.columnOne} />
-          <div set:html={card?.description?.columnTwo} />
+          <div set:html={cleanHtml(card?.description?.columnOne)} />
+          <div set:html={cleanHtml(card?.description?.columnTwo)} />
         </CustomGrid>
         <CustomGrid columns="2">
           <div>
