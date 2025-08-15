@@ -1,7 +1,7 @@
 ---
 import Icon from "./Icon.astro";
 
-const {id, packages} = Astro.props;
+const {id, packages, arrayImages} = Astro.props;
 
 ---
 <section class="fab-ready-works splide" data-id={`construction-${id}`} hidden={id > 1 ? true : false}>
@@ -10,7 +10,7 @@ const {id, packages} = Astro.props;
             {
                 packages?.map( project => 
                     <a class="splide__slide" href={project.href.replace("https://fineartbox.ru", "")}>
-                        <img data-splide-lazy={`${project?.image?.url ? `${import.meta.env.HOST}${project?.image?.url}` : (project?.srcAlternative ? project?.srcAlternative : "/no-image.jpg")}`} alt={project?.title} />
+                        <img data-splide-lazy={project?.PreviewSourceImageArray[0]?.src} />
                     </a>
             
                 )

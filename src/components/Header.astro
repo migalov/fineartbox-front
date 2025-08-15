@@ -506,8 +506,6 @@ const headerMenuData = await fetch(`${import.meta.env.HOST_API}/header-menu/?${q
     let buttonAccount = document.querySelector(".fab-personal-account");
     let blockOptions = document.querySelector(".fab-personal-account-options");
     const movingBlockOptions = () => {
-        // console.log(blockOptions);
-        
         if (window.innerWidth > 1440) {
             blockOptions.style.left = `${buttonAccount.getBoundingClientRect()}px`;
         }
@@ -525,10 +523,7 @@ document.querySelectorAll(".fab-header-menu-lvl-1 a").forEach(link => {
         const span = document.createElement('span');
         span.textContent = link.textContent;
         link.classList.add("active");
-        // link.closest("li").children[0].classList.add("active");
          link.closest(".fab-header-menu-lvl-1-item").children[0].classList.add("active");
-         
-        // link.replaceWith(span);
     }
 });
 </script>

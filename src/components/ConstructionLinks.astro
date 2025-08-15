@@ -3,9 +3,6 @@ import Icon from "./Icon.astro";
 const {titlePage, slug, filterConstructions, packageTypes, previewTab} = Astro.props;
 import replaceSpacesAfterPrepositions from "../scripts/words";
 ---
-<!-- <code>
-    {JSON.stringify(packageTypes)}
-</code> -->
 {
     <section class="constructions-switch">
         <h2>{titlePage}</h2>
@@ -118,7 +115,6 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
             aspect-ratio: 1/1;
             margin: 0 0 0 1.4rem;
             z-index: 2;
-            // opacity: .4;
             &:nth-child(2) {
                 display: none;
             }
@@ -144,7 +140,6 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
 <script>
     document.querySelectorAll(`.constructions-switch-wrap input`).forEach( label => {
         label.addEventListener("click", () => {
-            console.log(label.getAttribute("data-tag"));
             window.location.hash = label.getAttribute("data-tag");
         })
     })
@@ -154,7 +149,6 @@ import replaceSpacesAfterPrepositions from "../scripts/words";
     window.addEventListener("DOMContentLoaded", () => {
         if (window.location.hash) {
             document.querySelectorAll(".constructions-switch input").forEach( el => {
-                // console.log(el?.getAttribute("data-tag"));
                 if (`#${el?.getAttribute("data-tag")}` == window.location.hash) {
                     el.click();
                 }

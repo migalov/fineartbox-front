@@ -114,8 +114,7 @@ const data1 = await response1.json();
                 <CustomGrid columns="2">
                     <div>
                         <h2>Процесс изготовления</h2>
-                        <p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p>
-                        <p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>
+                        <p>Для запроса стоимости и заказа тиража просим указать:</p>
                         <p>Следующим этапом является выбор материала — обычно используют плотный картон или дизайнерскую бумагу, в зависимости от назначения коробки и желаемого визуального эффекта. Затем проводится вырубка: на специальном оборудовании листы картона нарезаются по заданному шаблону, включая элементы крышки и донышка. После этого детали проходят процесс биговки — нанесения линий сгиба, благодаря которым коробка легко и аккуратно собирается.</p>
                         <p>На этапе печати и отделки применяется множество техник: тиснение, ламинация, выборочный лак, фольгирование и другие виды декоративной обработки. Это придаёт коробке уникальность и повышает её привлекательность. Далее следует ручная или автоматизированная сборка, после чего изделия упаковываются и подготавливаются к отправке заказчику. Таким образом, производство коробок крышка-дно — это комплексный процесс, сочетающий технологии, дизайн и внимание к деталям.</p>
                     </div>
@@ -385,51 +384,34 @@ const data1 = await response1.json();
         main.sync(thumbnails);
         main.mount();
         thumbnails.mount();
-        // document.querySelector(".fab-product-portfolio").style.setProperty("--count", main.length);
-
-        // main.on("move", function (e) {
-        //   document.querySelector(".fab-product-portfolio").style.setProperty("--position", e + 1);
-        // });
     </script>
 
     <script>
-      // Функция, которая будет вызываться после загрузки формы
       function onFormLoaded() {
-          console.log("Форма загружена!");
-          // Здесь вы можете добавить свой код для обработки события
           document.querySelectorAll(".b24-form-control-label").forEach(el => {
               let input = el.previousSibling?.parentNode.children[0];
               if (el.innerText.includes("Название страницы")) {
                 input.value = `${document.title}`;
-                console.log(input);
                 input.value = document.title;
-                // input.value(document.title);
-                
-                
-                // input?.closest(".b24-form-field").style.display = 'none';
               }
               if (el.innerText.includes("Сайт")) {
                 input.value = document.location.href;
               }
               if (el.innerText.includes("Название страницы") || (el.innerText.includes("Сайт"))) {
-                // input.closest(".b24-form-field").style.display = 'none';
               }
           })
           
       }
 
-// Настройки для наблюдателя
 const config = { childList: true, subtree: true };
 
-// Создаем экземпляр MutationObserver
 const observer = new MutationObserver((mutationsList) => {
     for (let mutation of mutationsList) {
         if (mutation.type === 'childList') {
-            // Проверяем, появилась ли форма
-            const form = document.querySelector('.b24-form-wrapper'); // Замените на селектор вашей формы
+            const form = document.querySelector('.b24-form-wrapper');
             if (form) {
-                onFormLoaded(); // Вызываем функцию при загрузке формы
-                observer.disconnect(); // Отключаем наблюдателя, если форма найдена
+                onFormLoaded();
+                observer.disconnect();
                 break;
             }
         }

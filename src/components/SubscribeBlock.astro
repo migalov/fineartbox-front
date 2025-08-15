@@ -83,7 +83,6 @@ const form = document.querySelector(`.fab-subscribe-form`);
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     let formData = new FormData(form);
-    console.log(formData);
     showStatus("pending");
     fetch(e.target.action, {
       method: form.method,

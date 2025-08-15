@@ -87,12 +87,10 @@ import Sprite from "./sprite.astro";
     document.querySelectorAll(".fab-scrollbar").forEach( scroll => {
         const showScrollbar = () => {
             scroll.classList.add("fab-scrollbar--show");
-            console.log('show');
             
         }
         const hideScrollbar = () => {
             scroll.classList.remove("fab-scrollbar--show");
-            console.log('hide');
         }
         const checkScrollbar = () => {
             scroll.scrollWidth > scroll.clientWidth ? showScrollbar() : hideScrollbar()
