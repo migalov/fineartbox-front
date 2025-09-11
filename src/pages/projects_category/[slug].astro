@@ -260,3 +260,35 @@ const pageData = landingPageData?.data[0];
     });
   });
 </script>
+<script is:inline>
+        let currentMenuItems = document.querySelectorAll(".fab-header-menu-lvl-1-item-link.active + .fab-header-menu-lvl-2 a");
+        if (currentMenuItems.length > 0) {
+            let clearCurrentMenuItems = () => {
+                currentMenuItems.forEach(a => {
+                    a.classList.remove("active");
+                })
+            }
+            currentMenuItems.forEach( a => {
+                a.addEventListener("click", (e) => {
+                    clearCurrentMenuItems();
+                    e.target.classList.add("active");
+                    let tag = new URL(String(e.target.href)).hash.slice(1)
+                    document.querySelector(`input[data-tag=${tag}]`).click();
+                })
+            })
+            if (document.querySelectorAll(`input[data-tag]`).length > 0) {
+                document.querySelectorAll(`input[data-tag]`).forEach( input => {
+                    input.addEventListener("click", e => {
+                        console.log(e);
+                        let tag = e.target.getAttribute("data-tag");
+                        clearCurrentMenuItems();
+                        currentMenuItems.forEach( _e => {
+                            if (new URL(_e.href).hash.replace("#", "").includes(tag)) {
+                                _e.classList.add("active");
+                            }
+                        })
+                    })
+                });
+            }   
+        }
+</script>

@@ -22,6 +22,9 @@ export async function getStaticPaths() {
       },
       description: {
         populate: "*"
+      },
+      drawing: {
+        populate: "*"
       }
     }
   }
@@ -199,7 +202,6 @@ const data1 = await response1.json();
           </div>
           <div>
             <h2>Конструкция в чертеже</h2>
-
             {
               card?.drawing?.url && (
                 <img src={`${import.meta.env.HOST}${card?.drawing?.url}`} />
@@ -462,7 +464,7 @@ const data1 = await response1.json();
         },
         768: {
           direction: "ttb",
-          fixedHeight: `20%`,
+          fixedHeight: `calc(33% - 0.5rem)`,
           dragMinThreshold: "",
           fixedWidth: `100%`,
           destroy: false,
