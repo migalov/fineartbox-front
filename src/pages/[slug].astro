@@ -5,10 +5,7 @@ import ReadyWorks from "../components/ReadyWorks.astro";
 import qs from "qs";
 import Icon from "../components/Icon.astro";
 import PortfolioSprite from "../sprites/PortfolioSprite.astro";
-import ButtonDefault from "../components/Button/ButtonDefault.astro";
 import SEOBlock from "../components/SEOBlock.astro";
-import SubscribeBlock from "../components/SubscribeBlock.astro";
-import Empty from "../layouts/Empty.astro";
 import cleanHtml from "../scripts/cleanHtml";
 
 export async function getStaticPaths() {
@@ -61,11 +58,6 @@ const data1 = await response1.json();
 <Layout title={card?.title}>
   <div class="fab-page">
     <div class="content-grid">
-      <!-- <code>
-        {
-          JSON.stringify(card)
-        }
-      </code> -->
       <div class="fab-product-portfolio" style="--position: 1">
         <div class="fab-product-portfolio-left">
           <div
@@ -168,17 +160,12 @@ const data1 = await response1.json();
           </div>
           <div>
             <h2>Конструкция в чертеже</h2>
-            <!-- <code>
-              {
-                JSON.stringify(card?.package_types[0].drawing)
-              }
-            </code> -->
             {
               card?.package_types[0]?.drawing && (
-                <img src={`${card?.package_types[0].drawing}`} />
+                <img class="fab-package-drawing" src={`${card?.package_types[0].drawing}`} />
               )
             }
-            {!card?.package_types[0]?.drawing && <img src={`/img/empty-image.jpg`} />}
+            {!card?.package_types[0]?.drawing && <img class="fab-package-drawing" src={`/img/empty-image.jpg`} />}
             <p>Для запроса стоимости и заказа тиража просим указать:</p>
             <div>
               <ul>
@@ -326,6 +313,10 @@ const data1 = await response1.json();
       left: var(--position-scroll);
       height: 8px;
       clip-path: polygon(5px 0%, 100% 0, calc(100% - 5px) 100%, 0 100%);
+    }
+
+    .fab-package-drawing {
+      background-color: var(--color-gray-1);
     }
 
     #main-slider {
