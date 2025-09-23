@@ -159,13 +159,15 @@ const data1 = await response1.json();
             </p>
           </div>
           <div>
+            <code>
+              {JSON.stringify(card?.title)}
+            </code>
             <h2>Конструкция в чертеже</h2>
             {
               card?.package_types[0]?.drawing && (
                 <img class="fab-package-drawing" src={`${card?.package_types[0].drawing}`} />
               )
             }
-            {!card?.package_types[0]?.drawing && <img class="fab-package-drawing" src={`/img/empty-image.jpg`} />}
             <p>Для запроса стоимости и заказа тиража просим указать:</p>
             <div>
               <ul>

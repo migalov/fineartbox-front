@@ -1,0 +1,239 @@
+---
+import Layout from "../layout.astro";
+import Input from "../components/Form/Input.astro";
+import Select from "../components/Form/Select.astro";
+import Option from "../components/Form/Option.astro";
+import TechDocs from "../components/TechDocs.astro";
+import CustomGrid from "../components/CustomGrid.astro";
+import YandexWidget from "../components/YandexWidget.astro";
+import BlogRoot from "../components/Blog/BlogRoot.astro";
+import OldCalc from "../components/OldCalc.astro";
+---
+
+<Layout title="Страница продукта">
+
+    <div class="fab-page">
+        <div class="content-grid">
+            <h2 class="h1">Заказать пакет</h2>
+            <section
+                style="
+                display: grid;
+                grid-template-columns: repeat(12, minmax(0, 1fr));
+                gap: 2rem;
+                "
+            >
+                <Select name="Бумага на крышку" style="grid-area: auto / span 6;">
+                    <Option text="Бумага на крышку" value="1" />
+                    <Option text="Значение 2" value="2" />
+                </Select>
+
+                <Select name="Ширина" style="grid-area: auto / span 3;">
+                    <Option text="60" value="60" />
+                </Select>
+                <Select name="Длина" style="grid-area: auto / span 3;">
+                    <Option text="Цифровой офсет" value="1" />
+                    <Option text="Значение 2" value="2" />
+                </Select>
+
+                <Select name="Длина" style="grid-area: auto / span 6;">
+                    <Option text="Полноцвет односторонний" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+                <Select name="Бумага на крышку" style="grid-area: auto / span 4;">
+                    <Option text="Мелованая матовая бумага" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+                <Select name="Плотность" style="grid-area: auto / span 2;">
+                    <Option text="170 гр" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+<!-- 
+                <Select name="Красочность крышки" style="grid-area: auto / span 4;">
+                    <Option text="Без ламинации" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+                <Select name="Ламинирование крышки" style="grid-area: auto / span 4;">
+                    <Option text="Пленка матовая" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+                <Select name="Пленка для ламинирования крышки" style="grid-area: auto / span 4;">
+                    <Option text="Без 3D-лака" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+
+                <Select name="Пленка для ламинирования крышки" style="grid-area: auto / span 5;">
+                    <Option text="Без 3D-фольги" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+                <Select style="grid-area: auto / span 5;">
+                    <Option text="Золотая фольга" value="1" />
+                    <Option text="2" value="2" />
+                </Select>
+                <Select style="grid-area: auto / span 2;">
+                    <Option text="15 шт." value="1" />
+                    <Option text="2" value="2" />
+                </Select> -->
+
+                
+
+            </section>
+            <CustomGrid columns="2">
+                <div class="fab-download-doc">
+                    <span>Скачать технические требования</span>
+                </div>
+                <div>
+                    <div class="fab-check-design">
+                        <label class="fab-checkbox-type-1">
+                            <input type="checkbox" />
+                            <span>Проверка макета</span>
+                        </label>
+                        <span>200 ₽</span>
+                    </div>
+                    <table class="fab-product-table-results">
+                        <tr>
+                            <td>Готовность</td>
+                            <td><strong class="fab-product-table-results-date">1 августа 2025</strong></td>
+                        </tr>
+                        <tr>
+                            <td valign="top">Стоимость</td>
+                            <td>
+                                <div class="fab-product-price">2 990 ₽</div>
+                                <div><strong>в т.ч. НДС</strong></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </CustomGrid>
+            <CustomGrid columns="2">
+                <div>
+                    <h2 class="h3">О продукте</h2>
+                    <p>Производство коробок крышка-дно включает в себя несколько ключевых этапов. Изготовление начинается с создания проекта.</p>
+                    <p>Вы можете воспользоваться одним из стандартных вариантов формы и размера и добавить свою декоративную обработку, или продумать дизайн с нуля, получив нечто совершенно новое, в корпоративном стиле. Чтобы убедиться, что результат соответствует первоначальному плану, типография может подготовить прототип.</p>
+                </div>
+                <div class="fab-product-tabs">
+                    <label class="fab-product-tab">
+                        <input checked type="radio" name="product-tab" id="" />
+                        <span class="h3">Доставка</span>
+                    </label>
+                    <label class="fab-product-tab">
+                        <input type="radio" name="product-tab" id="" />
+                        <span class="h3">Оплата</span>
+                    </label>
+                    <div>
+                        <p>По Москве и Санкт-Петербургу доставка осуществляется в течении от 1 до 2 дней компанией CDEK.</p>
+                        <p>По остальной части России доставка также осуществляется компанией CDEK и занимает от 3 до 14 дней. Также, вы можете забрать свой заказ самовывозом из Москвы по будням с 10 до 19, по адресу ул. Зорге 15к1.</p>
+                    </div>
+                    <div>
+                        <p>Текст не придумали еще...</p>
+                    </div>
+                </div>
+            </CustomGrid>
+            <CustomGrid columns="2">
+                <YandexWidget />
+                <BlogRoot />
+            </CustomGrid>
+            <!-- <OldCalc /> -->
+        </div>
+    </div>
+</Layout>
+
+
+<style lang="scss" is:global>
+    .fab-product-price {
+        font-size: 2rem;
+        font-weight: 700;
+        font-family: var(--second-family);
+        color: var(--color-green-3);
+    }
+    .fab-check-design {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .fab-product-table-results {
+        & tr td {
+            padding: 1em 0;
+            
+        }
+        & tr td:nth-child(2) {
+            text-align: right;
+        }
+        & tr:not(:nth-of-type(1)) td {
+            border-top: 1px solid var(--color-gray-2);
+        }
+    }
+    .fab-checkbox-type-1 {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        & input {
+            position: relative;
+            padding: 0 0 0 1rem;
+            appearance: none;
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                border: 1px solid var(--color-gray-5);
+                width: 1rem;
+                height: 1rem;
+                border-radius: .25rem;
+            }
+            &:checked::after {
+                content: "";
+                position: absolute;
+                left: .2em;
+                top: 50%;
+                transform: translateY(-50%);
+                background: url("./icons/check-green.svg") no-repeat;
+                width: .5625rem;
+                height: .46875rem;
+            }
+        }
+    }
+    .fab-product-tab {
+        & input {
+            appearance: none;
+            &:not(:checked) {
+                & + span {
+                    color: var(--color-gray-5);
+                    border-bottom: 1px dashed var(--color-gray-2)
+                }
+            }
+        }
+    }
+</style>
+
+<script>
+
+    const getParameter = (label) => {
+        document.querySelector()
+    }
+
+    document.querySelectorAll(".calculation-module-row").forEach( c => {
+        if (!c.closest(".hidden")) {
+            console.log(c);
+        }
+    })
+
+
+    document.querySelector(".fab-product-table-results-date").innerText = `${document.querySelector(".production-day").innerText}`;
+    
+
+    // Цена производства
+    document.querySelector(".fab-product-price").innerText = `${document.querySelector(".product-add-cart-price .price").innerText.split(".")[0]} ₽`
+    
+
+
+    // document.querySelectorAll(".label-name").forEach( l => {
+    //     console.log(l.innerText);
+    //     if (l.innerText.toLocaleLowerCase() == "длина" || l.innerText.toLocaleLowerCase() == "ширина") {
+    //         console.log(l.nextElementSibling?.querySelector(".calculation-module-select .active").innerText);
+    //     }
+    // })
+    /*
+        document.querySelector(".product-size-width")
+    */
+</script>

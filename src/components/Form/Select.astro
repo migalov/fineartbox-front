@@ -1,0 +1,21 @@
+---
+const {name, style} = Astro.props
+---
+
+<select class="fab-section" style={style} data-name={name}>
+    <slot />
+</select>
+
+
+<style lang="scss" is:global>
+    .fab-section {
+        appearance: none;
+        border: 0;
+        outline: 0;
+        padding: 0.93em 1em;
+        width: 100%;
+        font-family: var(--font-family);
+        border-bottom: 1px solid var(--color-gray-4);
+        background-color: var(--color-gray-1);
+    }
+</style>

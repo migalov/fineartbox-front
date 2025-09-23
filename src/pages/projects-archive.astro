@@ -24,6 +24,11 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
 
 <Layout title="Портфолио">
     <div class="content-grid">
+      <code>
+        {
+          JSON.stringify(pageData[0].package_types[0].drawing)
+        }
+      </code>
         <Breadcrumbs />
        <div class="fab-filters">
       <!-- Кастомный селект: Тип -->
