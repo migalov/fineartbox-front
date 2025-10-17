@@ -5,6 +5,7 @@ import Layout from "../layout.astro";
 import qs from "qs";
 import PortfolioSprite from "../sprites/PortfolioSprite.astro";
 import ButtonDefault from "../components/Button/ButtonDefault.astro";
+import Select from "../components/Select.astro";
 const paramsPage = {
     populate: "*"
 };
@@ -15,87 +16,69 @@ const paperBugsParameters = {
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/packages?${queryStringPage}`).then(res => res.json());
 const pageData = landingPageData.data;
-const typesArray = await fetch(`${import.meta.env.HOST_API}/package-types`).then(res => res.json());
-const formsArray = await fetch(`${import.meta.env.HOST_API}/package-forms`).then(res => res.json());
-const appointmentsArray = await fetch(`${import.meta.env.HOST_API}/package-appointments`).then(res => res.json());
+const typesArray = await fetch(`${import.meta.env.HOST_API}/package-types?populate=*`).then(res => res.json());
+const formsArray = await fetch(`${import.meta.env.HOST_API}/package-forms?populate=*`).then(res => res.json());
+const appointmentsArray = await fetch(`${import.meta.env.HOST_API}/package-appointments?populate=*`).then(res => res.json());
 const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?populate=*`).then(res => res.json());
 
 ---
 
 <Layout title="Портфолио">
     <div class="content-grid">
-      <code>
+      <!-- <code>
         {
-          JSON.stringify(pageData[0].package_types[0].drawing)
+          JSON.stringify(formsArray)
         }
-      </code>
+      </code> -->
         <Breadcrumbs />
-       <div class="fab-filters">
-      <!-- Кастомный селект: Тип -->
-      <div class="fab-select-wrapper">
-        <div id="typeToggle" class="fab-select-button">
-          <span id="typeLabel">Тип</span>
-          <span><Icon id="dropdown-arrow" width="12" height="8"></span>
+        <div class="fab-filters">
+          <Select title="Тип" id="typeToggle" idList="typeOptions">
+            {
+              typesArray.data.map( type => 
+              <>
+                {
+                  type.packages.length > 0 &&
+                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
+                }
+              </>
+              )
+            }
+          </Select>
+          <Select title="Назначение" id="purposeToggle" idList="purposeOptions">
+            {
+              appointmentsArray.data.map( type => 
+              <>
+                {
+                  type.packages.length > 0 &&
+                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
+                }
+              </>
+              )
+            }
+          </Select>        
+          <Select title="Форма" id="shapeToggle" idList="shapeOptions">
+            {
+              formsArray.data.map( type => 
+              <>
+              {
+                type.packages.length > 0 &&
+                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
+              }
+              
+              </>
+              )
+            }
+          </Select>
+          <Select title="Бумажные пакеты" id="paperToggle" idList="paperOptions" >
+            {
+              paperBagsArray.data.map( type => 
+              type.packages.length > 0 &&
+                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
+              )
+            }
+          </Select>
         </div>
-        <ul id="typeOptions" class="fab-select-list">
-          <li data-tag="">Тип</li>
-          {
-            typesArray.data.map( type => 
-                <li data-tag={type?.tag}>{type?.title}</li>
-            )
-          }
-        </ul>
-      </div>
-
-      <!-- Кастомный селект: Назначение -->
-      <div class="fab-select-wrapper">
-        <div id="purposeToggle" class="fab-select-button">
-          <span id="purposeLabel">Назначение</span>
-          <span><Icon id="dropdown-arrow" width="12" height="8"></span>
-        </div>
-        <ul id="purposeOptions" class="fab-select-list">
-          <li data-tag="">Назначение</li>
-          {
-            appointmentsArray.data.map( type => 
-                type.tag !== "for-bottles" && <li data-tag={type?.tag}>{type?.title}</li>
-            )
-          }
-        </ul>
-      </div>
-
-      <!-- Кастомный селект: Форма -->
-      <div class="fab-select-wrapper">
-        <div id="shapeToggle" class="fab-select-button">
-          <span id="shapeLabel">Форма</span>
-          <span><Icon id="dropdown-arrow" width="12" height="8"></span>
-        </div>
-        <ul id="shapeOptions" class="fab-select-list">
-          <li data-tag="">Форма</li>
-          {
-            formsArray.data.map( type => 
-                <li data-tag={type?.tag}>{type?.title}</li>
-            )
-          }
-        </ul>
-      </div>
-
-      <!-- Кастомный селект: Форма -->
-      <div class="fab-select-wrapper">
-        <div id="paperToggle" class="fab-select-button">
-          <span id="paperLabel">Бумажные пакеты</span>
-          <span><Icon id="dropdown-arrow" width="12" height="8"></span>
-        </div>
-        <ul id="paperOptions" class="fab-select-list">
-          <li data-tag="">Бумажные пакеты</li>
-          {
-            paperBagsArray.data.map( type => 
-                <li data-tag={type?.tag}>{type?.title}</li>
-            )
-          }
-        </ul>
-      </div>
-
-    </div>
+       
         <div class="fab-portfolio-grid">
           {
             pageData?.map( (pkg) => 
@@ -111,6 +94,8 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
                 
               >
                 <img
+                  width="260"
+                  height="260"
                   data-src={pkg?.srcAlternative ? pkg?.srcAlternative : pkg?.PreviewSourceImageArray[0]?.src}
                   alt={pkg?.title}
                   title={pkg?.title}
@@ -129,72 +114,22 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
 
 <style lang="scss" is:global>
 .fab-filters {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin: 0 0 -1rem;
-      position: sticky;
-      background: var(--color-white);
-      top: var(--header-height);
-      border: 1px solid var(--color-white);
-      padding: 1rem 0;
-      width: calc(100% + 1px);
-      z-index: 2;
-      @media (min-width: 768px) {
-        top: 0;
-      }
-    }
-    @media (min-width: 768px) {
-      .fab-filters {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
+  position: sticky;
+  top: var(--header-height);
+  display: grid;
+  gap: 1rem;
+  background-color: var(--color-white);
+  @media (min-width: 768px) {
+    position: static;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
 
-    .fab-select-wrapper {
-      position: relative;
-    }
-    .fab-select-button {
-      width: 100%;
-      padding: 8px 12px;
-      background: var(--color-gray-1);
-      border-bottom: 1px solid var(--color-gray-2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--color-gray-5);
-      cursor: pointer;
-    }
-    .fab-select-list {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 10;
-      width: 100%;
-      background: var(--color-gray-1);
-      border: 1px solid #ccc;
-      border-radius: 0;
-      margin-top: -1px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-height: 50vh;
-      overflow-y: auto;
-      list-style-type: none;
-      padding: 0;
-    }
-    .fab-select-list li {
-      padding: 8px 12px;
-      cursor: pointer;
-      transition: var(--transition-default);
-      &.active {
-        background-color: var(--color-gray-5);
-        color: var(--color-white);
-        cursor: not-allowed;
-        pointer-events: none;
-      }
-    }
-    .fab-select-list li:hover {
-      background-color:  var(--color-gray-2);
-    }
+}
 
 
     .fab-portfolio-grid {
@@ -211,8 +146,6 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
         }
       }
       & > :is(a, div) {
-
-
         border: 1px solid var(--color-gray-1);
         overflow: hidden;
       }
@@ -222,6 +155,9 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
       & div {
         display: flex;
         clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
+      }
+      & img {
+        object-fit: cover;
       }
       & img:hover {
         transform: scale(1.15);
@@ -241,76 +177,84 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
     }
 </style>
 
-    <script is:inline>
-    let state = {
-      type: '',
-      purpose: '',
-      shape: '',
-      paper: ''
-    };
-
-      setupCustomSelect('typeToggle', 'typeOptions', 'typeLabel', 'type');
-      setupCustomSelect('purposeToggle', 'purposeOptions', 'purposeLabel', 'purpose');
-      setupCustomSelect('shapeToggle', 'shapeOptions', 'shapeLabel', 'shape');
-      setupCustomSelect('paperToggle', 'paperOptions', 'paperLabel', 'paper');
-
-    function filterPackages() {
-      const packages = document.querySelectorAll('.fab-portfolio-grid > a');
-      packages.forEach(pkg => {
-        const matchesType = !state.type || pkg.dataset.type === state.type;
-        const matchesPurpose = !state.purpose || pkg.dataset.purpose === state.purpose;
-        const matchesShape = !state.shape || pkg.dataset.shape === state.shape;
-        const paperShape = !state.paper || pkg.dataset.paper.includes(state.paper);
-
-        pkg.style.display = (matchesType && matchesPurpose && matchesShape && paperShape) ? '' : 'none';
-      });
-    }
-
-    function setupCustomSelect(toggleId, listId, labelId, key) {
-      const toggle = document.getElementById(toggleId);
-      const list = document.getElementById(listId);
-      const label = document.getElementById(labelId);
-
-      toggle.addEventListener('click', () => {
-        document.querySelectorAll('.fab-select-list').forEach(el => {
-          if (el !== list) el.style.display = 'none';
-        });
-        list.style.display = list.style.display === 'block' ? 'none' : 'block';
-      });
-
-      list.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', () => {
-          const tag = item.dataset.tag;
-          state[key] = tag;
-          label.textContent = item.textContent;
-          list.style.display = 'none';
-          list.querySelectorAll("li").forEach(_item => _item.classList.remove("active"))
-          item.classList.toggle("active");
-          filterPackages();
-        });
-      });
-    }
-
-    const clearFilter = () => {
-      state = {
-        type: '',
-        purpose: '',
-        shape: '',
-        paper: ''
-      };
-      filterPackages();
-      document.querySelectorAll(".fab-select-list").forEach( list => {
-        list.querySelector("li").click();
-      })
-    }
 
 
-    document.querySelector("#clearFilter").addEventListener("click", clearFilter);
+<script is:inline>
+  var state = {
+    type: '',
+    purpose: '',
+    shape: '',
+    paper: ''
+  };
+  const filterPackages = () => {
+    const packages = document.querySelectorAll('.fab-portfolio-grid > a');
+    packages.forEach(pkg => {
+      const matchesType = !state.type || pkg.dataset.type === state.type;
+      const matchesPurpose = !state.purpose || pkg.dataset.purpose === state.purpose;
+      const matchesShape = !state.shape || pkg.dataset.shape === state.shape;
+      const paperShape = !state.paper || pkg.dataset.paper.includes(state.paper);
 
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.fab-select-wrapper')) {
-        document.querySelectorAll('.fab-select-list').forEach(el => el.style.display = 'none');
-      }
+      pkg.style.display = (matchesType && matchesPurpose && matchesShape && paperShape) ? '' : 'none';
+
     });
-    
+  }
+
+
+
+
+  const setupCustomSelect = (listId, key) => {
+
+    console.log(listId, key);
+    const list = document.getElementById(listId);
+
+    list.querySelectorAll('.product-input-dropdown-value').forEach(item => {
+      item.addEventListener('click', (e) => {
+        const tag = e.target.dataset.tag;
+        state[key] = tag;
+        if(item.classList.contains("active")) {
+          item.classList.remove("active");
+        }
+        else {
+          item.classList.add("active");
+        }
+        // item.classList.toggle("active");
+        filterPackages();
+        console.log(state);
+      });
+    });
+  }
+
+  setupCustomSelect('typeOptions','type');
+  setupCustomSelect('purposeOptions',  'purpose');
+  setupCustomSelect('shapeOptions', 'shape');
+  setupCustomSelect('paperOptions', 'paper');
   </script>
+  <script is:inline>
+    let dropdownLists = document.querySelectorAll(".product-input-dropdown");
+
+    document.querySelectorAll(".product-input").forEach( block => {
+    
+    let blockCurrentValue = block.querySelector(".product-input-value"); 
+    
+      
+    block.querySelectorAll(".product-input-dropdown-value").forEach(option => {
+        option.addEventListener("click", (e) => {
+          blockCurrentValue.innerText = e.target.innerText;
+          option.closest(".open").classList.remove("open");
+        })
+    })
+
+    block.querySelector(".product-input-dropdown").style.setProperty("--max-height-dropdown", `calc(50vh)`);
+    
+    block.querySelector(".product-input-button-open-dropdown").addEventListener("click", (_e) => {
+      
+      // if (!checkShowDropdownLists) {
+        block.querySelector(".product-input-dropdown").classList.toggle("open");
+      // }
+      // else {
+      //   hideAllDropdownLists();
+      // }
+    });
+
+  });
+</script>

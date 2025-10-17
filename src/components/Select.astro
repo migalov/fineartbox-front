@@ -1,0 +1,94 @@
+---
+const {title, id, idLabel, idList} = Astro.props
+---
+<div class="product-input">
+    <div class="product-input-header" id={id}>
+    <div class="product-input-title" id={idLabel}>{title}</div>
+    <div class="product-input-value">Все</div>
+    </div>
+    <button class="product-input-button-open-dropdown">
+        <svg class="icon undefined" width="16" height="16">
+            <use xlink:href="#arrow-dropdown"></use>
+        </svg>
+    </button>
+    <div class="product-input-dropdown" id={idList}>
+        <div class="product-input-dropdown-value">Все</div>
+        <slot />
+    </div>
+</div>
+
+<style lang="scss" is:global>
+    .product-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: var(--color-gray-1);
+        border-bottom: 1px solid var(--color-gray-2);
+        padding: .7em;
+
+    }
+
+    .product-input button {
+        appearance: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .product-input-value {
+        flex: 1;
+        appearance: none;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+
+    .product-input-dropdown {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        border-top: 1px solid var(--color-gray-2);
+        max-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: ease .3s;
+        z-index: 1;
+    }
+
+    .product-input-dropdown.open {
+        max-height: var(--max-height-dropdown);
+    }
+
+    .product-input-dropdown-value {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: var(--color-gray-1);
+        padding: .7em;
+        transition: ease .3s;
+    }
+
+    .product-input-dropdown-value:hover {
+        background-color: var(--color-gray-5);
+        color: white;
+    }
+
+    .product-input-button-open-dropdown {
+        margin-left: auto;
+    }
+
+    .product-input-button-preview svg {
+        transform: rotate(90deg);
+    }
+
+    .product-input-button-next svg {
+    transform: rotate(-90deg);
+    }
+
+:is(.product-input-button-preview, .product-input-button-next)[disabled] {
+  opacity: .5;
+}
+</style>
