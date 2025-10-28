@@ -7,6 +7,7 @@ import Icon from "../components/Icon.astro";
 import PortfolioSprite from "../sprites/PortfolioSprite.astro";
 import SEOBlock from "../components/SEOBlock.astro";
 import cleanHtml from "../scripts/cleanHtml";
+import ZeroLayout from "../ZeroLayout.astro";
 
 export async function getStaticPaths() {
   const paramsPage = {
@@ -55,7 +56,7 @@ const response1 = await fetch(
 const data1 = await response1.json();
 ---
 
-<Layout title={card?.title}>
+<ZeroLayout title={card?.title}>
   <div class="fab-page">
     <div class="content-grid">
       <div class="fab-product-portfolio" style="--position: 1">
