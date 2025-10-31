@@ -13,13 +13,13 @@ const cleanHtml = (rawHtml: any) => sanitizeHtml(rawHtml, {
    });
 
 ---
-<div class:list={["fab-seo-block"]} data-id={`construction-${id+1}`} hidden={hidden}>
+<div class:list={["fab-seo-block"]} data-id={`construction-${id}`} hidden={hidden}>
     <div class="fab-seo-block-wrap">
         <div class="fab-seo-block-column" set:html={columnOne ? cleanHtml(replaceSpacesAfterPrepositions(columnOne)) : ""} />
         <div class="fab-seo-block-column" set:html={columnTwo ? cleanHtml(replaceSpacesAfterPrepositions(columnTwo)) : ""} />
     </div>
-    <label class="fab-seo-toggle" for={id !== "" ? `seo-toggle-${id+1}` : `seo-toggle`}>
-        <input hidden type="checkbox" name="" id={id !== "" ? `seo-toggle-${id+1}` : `seo-toggle`}>
+    <label class="fab-seo-toggle" for={id !== "" ? `seo-toggle-${id}` : `seo-toggle`}>
+        <input hidden type="checkbox" name="" id={id !== "" ? `seo-toggle-${id}` : `seo-toggle`}>
         <Icon id="arrow" width="24" height="24" />
     </label>
 </div>

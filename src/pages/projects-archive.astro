@@ -6,6 +6,7 @@ import qs from "qs";
 import PortfolioSprite from "../sprites/PortfolioSprite.astro";
 import ButtonDefault from "../components/Button/ButtonDefault.astro";
 import Select from "../components/Select.astro";
+import SEOBlock from "../components/SEOBlock.astro";
 const paramsPage = {
     populate: "*"
 };
@@ -50,7 +51,7 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
               <>
                 {
                   type.packages.length > 0 &&
-                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
+                  <div class="product-input-dropdown-value" data-id={type?.id} data-tag={type?.tag}>{type?.title}</div>
                 }
               </>
               )
@@ -106,6 +107,20 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
             )
           }
 
+        </div>
+
+        <div>
+          {
+              appointmentsArray.data.map( type => 
+              <>
+                {
+                  type.packages.length > 0 &&
+                  type?.SEO && <SEOBlock {...type.SEO} id={type.id} />
+                }
+              </>
+              )
+            }
+          
         </div>
     </div>
 
@@ -257,4 +272,24 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
     });
 
   });
+</script>
+<script is:inline>
+
+  const seoBlocks = document.querySelectorAll(".fab-seo-block");
+
+  const hideSEOBlocks = () => {
+    seoBlocks.forEach(seo => {
+      seo.setAttribute("hidden", "")
+    })
+  }
+  document.querySelectorAll("#purposeOptions .product-input-dropdown-value").forEach(el => {
+    el.addEventListener("click", () => {
+      let id = el.getAttribute("data-id");
+      console.log(id);
+      
+      hideSEOBlocks();
+      document.querySelector(`.fab-seo-block[data-id="construction-${id}"]`)?.removeAttribute("hidden");
+    })
+  });
+  hideSEOBlocks();
 </script>
