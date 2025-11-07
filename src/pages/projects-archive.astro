@@ -10,41 +10,38 @@ import SEOBlock from "../components/SEOBlock.astro";
 const paramsPage = {
     populate: "*"
 };
-const paperBugsParameters = {
-  populate: "*"
+const constructionTypesParameters =  {
+  populate: {
+    packageType: {
+      populate: "*"
+    },
+    packages: {
+      populate: "*"
+    }
+  }
 };
+
+const queryStringConstructionTypes = qs.stringify(constructionTypesParameters, { encode: true });
+
+qs.stringify(paramsPage, { encode: true })
+
+const constructionTypesQuery = `${import.meta.env.HOST_API}/construction-types?${queryStringConstructionTypes}`;
 
 const queryStringPage = qs.stringify(paramsPage, { encode: true });
 const landingPageData = await fetch(`${import.meta.env.HOST_API}/packages?${queryStringPage}`).then(res => res.json());
 const pageData = landingPageData.data;
 const typesArray = await fetch(`${import.meta.env.HOST_API}/package-types?populate=*`).then(res => res.json());
 const formsArray = await fetch(`${import.meta.env.HOST_API}/package-forms?populate=*`).then(res => res.json());
-const appointmentsArray = await fetch(`${import.meta.env.HOST_API}/package-appointments?populate=*`).then(res => res.json());
-const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?populate=*`).then(res => res.json());
+const appointmentsArray = await fetch(`${import.meta.env.HOST_API}/package-appointments?populate=*`).then(res => res.json())
+const constructionTypes = await fetch(constructionTypesQuery).then(res => res.json())
 
 ---
 
 <Layout title="Портфолио">
     <div class="content-grid">
-      <!-- <code>
-        {
-          JSON.stringify(formsArray)
-        }
-      </code> -->
         <Breadcrumbs />
         <div class="fab-filters">
-          <Select title="Тип" id="typeToggle" idList="typeOptions">
-            {
-              typesArray.data.map( type => 
-              <>
-                {
-                  type.packages.length > 0 &&
-                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
-                }
-              </>
-              )
-            }
-          </Select>
+
           <Select title="Назначение" id="purposeToggle" idList="purposeOptions">
             {
               appointmentsArray.data.map( type => 
@@ -56,7 +53,31 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
               </>
               )
             }
-          </Select>        
+          </Select>
+          <Select title="Вид упаковки" id="packagesTypeToggle" idList="packagesTypeOptions" >
+            {
+              typesArray.data.map( type => 
+                type.constructionTypes.length > 0 &&
+                    <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
+                )
+            }
+          </Select>       
+          <Select title="Тип конструкции" id="typeConstructionToggle" idList="typeConstructionOptions" disable={true}>
+            {
+              typesArray.data.map( type => 
+              <>
+                {
+                  type.constructionTypes.map( construction => 
+                      <>
+                        <div class="product-input-dropdown-value" data-type={type?.tag} data-tag={construction?.tag}>{construction?.title}</div>
+                      </>
+                    )
+                }
+              </>
+              )
+            }
+          </Select>
+
           <Select title="Форма" id="shapeToggle" idList="shapeOptions">
             {
               formsArray.data.map( type => 
@@ -70,39 +91,45 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
               )
             }
           </Select>
-          <Select title="Бумажные пакеты" id="paperToggle" idList="paperOptions" >
-            {
-              paperBagsArray.data.map( type => 
-              type.packages.length > 0 &&
-                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
-              )
-            }
-          </Select>
+
         </div>
        
         <div class="fab-portfolio-grid">
           {
-            pageData?.map( (pkg) => 
-              <a
-                href={pkg?.href?.replace("https://fineartbox.ru","")}
-                style="--desktop-columns: 3"
+            constructionTypes?.data?.map( construction => 
+              <>
+                {
+                  construction?.packages?.length > 0 && 
+                  <>
+                    {
+                      construction?.packages?.map( pkg => 
+                        <a
+                          href={pkg?.href?.replace("https://fineartbox.ru","")}
+                          style="--desktop-columns: 3"
 
-                data-type={pkg?.package_types.map( type => `${type.tag}` )}
-                data-purpose={pkg?.package_appointment?.tag}
-                data-shape={pkg?.package_form?.tag}
-                data-paper={pkg?.paperBags.map( type => `${type?.tag}` )}
+                          data-construction-type={construction?.tag}
+                          data-package-type={construction?.packageType?.tag}
+                          data-purpose={pkg?.package_appointment?.tag}
+                          data-shape={pkg?.package_form?.tag}
 
+                        >
+                          <img
+                            width="260"
+                            height="260"
+                            data-src={pkg?.srcAlternative ? pkg?.srcAlternative : pkg?.PreviewSourceImageArray[0]?.src}
+                            alt={pkg?.title}
+                            title={pkg?.title}
+                            
+                            />
+                        </a>
+                      )
+                    }
+                  </>
+                }
                 
-              >
-                <img
-                  width="260"
-                  height="260"
-                  data-src={pkg?.srcAlternative ? pkg?.srcAlternative : pkg?.PreviewSourceImageArray[0]?.src}
-                  alt={pkg?.title}
-                  title={pkg?.title}
-                  
-                  />
-              </a>
+              </>
+              
+
 
             )
           }
@@ -128,88 +155,134 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
 </Layout>
 
 <style lang="scss" is:global>
-.fab-filters {
-  position: sticky;
-  top: var(--header-height);
-  display: grid;
-  gap: 1rem;
-  background-color: var(--color-white);
-  @media (min-width: 768px) {
-    position: static;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-
-}
-
-
-    .fab-portfolio-grid {
-      display: grid;
+  .fab-filters {
+    position: sticky;
+    top: var(--header-height);
+    display: grid;
+    gap: 1rem;
+    background-color: var(--color-white);
+    @media (min-width: 768px) {
+      position: static;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--global-gap);
-      @media (min-width: 992px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      @media (min-width: 1200px) {
-        grid-template-columns: repeat(12, 1fr);
-        & > :is(a, div) {
-          grid-area: auto / span var(--desktop-columns);
-        }
-      }
+      gap: 1.5rem;
+    }
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .fab-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--global-gap);
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(12, 1fr);
       & > :is(a, div) {
-        border: 1px solid var(--color-gray-1);
-        overflow: hidden;
-      }
-      & a {
-        display: block;
-      }
-      & div {
-        display: flex;
-        clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
-      }
-      & img {
-        object-fit: cover;
-      }
-      & img:hover {
-        transform: scale(1.15);
+        grid-area: auto / span var(--desktop-columns);
       }
     }
-    .portfolio-box-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: clamp(0.5rem, -0.3803rem + 3.7559vw, 3rem);
-        background-color: var(--color-orange);
-        color: var(--color-white);
-        row-gap: .75rem;
-        & h3 {
-            font-size: 1.5rem;
-        }
+    & > :is(a, div) {
+      border: 1px solid var(--color-gray-1);
+      overflow: hidden;
     }
+    & a {
+      display: block;
+    }
+    & div {
+      display: flex;
+      clip-path: polygon(100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 0);
+    }
+    & img {
+      object-fit: cover;
+    }
+    & img:hover {
+      transform: scale(1.15);
+    }
+  }
+  .portfolio-box-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(0.5rem, -0.3803rem + 3.7559vw, 3rem);
+      background-color: var(--color-orange);
+      color: var(--color-white);
+      row-gap: .75rem;
+      & h3 {
+          font-size: 1.5rem;
+      }
+  }
 </style>
 
-
-
 <script is:inline>
+
+  const packageTypesOptions = document.querySelectorAll("#packagesTypeOptions .product-input-dropdown-value");
+  const constructionTypesOptions = document.querySelectorAll("#typeConstructionOptions .product-input-dropdown-value");
+
+    const constructionTypesOptionsHide = () => {
+    constructionTypesOptions.forEach( (el, idx) => {
+      if (idx > 0) {
+        el.style.display = "none";
+      }
+
+    })
+  }
+
+  packageTypesOptions.forEach( (item, idx) => {
+    item.addEventListener("click", (e) => {
+      document.querySelector(".product-input:has( #typeConstructionOptions)")?.classList?.remove("product-input--disabled");
+      if (idx == 0) {
+        document.querySelector(".product-input:has( #typeConstructionOptions)")?.classList?.add("product-input--disabled");
+      }
+      constructionTypesOptions[0].click();
+      constructionTypesOptionsHide();
+
+      var typePackage = e?.target?.dataset?.tag;
+      
+      constructionTypesOptions.forEach(_el => {
+        
+        if (_el.dataset.type == typePackage) {
+
+          _el.style.display = "";
+          
+        }
+
+      })
+      
+    })
+  });
+
+
+
+  constructionTypesOptionsHide();
+
+  constructionTypesOptions.forEach( item => {
+    item.addEventListener("click", () => {
+      document.querySelector(".product-input:has( #typeConstructionOptions)").classList.remove("product-input--disabled");
+    })
+  })
+
+
   var state = {
-    type: '',
-    purpose: '',
-    shape: '',
-    paper: ''
+    purpose: '', // Назначение
+    packageType: '', // Тип упаковки
+    constructionType: '', // Тип конструкции
+    shape: '', // Форма
   };
   const filterPackages = () => {
     const packages = document.querySelectorAll('.fab-portfolio-grid > a');
     packages.forEach(pkg => {
-      const matchesType = !state.type || pkg.dataset.type === state.type;
+
+      const matchesConstructionType = !state.constructionType || pkg.dataset.constructionType === state.constructionType;
+      const matchesPackageType = !state.packageType || pkg.dataset.packageType === state.packageType;
       const matchesPurpose = !state.purpose || pkg.dataset.purpose === state.purpose;
       const matchesShape = !state.shape || pkg.dataset.shape === state.shape;
-      const paperShape = !state.paper || pkg.dataset.paper.includes(state.paper);
 
-      pkg.style.display = (matchesType && matchesPurpose && matchesShape && paperShape) ? '' : 'none';
+
+      pkg.style.display = (matchesConstructionType && matchesPackageType && matchesPurpose && matchesShape) ? '' : 'none';
 
     });
   }
@@ -219,7 +292,6 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
 
   const setupCustomSelect = (listId, key) => {
 
-    console.log(listId, key);
     const list = document.getElementById(listId);
 
     list.querySelectorAll('.product-input-dropdown-value').forEach(item => {
@@ -232,43 +304,36 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
         else {
           item.classList.add("active");
         }
-        // item.classList.toggle("active");
         filterPackages();
-        console.log(state);
       });
     });
   }
-
-  setupCustomSelect('typeOptions','type');
   setupCustomSelect('purposeOptions',  'purpose');
+  setupCustomSelect('packagesTypeOptions', 'packageType');
+  setupCustomSelect('typeConstructionOptions','constructionType');
   setupCustomSelect('shapeOptions', 'shape');
-  setupCustomSelect('paperOptions', 'paper');
+
   </script>
   <script is:inline>
-    let dropdownLists = document.querySelectorAll(".product-input-dropdown");
 
-    document.querySelectorAll(".product-input").forEach( block => {
+document.querySelectorAll(".product-input").forEach( block => {
     
-    let blockCurrentValue = block.querySelector(".product-input-value"); 
+    var blockCurrentValue = block?.querySelector(".product-input-value"); 
     
-      
-    block.querySelectorAll(".product-input-dropdown-value").forEach(option => {
-        option.addEventListener("click", (e) => {
-          blockCurrentValue.innerText = e.target.innerText;
-          option.closest(".open").classList.remove("open");
-        })
-    })
+      block?.querySelectorAll(".product-input-dropdown-value").forEach(option => {
+          option.addEventListener("click", (e) => {
+            blockCurrentValue.innerText = e.target.innerText;
+            option.closest(".open").classList.remove("open");
+          })
+      })
 
-    block.querySelector(".product-input-dropdown").style.setProperty("--max-height-dropdown", `calc(50vh)`);
+
+    block?.querySelector(".product-input-dropdown").style.setProperty("--max-height-dropdown", `calc(50vh)`);
     
-    block.querySelector(".product-input-button-open-dropdown").addEventListener("click", (_e) => {
-      
-      // if (!checkShowDropdownLists) {
-        block.querySelector(".product-input-dropdown").classList.toggle("open");
-      // }
-      // else {
-      //   hideAllDropdownLists();
-      // }
+    block?.querySelector(".product-input-button-open-dropdown").addEventListener("click", (_e) => {
+
+        block?.querySelector(".product-input-dropdown").classList.toggle("open");
+
     });
 
   });
@@ -285,7 +350,6 @@ const paperBagsArray = await fetch(`${import.meta.env.HOST_API}/paper-bags?popul
   document.querySelectorAll("#purposeOptions .product-input-dropdown-value").forEach(el => {
     el.addEventListener("click", () => {
       let id = el.getAttribute("data-id");
-      console.log(id);
       
       hideSEOBlocks();
       document.querySelector(`.fab-seo-block[data-id="construction-${id}"]`)?.removeAttribute("hidden");

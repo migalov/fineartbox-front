@@ -1,7 +1,7 @@
 ---
-const {title, id, idLabel, idList} = Astro.props
+const {title, id, idLabel, idList, disable} = Astro.props
 ---
-<div class="product-input">
+<div class:list={["product-input", disable && "product-input--disabled"]}>
     <div class="product-input-header" id={id}>
     <div class="product-input-title" id={idLabel}>{title}</div>
     <div class="product-input-value">Все</div>
@@ -78,14 +78,18 @@ const {title, id, idLabel, idList} = Astro.props
 
     .product-input-button-open-dropdown {
         margin-left: auto;
+        transform-origin: center;
+        &:has( ~ .open) {
+            transform: rotate(180deg);
+        }
     }
 
-    .product-input-button-preview svg {
-        transform: rotate(90deg);
-    }
-
-    .product-input-button-next svg {
-    transform: rotate(-90deg);
+    .product-input--disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+        & :is(.product-input-title, .product-input-value, svg) {
+            opacity: .5;
+        }
     }
 
 :is(.product-input-button-preview, .product-input-button-next)[disabled] {

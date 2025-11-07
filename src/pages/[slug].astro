@@ -26,8 +26,11 @@ export async function getStaticPaths() {
       },
       package_types: {
             populate: "*"
+      },
+      construction_type: {
+        populate: "*"
       }
-    }
+    },
   }
   const queryStringPage1 = qs.stringify(paramsPage, { encode: true });
   const response = await fetch(
@@ -56,7 +59,8 @@ const response1 = await fetch(
 const data1 = await response1.json();
 ---
 
-<ZeroLayout title={card?.title}>
+<Layout title={card?.title}>
+  <div class="widget-container" data-hash="d5ddc574f7cc9130df370b237162d2ac">Стилизация карточки из каталога</div>
   <div class="fab-page">
     <div class="content-grid">
       <div class="fab-product-portfolio" style="--position: 1">
@@ -120,10 +124,20 @@ const data1 = await response1.json();
       </div>
       <section>
         <h1>{card?.title}</h1>
-        <CustomGrid columns="2">
-          <div set:html={cleanHtml(card?.description?.columnOne)} />
-          <div set:html={cleanHtml(card?.description?.columnTwo)} />
-        </CustomGrid>
+        {
+          !card?.description?.columnTwo && 
+          <CustomGrid columns="1">
+            <div set:html={cleanHtml(card?.description?.columnOne)} />
+          </CustomGrid>
+        }
+        {
+          card?.description?.columnTwo && 
+            <CustomGrid columns="2">
+            <div set:html={cleanHtml(card?.description?.columnOne)} />
+            <div set:html={cleanHtml(card?.description?.columnTwo)} />
+          </CustomGrid>
+        }
+
         <CustomGrid columns="2">
           <div>
             <h2>Процесс изготовления</h2>
@@ -160,13 +174,10 @@ const data1 = await response1.json();
             </p>
           </div>
           <div>
-            <code>
-              {JSON.stringify(card?.title)}
-            </code>
             <h2>Конструкция в чертеже</h2>
             {
-              card?.package_types[0]?.drawing && (
-                <img class="fab-package-drawing" src={`${card?.package_types[0].drawing}`} />
+              card?.construction_type?.drawing && (
+                <img class="fab-package-drawing" src={`${card?.construction_type?.drawing}`} />
               )
             }
             <p>Для запроса стоимости и заказа тиража просим указать:</p>
@@ -198,7 +209,7 @@ const data1 = await response1.json();
     </div>
   </div>
   <PortfolioSprite />
-
+</Layout>
   <style lang="scss" is:global>
     .fab-product-portfolio-buttons
       div:first-child
