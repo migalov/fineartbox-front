@@ -47,7 +47,7 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
               appointmentsArray.data.map( type => 
               <>
                 {
-                  type.packages.length > 0 &&
+                  type?.packages?.length > 0 &&
                   <div class="product-input-dropdown-value" data-id={type?.id} data-tag={type?.tag}>{type?.title}</div>
                 }
               </>
@@ -56,7 +56,7 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
           </Select>
           <Select title="Вид упаковки" id="packagesTypeToggle" idList="packagesTypeOptions" >
             {
-              typesArray.data.map( type => 
+              typesArray?.data.map( type => 
                 type.constructionTypes.length > 0 &&
                     <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
                 )
@@ -64,7 +64,7 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
           </Select>       
           <Select title="Тип конструкции" id="typeConstructionToggle" idList="typeConstructionOptions" disable={true}>
             {
-              typesArray.data.map( type => 
+              typesArray?.data.map( type => 
               <>
                 {
                   type.constructionTypes.map( construction => 
@@ -73,20 +73,6 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
                       </>
                     )
                 }
-              </>
-              )
-            }
-          </Select>
-
-          <Select title="Форма" id="shapeToggle" idList="shapeOptions">
-            {
-              formsArray.data.map( type => 
-              <>
-              {
-                type.packages.length > 0 &&
-                  <div class="product-input-dropdown-value" data-tag={type?.tag}>{type?.title}</div>
-              }
-              
               </>
               )
             }
@@ -141,7 +127,6 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
               appointmentsArray.data.map( type => 
               <>
                 {
-                  type.packages.length > 0 &&
                   type?.SEO && <SEOBlock {...type.SEO} id={type.id} />
                 }
               </>
@@ -167,7 +152,7 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
       gap: 1.5rem;
     }
     @media (min-width: 992px) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
     }
   }

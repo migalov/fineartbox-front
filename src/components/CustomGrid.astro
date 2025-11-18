@@ -32,6 +32,9 @@ const {columns, classes, margin, padding} = Astro.props;
                 column-count: var(--columns-count);
             }
         }
+        & small {
+            font-size: 75%;
+        }
         @media (min-width: 768px) {
             grid-template-columns: var(--grid-template-columns);
         }
