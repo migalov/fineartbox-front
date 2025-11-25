@@ -37,7 +37,7 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
 
 ---
 
-<Layout title="Портфолио">
+<Layout title="Каталог">
     <div class="content-grid">
         <Breadcrumbs />
         <div class="fab-filters">
@@ -54,7 +54,7 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
               )
             }
           </Select>
-          <Select title="Вид упаковки" id="packagesTypeToggle" idList="packagesTypeOptions" >
+          <Select title="Вид упаковки" id="packagesTypeToggle" idList="packagesTypeOptions">
             {
               typesArray?.data.map( type => 
                 type.constructionTypes.length > 0 &&
@@ -96,8 +96,6 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
                           data-construction-type={construction?.tag}
                           data-package-type={construction?.packageType?.tag}
                           data-purpose={pkg?.package_appointment?.tag}
-                          data-shape={pkg?.package_form?.tag}
-
                         >
                           <img
                             width="260"
@@ -206,6 +204,33 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
 
   const packageTypesOptions = document.querySelectorAll("#packagesTypeOptions .product-input-dropdown-value");
   const constructionTypesOptions = document.querySelectorAll("#typeConstructionOptions .product-input-dropdown-value");
+  const purposeTypesOptions = document.querySelectorAll("#purposeOptions .product-input-dropdown-value");
+
+  const changeURL = (key, value) => {
+      const currentURL = new URL(window.location.href);
+      const searchParams = currentURL.searchParams;
+      value ? searchParams.set(key, value) : searchParams.delete(key);
+      window.history.pushState({}, '', currentURL.toString());
+  }
+
+  const getSearchParameter = (key) => {
+    return key ? new URLSearchParams(window.location.search).get(key) : false;
+  }
+
+  const arrayParameters = (array, parameter) => {
+    array.forEach( option => {
+      option.addEventListener("click", (e) => {
+        let tag = e?.target?.dataset?.tag;        
+        changeURL(parameter, tag);
+      })
+    })
+  }
+
+  arrayParameters(purposeTypesOptions, "type_appointment");
+  arrayParameters(packageTypesOptions, "type_package");
+  arrayParameters(constructionTypesOptions, "type_construction");
+
+
 
     const constructionTypesOptionsHide = () => {
     constructionTypesOptions.forEach( (el, idx) => {
@@ -242,14 +267,13 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
 
 
 
-  constructionTypesOptionsHide();
+  // constructionTypesOptionsHide();
 
   constructionTypesOptions.forEach( item => {
     item.addEventListener("click", () => {
       document.querySelector(".product-input:has( #typeConstructionOptions)").classList.remove("product-input--disabled");
     })
   })
-
 
   var state = {
     purpose: '', // Назначение
@@ -264,47 +288,55 @@ const constructionTypes = await fetch(constructionTypesQuery).then(res => res.js
       const matchesConstructionType = !state.constructionType || pkg.dataset.constructionType === state.constructionType;
       const matchesPackageType = !state.packageType || pkg.dataset.packageType === state.packageType;
       const matchesPurpose = !state.purpose || pkg.dataset.purpose === state.purpose;
-      const matchesShape = !state.shape || pkg.dataset.shape === state.shape;
 
-
-      pkg.style.display = (matchesConstructionType && matchesPackageType && matchesPurpose && matchesShape) ? '' : 'none';
+      pkg.style.display = (matchesConstructionType && matchesPackageType && matchesPurpose) ? '' : 'none';
 
     });
   }
 
-
-
-
   const setupCustomSelect = (listId, key) => {
 
-    const list = document.getElementById(listId);
-
-    list.querySelectorAll('.product-input-dropdown-value').forEach(item => {
-      item.addEventListener('click', (e) => {
-        const tag = e.target.dataset.tag;
-        state[key] = tag;
-        if(item.classList.contains("active")) {
-          item.classList.remove("active");
-        }
-        else {
-          item.classList.add("active");
-        }
-        filterPackages();
+    if (listId) {
+    const list = document?.getElementById(listId);
+      list.querySelectorAll('.product-input-dropdown-value').forEach(item => {
+        item.addEventListener('click', (e) => {
+          const tag = e.target.dataset.tag;
+          state[key] = tag;
+          if(item.classList.contains("active")) {
+            item.classList.remove("active");
+          }
+          else {
+            item.classList.add("active");
+          }
+          filterPackages();
+        });
       });
-    });
+    }
+
   }
   setupCustomSelect('purposeOptions',  'purpose');
   setupCustomSelect('packagesTypeOptions', 'packageType');
   setupCustomSelect('typeConstructionOptions','constructionType');
-  setupCustomSelect('shapeOptions', 'shape');
+
+  const checkSearchParameters = (array, parameter) => {  
+    array.forEach(option => {
+      if (option?.dataset?.tag == getSearchParameter(parameter)) {
+        option.closest(".product-input").querySelector(".product-input-value").innerText = option.innerText;
+        option.click();
+      }
+    })
+  }
+
+  checkSearchParameters(purposeTypesOptions, "type_appointment");
+  checkSearchParameters(packageTypesOptions, "type_package");
+  checkSearchParameters(constructionTypesOptions, "type_construction");
 
   </script>
   <script is:inline>
 
-document.querySelectorAll(".product-input").forEach( block => {
+  document.querySelectorAll(".product-input").forEach( block => {
     
     var blockCurrentValue = block?.querySelector(".product-input-value"); 
-    
       block?.querySelectorAll(".product-input-dropdown-value").forEach(option => {
           option.addEventListener("click", (e) => {
             blockCurrentValue.innerText = e.target.innerText;
@@ -314,11 +346,8 @@ document.querySelectorAll(".product-input").forEach( block => {
 
 
     block?.querySelector(".product-input-dropdown").style.setProperty("--max-height-dropdown", `calc(50vh)`);
-    
     block?.querySelector(".product-input-button-open-dropdown").addEventListener("click", (_e) => {
-
         block?.querySelector(".product-input-dropdown").classList.toggle("open");
-
     });
 
   });

@@ -33,7 +33,7 @@ export async function getStaticPaths() {
       materials: {
         populate: "*"
       },
-      finishing: {
+      finishings: {
         populate: "*"
       },
       lodgement: {
@@ -49,11 +49,11 @@ export async function getStaticPaths() {
   }
   const queryStringPage1 = qs.stringify(paramsPage, { encode: true });
   const response = await fetch(
-    `${import.meta.env.HOST_API}/packages?${queryStringPage1}`
+    `http://localhost:1337/api/packages?${queryStringPage1}`
   );
   const data = await response.json();
 
-  return data?.data?.map((card) => {
+  return data?.data?.map((card: any) => {
     let slug = card?.href?.replace("https://fineartbox.ru/", "")
       ? card?.href.replace("https://fineartbox.ru/", "")
       : "";
@@ -169,12 +169,22 @@ const data1 = await response1.json();
                     Тип конструкции: {card?.construction_type.title}
                   </li>
               }
-              {
-                card?.finishing &&
-                  <li>
-                    Отделка: {card?.finishing.title}
-                  </li>
-              }
+            {
+              card?.finishings.length > 0 &&
+              <li>
+                <>Отделка: </>
+                {
+                      
+                      <>
+                        {
+                          card?.finishings?.map((finishing, index) =>
+                            <>{`${finishing.title}${index < card?.finishing?.length - 1 ? `, ` : ""}`}</>
+                          )
+                        }
+                      </>
+                }
+              </li>
+            }
             
               <li>
                 <>Материалы: </>
@@ -202,13 +212,7 @@ const data1 = await response1.json();
                     </li>
                 }
             </ul>
-            <h2>Сроки</h2>
-            <ul>
-              <li>Минимальный тираж от 100 экземпляров</li>
-              <li>Срок разработки стандартной конструкции от 1 рабочего дня, без учета разработки ложемента</li>
-              <li>Срок производства от 10* рабочих дней</li>
-            </ul>
-            <small>*  Срок изготовления тиража упаковки может быть увеличен в связи с загрузкой производства</small>
+            <div class="widget-container" data-hash="f53446f878a4d791ce351db16fb16f0d">Сроки (для упаковки)</div>
           </div>
           {
             card?.construction_type?.drawing &&
@@ -228,7 +232,7 @@ const data1 = await response1.json();
         )
       }
       
-      <SEOBlock {...card.SEOBlock} />
+      <!-- <SEOBlock {...card.SEOBlock} /> -->
     </div>
   </div>
   <PortfolioSprite />
